@@ -1,4 +1,34 @@
-<p>home works!</p>
-
-
-<router-outlet></router-outlet>
+<br />
+<section>
+  <main class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-12 col-md-4">
+            <h4>Seleccione Cliente</h4>
+            <hr />
+            <ul class="menu-group-customer">
+              <li
+                [class.active1]="active"
+                (click)="listPeople()"
+                class="list-group-item"
+              >
+                Personas
+              </li>
+              <li
+                [class.active1]="!active"
+                (click)="listCompanies()"
+                class="list-group-item"
+              >
+                Empresas
+              </li>
+            </ul>
+          </div>
+          <div class="col-sm-12 col-md-8">
+            <app-table-customer [label]="label"></app-table-customer>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</section>

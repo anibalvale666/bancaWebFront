@@ -1,0 +1,17 @@
+li:hover {
+  cursor: pointer;
+}
+.active1 {
+  background-color: #0d6efd;
+  color: white;
+}
+.card {
+  border-color: #072146;
+  border-width: 5px;
+}
+.list-group-item {
+  border-color: #072146;
+}
+hr {
+  height: 5px;
+}

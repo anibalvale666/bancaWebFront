@@ -1,0 +1,35 @@
+.card {
+  background-color: #072146;
+  color: white;
+}
+.card-title {
+  margin-left: 10px;
+  margin-top: 5px;
+}
+.card-body {
+  background-color: white;
+  color: black;
+}
+.monto {
+  text-align: end;
+  margin-right: 5px;
+}
+th {
+  font-size: 14px;
+}
+.color-cabecera {
+  background-color: #bcd3e5;
+}
+tbody tr:hover {
+  cursor: pointer;
+}
+.td {
+  font-size: 20px;
+  text-align: right;
+}
+.link {
+  color: blue;
+}
+.img-tarjeta-credito {
+  width: 80px;
+}

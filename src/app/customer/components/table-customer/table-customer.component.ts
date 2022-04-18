@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-table-customer',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./table-customer.component.css']
 })
 export class TableCustomerComponent implements OnInit {
+
+  @Input() label: string = "";
 
   constructor() { }
 

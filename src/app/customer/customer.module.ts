@@ -9,6 +9,7 @@ import { DetailsCustomerProductsComponent } from './pages/details-customer-produ
 import { CreditCardConsumptionComponent } from './components/forms/credit-card-consumption/credit-card-consumption.component';
 import { AccountOperationsComponent } from './components/forms/account-operations/account-operations.component';
 import { CreateProductComponent } from './components/forms/create-product/create-product.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,11 +20,12 @@ import { CreateProductComponent } from './components/forms/create-product/create
     DetailsCustomerProductsComponent,
     CreditCardConsumptionComponent,
     AccountOperationsComponent,
-    CreateProductComponent
+    CreateProductComponent,
   ],
   imports: [
     CommonModule,
-    CustomerRoutingModule
+    CustomerRoutingModule,
+    ReactiveFormsModule,
   ]
 })
 export class CustomerModule { }

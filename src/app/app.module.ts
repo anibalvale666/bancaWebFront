@@ -6,17 +6,22 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CustomerModule } from './customer/customer.module';
 import { ProductsModule } from './products/products.module';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { FooterComponent } from './shared/footer/footer.component';
+import { SharedModule } from './shared/shared.module';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HomeModule,
     CustomerModule,
-    ProductsModule
+    ProductsModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

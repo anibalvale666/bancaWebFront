@@ -8,17 +8,20 @@ const routes: Routes = [
   {
     path: '',
     // component: HomeComponent,
-    children:[
-      {path: '', component: HomeComponent},
-      {path: 'detailcustomer/:id', component: DetailsCustomerComponent},
-      {path: 'customerproducts/:id', component: DetailsCustomerProductsComponent},
-      {path: '**', redirectTo: ''},
-    ]
-  }
+    children: [
+      { path: '', component: HomeComponent },
+      { path: 'detailcustomer/:id', component: DetailsCustomerComponent },
+      {
+        path: 'customerproducts/:id',
+        component: DetailsCustomerProductsComponent,
+      },
+      { path: '**', redirectTo: '' },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class CustomerRoutingModule { }
+export class CustomerRoutingModule {}

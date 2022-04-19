@@ -1,0 +1,10 @@
+.card-body {
+  border-color: #072146;
+  border-width: 5px;
+}
+.card-body-ml {
+  margin-left: 5px;
+}
+hr {
+  height: 5px;
+}

@@ -10,7 +10,6 @@ import { CreditCardConsumptionComponent } from './components/forms/credit-card-c
 import { AccountOperationsComponent } from './components/forms/account-operations/account-operations.component';
 import { CreateProductComponent } from './components/forms/create-product/create-product.component';
 
-
 @NgModule({
   declarations: [
     TableCustomerComponent,
@@ -19,11 +18,8 @@ import { CreateProductComponent } from './components/forms/create-product/create
     DetailsCustomerProductsComponent,
     CreditCardConsumptionComponent,
     AccountOperationsComponent,
-    CreateProductComponent
+    CreateProductComponent,
   ],
-  imports: [
-    CommonModule,
-    CustomerRoutingModule
-  ]
+  imports: [CommonModule, CustomerRoutingModule],
 })
-export class CustomerModule { }
+export class CustomerModule {}

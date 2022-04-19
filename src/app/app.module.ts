@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
 import { CustomerModule } from './customer/customer.module';
 import { ProductsModule } from './products/products.module';
-import { NavbarComponent } from './shared/navbar/navbar.component';
-import { FooterComponent } from './shared/footer/footer.component';
-import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './home/home.module';
+import { SharedModule } from './shared/shared.module';
+
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +21,7 @@ import { HomeModule } from './home/home.module';
     CustomerModule,
     ProductsModule,
     SharedModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -25,7 +25,8 @@
             </ul>
           </div>
           <div class="col-sm-12 col-md-8">
-            <app-table-customer [label]="label"></app-table-customer>
+            <h4 class="text-center">Lista de {{ (active) ? 'Personas' : 'Empresas' }} </h4>
+            <app-table-customer [isPerson]="active" [customers]="(active) ? clientCustomer: businessCustomers "></app-table-customer>
           </div>
         </div>
       </div>

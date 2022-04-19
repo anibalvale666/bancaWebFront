@@ -1,41 +1,47 @@
-<h4 class="text-center">{{ label }}</h4>
+
 <hr />
 <div class="table-responsive">
   <table class="table table-striped table-bordered">
     <thead>
       <tr class="color-cabecera">
-        <th>NOMBRE COMPLETO</th>
-        <th>Nº DOC</th>
+        <th>{{ (isPerson) ? 'NOMBRE COMPLETO' : 'RAZÓN SOCIAL' }} </th>
+        <th>{{ (isPerson) ? 'DNI:' : 'RUC:' }}</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Diego Andres Tuesta Perez</td>
-        <td>87654321</td>
+      <tr *ngFor="let customer of customers " >
+        
+        <!-- <ng-container *ngIf="isPerson; else empresa"> 
+
+        <td >{{customer.firstName + ' ' + customer.lastName}}</td>
+        <td>{{customer.dni}}</td>
         <td>
-          <a [routerLink]="['detailcustomer/', 2]" class="enlace"
+          <a [routerLink]="['detailcustomer/', customer.id]" class="enlace"
             >ver detalle</a
           >
         </td>
-      </tr>
-      <tr>
-        <td>Diego Andres Tuesta Perez</td>
-        <td>87654321</td>
+
+      </ng-container> 
+
+      <ng-template #empresa>
+        <td >{{customer.businessName}}</td>
+        <td>{{customer.ruc}}</td>
         <td>
-          <a [routerLink]="['detailcustomer/', 2]" class="enlace"
+          <a [routerLink]="['detailcustomer/', customer.id]" class="enlace"
             >ver detalle</a
           >
         </td>
-      </tr>
-      <tr>
-        <td>Diego Andres Tuesta Perez</td>
-        <td>87654321</td>
-        <td>
-          <a [routerLink]="['detailcustomer/', 2]" class="enlace"
-            >ver detalle</a
-          >
-        </td>
+      </ng-template> -->
+        
+
+      <td >  {{ (isPerson) ? customer.firstName + ' ' + customer.lastName : customer.businessName}}</td>
+      <td> {{ (isPerson) ? customer.dni : customer.ruc}}</td>
+      <td>
+        <a [routerLink]="['detailcustomer/', customer.id]" class="enlace"
+          >ver detalle</a
+        >
+      </td>
       </tr>
     </tbody>
   </table>

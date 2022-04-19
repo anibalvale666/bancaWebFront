@@ -6,8 +6,10 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./table-customer.component.css']
 })
 export class TableCustomerComponent implements OnInit {
-
-  @Input() label: string = "";
+  // Boleano para cambiar  la tabla a talba empresa o tabla clientes; si esta en true es cliente
+  @Input() isPerson: boolean = true;
+  //lista de los clientes o empresas
+  @Input() customers: any[] = [];
 
   constructor() { }
 

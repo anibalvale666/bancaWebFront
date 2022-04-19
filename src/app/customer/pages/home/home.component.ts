@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CustomerService } from '../../services/customer.service';
 
 @Component({
   selector: 'app-home',
@@ -7,25 +8,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  label: string = "Lista de Personas";
+  // cuando active esta en true muestra la lista de personas; else muestra la lista de empresas
   active: boolean = true;
 
-  constructor() { }
+  clientCustomer:any[] = [];
+  businessCustomers: any[] = [];
+
+  constructor(private customerService: CustomerService) { }
+  
+  ngOnInit(): void {
+
+    // llamamos al servicio http y filtramos la respuesta en dos areglos, cliente y empresa 
+    // utilizamos el campo dni para filtrarlo
+    this.customerService.getCustomers().subscribe( customers => {
+      this.clientCustomer = customers.filter( ({dni}) => !!dni ) ;
+      this.businessCustomers = customers.filter( ({dni}) => !dni ) ;
+      this.listPeople();
+
+    });
+  }
+
   //metodo para listar clientes personas
   listPeople():void{
     this.active=true;
     console.log("listar personas");
-    this.label = "Lista de Personas";
+    console.log(this.clientCustomer);
+
   }
   //metodo para listar clientes Empresas
   listCompanies():void{
     this.active=false;
     console.log("listar empresas");
-    this.label = "Lista de Empresas";
-  }
+    console.log(this.businessCustomers);
 
-  ngOnInit(): void {
-    this.listPeople();
   }
 
 }

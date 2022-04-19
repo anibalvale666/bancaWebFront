@@ -12,7 +12,6 @@ import { DetailsCustomerProductsComponent } from './pages/details-customer-produ
 import { HomeComponent } from './pages/home/home.component';
 import { TableCustomerComponent } from './components/table-customer/table-customer.component';
 
-
 @NgModule({
   declarations: [
     TableCustomerComponent,
@@ -24,10 +23,12 @@ import { TableCustomerComponent } from './components/table-customer/table-custom
     AccountOperationsComponent,
     CreateProductComponent,
   ],
+
   imports: [
     CommonModule,
     CustomerRoutingModule,
     ReactiveFormsModule,
   ]
+
 })
-export class CustomerModule { }
+export class CustomerModule {}

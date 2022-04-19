@@ -30,17 +30,21 @@ export class HomeComponent implements OnInit {
 
   //metodo para listar clientes personas
   listPeople():void{
-    this.active=true;
-    console.log("listar personas");
-    console.log(this.clientCustomer);
+    if(!this.active) {
+      this.active=true;
+      console.log("listar personas");
+      console.log(this.clientCustomer);
+
+    }
 
   }
   //metodo para listar clientes Empresas
   listCompanies():void{
-    this.active=false;
-    console.log("listar empresas");
-    console.log(this.businessCustomers);
-
+    if(this.active) {
+      this.active=false;
+      console.log("listar empresas");
+      console.log(this.businessCustomers);
+    }
   }
 
 }

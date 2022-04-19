@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-account-operations',
@@ -9,9 +9,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class AccountOperationsComponent implements OnInit {
 
   accountForm: FormGroup = this.fb.group({
-    accountNumber: [''],
-    amount: [''],
-    operationType: ['deposit'],  
+    accountNumber: ['', Validators.required],
+    amount: [ '' , [Validators.required, Validators.min(1)]],  
+    operationType: ['deposit', Validators.required],  
   });
 
   constructor( private fb: FormBuilder) { }
@@ -26,14 +26,15 @@ export class AccountOperationsComponent implements OnInit {
   
   guardar() {
 
-    // if(this.miFormulario.invalid) {
-    //   this.miFormulario.markAllAsTouched();
-    //   return;
-    // }
-  
-    // console.log(this.miFormulario.value);
-    // this.miFormulario.reset();
+    if(this.accountForm.invalid) {
+      this.accountForm.markAllAsTouched();
+      return;
+    }
     console.log(this.accountForm.value);
+    this.accountForm.reset({
+      operationType: 'deposit',
+    });
+  
   }
 
 }

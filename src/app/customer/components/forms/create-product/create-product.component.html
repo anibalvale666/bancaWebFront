@@ -1,1 +1,137 @@
-<p>create-product works!</p>
+
+
+<div class="container mt-4 ">
+
+    <h1 class="text-center">Creación de Nueva Cuenta</h1>
+
+    <div class="d-flex justify-content-center ">
+        
+        <div class="row w-50 ">
+        <hr class="my-4">
+        <div class="col">
+            <form   autocomplete="off" [formGroup]="productForm" (ngSubmit)="guardar()" >
+                <!-- Campo de Numero de cuenta -->
+                <div class="mb-3 row">
+                    <label class="col-sm-3 col-form-label">Nombre</label>
+                    <div class="col-sm-9">
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            formControlName="name"
+                            placeholder="Nombre"
+                        >
+                        <!-- <span class="form-text text-danger"
+                            *ngIf="campoEsValido('nombre')"
+                        >
+                            Debe de ser de 3 letras
+                        </span> -->
+                    </div>
+                </div>
+                <!-- Campo de Nombre -->
+                <div class="mb-3 row">
+                    <label class="col-sm-3 col-form-label">Apellido</label>
+                    <div class="col-sm-9">
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            formControlName="lastName"
+                            placeholder="Apellido"
+                        >
+                        <!-- <span class="form-text text-danger"
+                            *ngIf="campoEsValido('nombre')"
+                        >
+                            Debe de ser de 3 letras
+                        </span> -->
+                    </div>
+                </div>
+                <!-- Campo de DBI -->
+                <div class="mb-3 row">
+                    <label class="col-sm-3 col-form-label">DNI:</label>
+                    <div class="col-sm-9">
+                        <input 
+                            type="number" 
+                            class="form-control" 
+                            formControlName="dni"
+                            placeholder="número de DNI"
+                        >
+                        <!-- <span class="form-text text-danger"
+                            *ngIf="campoEsValido('nombre')"
+                        >
+                            Debe de ser de 3 letras
+                        </span> -->
+                    </div>
+                </div>
+
+                <!-- Seleccion del tipo de operación -->
+                <div class="row mb-3" >
+                        <label class="col-sm-3 form-label">Tipo de Cuenta:</label>
+                        <div class="col-sm-9">
+                            <select 
+                                class="form-select"
+                                formControlName="accountType"
+                            >
+                                <!-- el pipe lowercase esta modificando el valor debido a los corchetes -->
+                                <!-- en este caso si modifica el valor  -->
+                                <!-- <option
+                                    *ngFor="let region of regiones"  
+                                    [value]="region | lowercase"
+                                >  -->
+                                <option selected
+                                value="savings"
+                                >  
+                                    Cuenta de Ahorros
+                                </option>
+                                <option
+                                    value="current"
+                                > 
+                                    Cuenta corriente  
+                                </option>
+                                <option
+                                    value="fixed"
+                                > 
+                                    Cuenta a plazo fijo  
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+            
+
+
+                <div class="row">
+                    <div class="col">
+                        <button
+                            type="submit"
+                            class="btn btn-primary float-end"
+                            >
+                            <!-- [disabled]="miFormulario.invalid" -->
+                            Guardar
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+
+    <div class="row">
+        <div class="col">
+            <span>valid</span>
+            <pre>{{ productForm.valid }}</pre>
+
+            <span>Pristine</span>
+            <pre>{{ productForm.pristine | json }}</pre>
+            
+            <span>Touched</span>
+            <pre>{{ productForm.touched | json }}</pre>
+
+            <span>value</span>
+            <pre>{{ productForm.value | json }}</pre>
+
+
+        </div>
+    </div>
+
+</div>

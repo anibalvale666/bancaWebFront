@@ -14,7 +14,7 @@ export interface Customer {
 
 export interface Account {
     id: string;
-    typeAccount: string; // savings, current or fixed
+    accountType: string; // savings, current or fixed
     numberAccount: string;
     openingDate: Date;
     cci: string;

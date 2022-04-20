@@ -12,7 +12,7 @@ export class CreateProductComponent implements OnInit {
     name: [''],
     lastName: [''],
     dni: [''],
-    accountType: ['savings'],  // savings, current anmd fixed
+    accountType: ['savings'],  // savings, current and fixed
   });
 
   constructor( private fb: FormBuilder) { }

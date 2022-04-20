@@ -1,101 +1,100 @@
 
 
-<div class="container mt-4 ">
+<div class="container mt-4 border w-50 p-5 sombras">
 
-    <h1 class="text-center">Depósito / Retiro de Cuenta</h1>
+    <h1 class="text-center">¿Qué operación vas a realizar?</h1>
 
     <div class="d-flex justify-content-center ">
         
-        <div class="row w-50 ">
-        <hr class="my-4">
-        <div class="col">
-            <form   autocomplete="off" [formGroup]="accountForm" (ngSubmit)="guardar()" >
-                <!-- Campo de Numero de cuenta -->
-                <div class="mb-3 row">
-                    <label class="col-sm-3 col-form-label">ID de cuenta</label>
-                    <div class="col-sm-9">
-                        <input 
-                            type="text" 
-                            class="form-control" 
-                            formControlName="accountNumber"
-                            placeholder="Número de la cuenta"
-                        >
-                        <!-- <span class="form-text text-danger"
-                            *ngIf="campoEsValido('nombre')"
-                        >
-                            Debe de ser de 3 letras
-                        </span> -->
-                    </div>
-                </div>
-
-                <!-- Seleccion del tipo de operación -->
-                <div class="row mb-3" >
-                        <label class="col-sm-3 form-label">Tipo de Operación:</label>
+        <div class="row ">
+            <hr class="my-4">
+            <div class="col">
+                <form   autocomplete="off" [formGroup]="accountForm" (ngSubmit)="guardar()" >
+                    <!-- Campo de Numero de cuenta -->
+                    <div class="mb-3 row">
+                        <label class="col-sm-3 col-form-label">Número de cuenta</label>
                         <div class="col-sm-9">
-                            <select 
-                                class="form-select"
-                                formControlName="operationType"
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                formControlName="accountNumber"
+                                placeholder="Número de la cuenta"
                             >
-                                <!-- el pipe lowercase esta modificando el valor debido a los corchetes -->
-                                <!-- en este caso si modifica el valor  -->
-                                <!-- <option
-                                    *ngFor="let region of regiones"  
-                                    [value]="region | lowercase"
-                                >  -->
-                                <option selected
-                                value="deposit"
-                                >  
-                                    Depósito    
-                                </option>
-                                <option
-                                    value="Withdrawal"
-                                > 
-                                    Retiro  
-                                </option>
-                            </select>
+                            <span class="form-text text-danger"
+                                *ngIf="campoEsValido('accountNumber')"
+                            >
+                                *Campo obligatorio
+                            </span>
                         </div>
                     </div>
 
-                <!-- Campo de Monto -->
-                <div class="mb-3 row">
-                    <label class="col-sm-3 col-form-label">Monto</label>
-                    <div class="col-sm-9">
-                        <input 
-                            type="number" 
-                            class="form-control" 
-                            formControlName="amount"
-                            placeholder="Monto"
-                        >
-                        <!-- <span class="form-text text-danger"
-                        *ngIf="campoEsValido('precio')"
-                        >
-                            El precio debe ser 0 o mayor
-                        </span> -->
-                    </div>
+                    <!-- Seleccion del tipo de operación -->
+                    <div class="row mb-3" >
+                            <label class="col-sm-3 form-label">Tipo de Operación:</label>
+                            <div class="col-sm-9">
+                                <select 
+                                    class="form-select"
+                                    formControlName="operationType"
+                                >
+                                    <!-- el pipe lowercase esta modificando el valor debido a los corchetes -->
+                                    <!-- en este caso si modifica el valor  -->
+                                    <!-- <option
+                                        *ngFor="let region of regiones"  
+                                        [value]="region | lowercase"
+                                    >  -->
+                                    <option selected
+                                    value="deposit"
+                                    >  
+                                        Depósito    
+                                    </option>
+                                    <option
+                                        value="Withdrawal"
+                                    > 
+                                        Retiro  
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
 
-                </div>
-
-
-
-                <div class="row">
-                    <div class="col">
-                        <button
-                            type="submit"
-                            class="btn btn-primary float-end"
+                    <!-- Campo de Monto -->
+                    <div class="mb-3 row">
+                        <label class="col-sm-3 col-form-label">Monto</label>
+                        <div class="col-sm-9">
+                            <input 
+                                type="number" 
+                                class="form-control" 
+                                formControlName="amount"
+                                placeholder="Monto"
                             >
-                            <!-- [disabled]="miFormulario.invalid" -->
-                            Guardar
-                        </button>
-                    </div>
-                </div>
+                            <span class="form-text text-danger"
+                            *ngIf="campoEsValido('amount')"
+                            >
+                                *El precio debe ser 1 o mayor
+                            </span>
+                        </div>
 
-            </form>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col">
+                            <button
+                                type="submit"
+                                class="btn btn-primary float-end"
+                                [disabled]="accountForm.invalid"
+                                >
+                                Guardar
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
         </div>
     </div>
 
-</div>
-
-    <div class="row">
+    <!-- <div class="row">
         <div class="col">
             <span>valid</span>
             <pre>{{ accountForm.valid }}</pre>
@@ -111,6 +110,6 @@
 
 
         </div>
-    </div>
+    </div> -->
 
 </div>

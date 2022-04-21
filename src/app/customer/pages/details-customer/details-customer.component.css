@@ -30,6 +30,11 @@ tbody tr:hover {
 .link {
   color: blue;
 }
-.img-tarjeta-credito {
-  width: 80px;
+.img-tarjeta-credito{
+width: 80px;
+}
+
+.img-loading{
+  width: 70px;
+  height: 70px;
 }

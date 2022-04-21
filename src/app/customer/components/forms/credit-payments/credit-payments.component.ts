@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-credit-payments',
@@ -10,8 +10,9 @@ export class CreditPaymentsComponent implements OnInit {
 
   creditForm: FormGroup = this.fb.group({
     creditNumber: [''],
-    dni: [''],
-    amount: [''],
+    dniRuc: ['', [Validators.required]],
+    amount: ['', [Validators.required]],
+    date: [new Date],
     operationType: ['payment'],  
   });
 
@@ -20,20 +21,22 @@ export class CreditPaymentsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  campoEsValido( campo: string) {
-    return this.creditForm.controls[campo].errors 
-        && this.creditForm.controls[campo].touched;
+  attIsValid( att: string) {
+    return this.creditForm.controls[att].errors 
+        && this.creditForm.controls[att].touched;
   }
   
-  guardar() {
+  save() {
 
-    // if(this.miFormulario.invalid) {
-    //   this.miFormulario.markAllAsTouched();
-    //   return;
-    // }
+    if(this.creditForm.invalid) {
+      this.creditForm.markAllAsTouched();
+      return;
+    }
   
     // console.log(this.miFormulario.value);
-    // this.miFormulario.reset();
     console.log(this.creditForm.value);
+    this.creditForm.reset({
+      operationType: 'payment',
+    });
   }
 }

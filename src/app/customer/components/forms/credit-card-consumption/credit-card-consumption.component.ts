@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-credit-card-consumption',
@@ -9,10 +9,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class CreditCardConsumptionComponent implements OnInit {
 
   creditCardForm: FormGroup = this.fb.group({
-    creditCardNumber: [''],
-    dni: [''],
-    amount: [''],
-    operationType: ['payment'], // payment, withdrawal
+    creditCardNumber: ['', Validators.required],
+    dni: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
+    cvc: ['', [Validators.required, Validators.maxLength(3)]],  
+    expirationDate: ['', Validators.required],
+    amount: ['',  [Validators.required, Validators.min(1)]],
+    operationType: ['payment', Validators.required], // payment, consumption
   });
 
   constructor( private fb: FormBuilder) { }
@@ -20,20 +22,22 @@ export class CreditCardConsumptionComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  campoEsValido( campo: string) {
-    return this.creditCardForm.controls[campo].errors 
-        && this.creditCardForm.controls[campo].touched;
+  attIsValid( att: string) {
+    return this.creditCardForm.controls[att].errors 
+        && this.creditCardForm.controls[att].touched;
   }
   
-  guardar() {
+  save() {
 
-    // if(this.miFormulario.invalid) {
-    //   this.miFormulario.markAllAsTouched();
-    //   return;
-    // }
-  
-    // console.log(this.miFormulario.value);
-    // this.miFormulario.reset();
+    if(this.creditCardForm.invalid) {
+      this.creditCardForm.markAllAsTouched();
+      return;
+    }
+    
     console.log(this.creditCardForm.value);
+    // console.log(this.creditCardForm.value);
+    this.creditCardForm.reset({
+      operationType: 'payment'
+    });
   }
 }

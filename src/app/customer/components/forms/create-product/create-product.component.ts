@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-product',
@@ -9,10 +9,19 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class CreateProductComponent implements OnInit {
 
   productForm: FormGroup = this.fb.group({
-    name: [''],
-    lastName: [''],
-    dni: [''],
+    dniRuc: ['',Validators.required],
+    product: ['account'], // creditCard, Loan, account
+    currency: ['PEN'], // USD, PEN
+    OpeningDate: [new Date],
+
+    // Si es cuenta
     accountType: ['savings'],  // savings, current and fixed
+    dniRucOwner: [''],
+    owner: ['owner'], // owner or signatory
+
+    // si es prestamo
+    CapitalAmount: [''], 
+    dues: [''], // numero de cuotas
   });
 
   constructor( private fb: FormBuilder) { }
@@ -20,21 +29,25 @@ export class CreateProductComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  campoEsValido( campo: string) {
-    return this.productForm.controls[campo].errors 
-        && this.productForm.controls[campo].touched;
+  attIsValid( att: string) {
+    return this.productForm.controls[att].errors 
+        && this.productForm.controls[att].touched;
   }
   
-  guardar() {
+  save() {
 
-    // if(this.miFormulario.invalid) {
-    //   this.miFormulario.markAllAsTouched();
-    //   return;
-    // }
-  
-    // console.log(this.miFormulario.value);
-    // this.miFormulario.reset();
+    if(this.productForm.invalid) {
+      this.productForm.markAllAsTouched();
+      return;
+    }
     console.log(this.productForm.value);
+  
+    this.productForm.reset({
+      product: 'account',
+      currency: 'PEN',
+      accountType: 'savings',
+      owner: 'owner',
+    });
   }
 
 }

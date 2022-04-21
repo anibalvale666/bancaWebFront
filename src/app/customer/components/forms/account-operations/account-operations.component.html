@@ -1,6 +1,6 @@
 
 
-<div class="container mt-4 border w-50 p-5 sombras">
+<div class="container mt-4 border w-50 p-5 box-shadows">
 
     <h1 class="text-center">¿Qué operación vas a realizar?</h1>
 
@@ -9,7 +9,7 @@
         <div class="row ">
             <hr class="my-4">
             <div class="col">
-                <form   autocomplete="off" [formGroup]="accountForm" (ngSubmit)="guardar()" >
+                <form   autocomplete="off" [formGroup]="accountForm" (ngSubmit)="save()" >
                     <!-- Campo de Numero de cuenta -->
                     <div class="mb-3 row">
                         <label class="col-sm-3 col-form-label">Número de cuenta</label>
@@ -21,7 +21,7 @@
                                 placeholder="Número de la cuenta"
                             >
                             <span class="form-text text-danger"
-                                *ngIf="campoEsValido('accountNumber')"
+                                *ngIf="attIsValid('accountNumber')"
                             >
                                 *Campo obligatorio
                             </span>
@@ -48,7 +48,7 @@
                                         Depósito    
                                     </option>
                                     <option
-                                        value="Withdrawal"
+                                        value="withdrawal"
                                     > 
                                         Retiro  
                                     </option>
@@ -67,7 +67,7 @@
                                 placeholder="Monto"
                             >
                             <span class="form-text text-danger"
-                            *ngIf="campoEsValido('amount')"
+                            *ngIf="attIsValid('amount')"
                             >
                                 *El precio debe ser 1 o mayor
                             </span>

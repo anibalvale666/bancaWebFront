@@ -1,18 +1,18 @@
 
 
-<div class="container mt-4 ">
+<div class="container mt-4 box-shadows p-5 ">
 
-    <h1 class="text-center">Pago / Retiro de Tarjeta de Crédito</h1>
+    <h1 class="text-center">Pago / consumo de Tarjeta de Crédito</h1>
 
     <div class="d-flex justify-content-center ">
         
         <div class="row w-50 ">
         <hr class="my-4">
         <div class="col">
-            <form   autocomplete="off" [formGroup]="creditCardForm" (ngSubmit)="guardar()" >
+            <form   autocomplete="off" [formGroup]="creditCardForm" (ngSubmit)="save()" >
                 <!-- Campo de Numero de cuenta -->
                 <div class="mb-3 row">
-                    <label class="col-sm-3 col-form-label">ID de Tárjeta</label>
+                    <label class="col-sm-3 col-form-label">Número de Tárjeta</label>
                     <div class="col-sm-9">
                         <input 
                             type="text" 
@@ -20,14 +20,14 @@
                             formControlName="creditCardNumber"
                             placeholder="Número de la tarjeta"
                         >
-                        <!-- <span class="form-text text-danger"
-                            *ngIf="campoEsValido('nombre')"
+                        <span class="form-text text-danger"
+                            *ngIf="attIsValid('creditCardNumber')"
                         >
-                            Debe de ser de 3 letras
-                        </span> -->
+                            *el campo es obligatorio
+                        </span>
                     </div>
                 </div>
-                <!-- Campo de Numero de cuenta -->
+                <!-- Campo de DNI -->
                 <div class="mb-3 row">
                     <label class="col-sm-3 col-form-label">DNI:</label>
                     <div class="col-sm-9">
@@ -37,11 +37,46 @@
                             formControlName="dni"
                             placeholder="número de DNI"
                         >
-                        <!-- <span class="form-text text-danger"
-                            *ngIf="campoEsValido('nombre')"
+                        <span class="form-text text-danger"
+                            *ngIf="attIsValid('dni')"
                         >
-                            Debe de ser de 3 letras
-                        </span> -->
+                            *el campo es obligatorio
+                        </span>
+                    </div>
+                </div>
+                <!-- Campo de CVC -->
+                <div class="mb-3 row">
+                    <label class="col-sm-3 col-form-label">CVC:</label>
+                    <div class="col-sm-9">
+                        <input 
+                            type="number" 
+                            class="form-control" 
+                            formControlName="cvc"
+                            placeholder="ingrese el numero CVC"
+                            maxlength="3"
+                        >
+                        <span class="form-text text-danger"
+                            *ngIf="attIsValid('cvc')"
+                        >
+                            *el campo es obligatorio
+                        </span>
+                    </div>
+                </div>
+                <!-- Campo de fecha de expiración -->
+                <div class="mb-3 row">
+                    <label class="col-sm-3 col-form-label">Fecha de Expiración:</label>
+                    <div class="col-sm-9">
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            formControlName="expirationDate"
+                            placeholder="ingrese Mes y año. Ejemplo: 05/22"
+                        >
+                        <span class="form-text text-danger"
+                            *ngIf="attIsValid('expirationDate')"
+                        >
+                            *el campo es obligatorio
+                        </span>
                     </div>
                 </div>
 
@@ -62,12 +97,12 @@
                                 <option selected
                                 value="payment"
                                 >  
-                                    Pago    
+                                    Pago de tarjeta  
                                 </option>
                                 <option
-                                    value="Withdrawal"
+                                    value="consumption"
                                 > 
-                                    Retiro  
+                                    Consumo de tarjeta
                                 </option>
                             </select>
                         </div>
@@ -83,11 +118,11 @@
                             formControlName="amount"
                             placeholder="Monto"
                         >
-                        <!-- <span class="form-text text-danger"
-                        *ngIf="campoEsValido('precio')"
+                        <span class="form-text text-danger"
+                        *ngIf="attIsValid('amount')"
                         >
                             El precio debe ser 0 o mayor
-                        </span> -->
+                        </span>
                     </div>
 
                 </div>
@@ -99,8 +134,8 @@
                         <button
                             type="submit"
                             class="btn btn-primary float-end"
+                            [disabled]="creditCardForm.invalid"
                             >
-                            <!-- [disabled]="miFormulario.invalid" -->
                             Guardar
                         </button>
                     </div>
@@ -110,24 +145,7 @@
         </div>
     </div>
 
-</div>
-
-    <div class="row">
-        <div class="col">
-            <span>valid</span>
-            <pre>{{ creditCardForm.valid }}</pre>
-
-            <span>Pristine</span>
-            <pre>{{ creditCardForm.pristine | json }}</pre>
-            
-            <span>Touched</span>
-            <pre>{{ creditCardForm.touched | json }}</pre>
-
-            <span>value</span>
-            <pre>{{ creditCardForm.value | json }}</pre>
-
-
-        </div>
     </div>
+
 
 </div>

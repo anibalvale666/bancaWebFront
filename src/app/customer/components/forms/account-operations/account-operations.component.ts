@@ -19,12 +19,12 @@ export class AccountOperationsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  campoEsValido( campo: string) {
-    return this.accountForm.controls[campo].errors 
-        && this.accountForm.controls[campo].touched;
+  attIsValid( att: string) {
+    return this.accountForm.controls[att].errors 
+        && this.accountForm.controls[att].touched;
   }
   
-  guardar() {
+  save() {
 
     if(this.accountForm.invalid) {
       this.accountForm.markAllAsTouched();

@@ -6,11 +6,11 @@ li:hover {
   color: white;
 }
 .card {
-  border-color: #072146;
+  border-color: #002a8d;
   border-width: 5px;
 }
 .list-group-item {
-  border-color: #072146;
+  border-color: #002a8d;
 }
 hr {
   height: 5px;

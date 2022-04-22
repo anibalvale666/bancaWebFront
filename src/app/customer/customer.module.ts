@@ -11,6 +11,7 @@ import { DetailsCustomerComponent } from './pages/details-customer/details-custo
 import { DetailsCustomerProductsComponent } from './pages/details-customer-products/details-customer-products.component';
 import { HomeComponent } from './pages/home/home.component';
 import { TableCustomerComponent } from './components/table-customer/table-customer.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -22,12 +23,16 @@ import { TableCustomerComponent } from './components/table-customer/table-custom
     CreditPaymentsComponent,
     AccountOperationsComponent,
     CreateProductComponent,
+    ModalComponent,
   ],
 
   imports: [
     CommonModule,
     CustomerRoutingModule,
     ReactiveFormsModule,
+  ],
+  exports: [
+    ModalComponent
   ]
 
 })

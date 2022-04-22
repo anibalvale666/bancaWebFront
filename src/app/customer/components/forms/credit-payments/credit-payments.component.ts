@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -6,26 +6,47 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   templateUrl: './credit-payments.component.html',
   styleUrls: ['./credit-payments.component.css']
 })
-export class CreditPaymentsComponent implements OnInit {
+export class CreditPaymentsComponent implements OnInit, OnChanges {
+
+  @Input() dniRuc!: number;
+  @Input() operationType!: string;
 
   creditForm: FormGroup = this.fb.group({
     creditNumber: [''],
     dniRuc: ['', [Validators.required]],
     amount: ['', [Validators.required]],
     date: [new Date],
-    operationType: ['payment'],  
+    operationType: ['deposit'],  // deposit is a payment of credit
   });
 
   constructor( private fb: FormBuilder) { }
 
-  ngOnInit(): void {
+  // para estar atento a los cambios en los padres del componente
+  ngOnChanges(changes: SimpleChanges): void {
+    this.creditForm.reset({
+      dniRuc: this.dniRuc,
+      operationType: this.operationType,
+      
+    })
+
   }
 
+  
+  ngOnInit(): void {
+    this.creditForm.reset({
+      dniRuc: this.dniRuc,
+      operationType: this.operationType,
+      
+    })
+  }
+
+  //funcion para la deteccion de errores en el html
   attIsValid( att: string) {
     return this.creditForm.controls[att].errors 
         && this.creditForm.controls[att].touched;
   }
   
+  //funcion submit, solo envia si el form es valido
   save() {
 
     if(this.creditForm.invalid) {
@@ -36,7 +57,7 @@ export class CreditPaymentsComponent implements OnInit {
     // console.log(this.miFormulario.value);
     console.log(this.creditForm.value);
     this.creditForm.reset({
-      operationType: 'payment',
+      operationType: 'deposit',
     });
   }
 }

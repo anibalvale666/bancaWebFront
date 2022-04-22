@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -6,24 +6,45 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './account-operations.component.html',
   styleUrls: ['./account-operations.component.css']
 })
-export class AccountOperationsComponent implements OnInit {
+export class AccountOperationsComponent implements OnInit, OnChanges {
 
+  
+  // accountForm
+  @Input() numberAccount!: number;
+  @Input() operationType!: string;
+
+  
   accountForm: FormGroup = this.fb.group({
-    accountNumber: ['', Validators.required],
-    amount: [ '' , [Validators.required, Validators.min(1)]],  
-    operationType: ['deposit', Validators.required],  
+    accountNumber:  [ '' , Validators.required],
+    operationType:  [ 'deposit' , Validators.required],  
+    amount:         [ '' , [Validators.required, Validators.min(1)]],  
   });
 
   constructor( private fb: FormBuilder) { }
+  // para estar atento a los cambios en los padres del componente
+  ngOnChanges(changes: SimpleChanges): void {
+    this.accountForm.reset({
+      accountNumber: this.numberAccount,
+      operationType: this.operationType,
 
-  ngOnInit(): void {
+    })
   }
 
+  ngOnInit(): void {
+    this.accountForm.reset({
+      accountNumber: this.numberAccount,
+      operationType: this.operationType,
+
+    })
+  }
+
+  //funcion para la deteccion de errores en el html
   attIsValid( att: string) {
     return this.accountForm.controls[att].errors 
         && this.accountForm.controls[att].touched;
   }
   
+  //funcion submit, solo envia si el form es valido
   save() {
 
     if(this.accountForm.invalid) {

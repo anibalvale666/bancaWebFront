@@ -1,12 +1,12 @@
 
 
-<div class="container mt-4 box-shadows p-5">
+<div class="">
 
     <h1 class="text-center">Pago / Retiro de Crédito</h1>
 
     <div class="d-flex justify-content-center ">
         
-        <div class="row w-50 ">
+        <div class="row ">
         <hr class="my-4">
         <div class="col">
             <form   autocomplete="off" [formGroup]="creditForm" (ngSubmit)="save()" >
@@ -71,12 +71,12 @@
                                     [value]="region | lowercase"
                                 >  -->
                                 <option selected
-                                value="payment"
+                                value="deposit"
                                 >  
                                     Pago de cuota
                                 </option>
                                 <option
-                                    value="Withdrawal"
+                                    value="withdrawal"
                                 > 
                                     Retiro de capital
                                 </option>
@@ -104,13 +104,22 @@
                 </div>
 
 
-
+                <hr>
                 <div class="row">
                     <div class="col">
+                        <!-- Boton Para cerrar el modal -->
+                        <button 
+                            type="button" 
+                            class="btn btn-secondary " 
+                            data-bs-dismiss="modal"
+                        >
+                            Cerrar
+                        </button>
                         <button
                             type="submit"
                             class="btn btn-primary float-end"
                             [disabled]="creditForm.invalid"
+                            data-bs-dismiss="modal"
                             >
                             Guardar
                         </button>

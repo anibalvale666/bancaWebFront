@@ -1,12 +1,10 @@
 
-
-<div class="container mt-4 box-shadows p-5 ">
-
+<div>
     <h1 class="text-center">Pago / consumo de Tarjeta de Crédito</h1>
 
     <div class="d-flex justify-content-center ">
         
-        <div class="row w-50 ">
+        <div class="row ">
         <hr class="my-4">
         <div class="col">
             <form   autocomplete="off" [formGroup]="creditCardForm" (ngSubmit)="save()" >
@@ -29,16 +27,16 @@
                 </div>
                 <!-- Campo de DNI -->
                 <div class="mb-3 row">
-                    <label class="col-sm-3 col-form-label">DNI:</label>
+                    <label class="col-sm-3 col-form-label">Número de documento:</label>
                     <div class="col-sm-9">
                         <input 
                             type="number" 
                             class="form-control" 
-                            formControlName="dni"
-                            placeholder="número de DNI"
+                            formControlName="dniRuc"
+                            placeholder="número de DNI o RUC"
                         >
                         <span class="form-text text-danger"
-                            *ngIf="attIsValid('dni')"
+                            *ngIf="attIsValid('dniRuc')"
                         >
                             *el campo es obligatorio
                         </span>
@@ -88,19 +86,14 @@
                                 class="form-select"
                                 formControlName="operationType"
                             >
-                                <!-- el pipe lowercase esta modificando el valor debido a los corchetes -->
-                                <!-- en este caso si modifica el valor  -->
-                                <!-- <option
-                                    *ngFor="let region of regiones"  
-                                    [value]="region | lowercase"
-                                >  -->
+                               
                                 <option selected
-                                value="payment"
+                                    value="deposit"
                                 >  
                                     Pago de tarjeta  
                                 </option>
                                 <option
-                                    value="consumption"
+                                    value="withdrawal"
                                 > 
                                     Consumo de tarjeta
                                 </option>
@@ -127,14 +120,23 @@
 
                 </div>
 
-
+                <hr>
 
                 <div class="row">
                     <div class="col">
+                        <!-- Boton Para cerrar el modal -->
+                        <button 
+                            type="button" 
+                            class="btn btn-secondary " 
+                            data-bs-dismiss="modal"
+                        >
+                            Cerrar
+                        </button>
                         <button
                             type="submit"
                             class="btn btn-primary float-end"
                             [disabled]="creditCardForm.invalid"
+                            data-bs-dismiss="modal"
                             >
                             Guardar
                         </button>

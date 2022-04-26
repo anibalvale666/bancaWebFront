@@ -5,9 +5,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class CurrencyTablePipe implements PipeTransform {
 
-  transform(account: any  ): string {
+  transform(valor: string  ): string {
     
-    return  (account.currency ==="S") ? "S/": "$"; 
+    return  (valor ==="S") ? "S/": "$"; 
   }
 
 }

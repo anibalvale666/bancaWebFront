@@ -11,6 +11,9 @@ import { DetailsCustomerComponent } from './pages/details-customer/details-custo
 import { DetailsCustomerProductsComponent } from './pages/details-customer-products/details-customer-products.component';
 import { HomeComponent } from './pages/home/home.component';
 import { TableCustomerComponent } from './components/table-customer/table-customer.component';
+
+import { ModalComponent } from './components/modal/modal.component';
+
 import { CardNumberPipe } from './pipes/card-number.pipe';
 import { CurrencyTablePipe } from './pipes/currency-table.pipe';
 import { CodCreditPipe } from './pipes/cod-credit.pipe';
@@ -32,9 +35,11 @@ import { TxtTranPipe } from './pipes/txt-tran.pipe';
     CreditPaymentsComponent,
     AccountOperationsComponent,
     CreateProductComponent,
+    ModalComponent,
     CardNumberPipe,
     CurrencyTablePipe,
     CodCreditPipe,
+    
     ACPipe,
     CciPipe,
     DetailAccountsComponent,
@@ -47,6 +52,9 @@ import { TxtTranPipe } from './pipes/txt-tran.pipe';
     CommonModule,
     CustomerRoutingModule,
     ReactiveFormsModule,
+  ],
+  exports: [
+    ModalComponent
   ]
 
 })

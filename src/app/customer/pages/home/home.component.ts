@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CustomerInterface } from 'src/app/interfaces/customer.interface';
 import { CustomerService } from '../../services/customer.service';
 
 @Component({
@@ -11,8 +12,8 @@ export class HomeComponent implements OnInit {
   // cuando active esta en true muestra la lista de personas; else muestra la lista de empresas
   active: boolean = true;
 
-  clientCustomer:any[] = [];
-  businessCustomers: any[] = [];
+  clientCustomer:CustomerInterface[] = [];
+  businessCustomers: CustomerInterface[] = [];
 
   constructor(private customerService: CustomerService) { }
   
@@ -20,11 +21,10 @@ export class HomeComponent implements OnInit {
 
     // llamamos al servicio http y filtramos la respuesta en dos areglos, cliente y empresa 
     // utilizamos el campo dni para filtrarlo
-    this.customerService.getCustomers().subscribe( customers => {
+    this.customerService.getCustomersD().subscribe( customers => {
       this.clientCustomer = customers.filter( ({dni}) => !!dni ) ;
       this.businessCustomers = customers.filter( ({dni}) => !dni ) ;
       this.listPeople();
-
     });
   }
 
@@ -32,8 +32,8 @@ export class HomeComponent implements OnInit {
   listPeople():void{
     if(!this.active) {
       this.active=true;
-      console.log("listar personas");
-      console.log(this.clientCustomer);
+      /*console.log("listar personas");
+      console.log(this.clientCustomer);*/
 
     }
 
@@ -42,8 +42,8 @@ export class HomeComponent implements OnInit {
   listCompanies():void{
     if(this.active) {
       this.active=false;
-      console.log("listar empresas");
-      console.log(this.businessCustomers);
+      /*console.log("listar empresas");
+      console.log(this.businessCustomers);*/
     }
   }
 

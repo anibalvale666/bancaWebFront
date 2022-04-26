@@ -1,24 +1,23 @@
 
 
-<div class="container mt-4 ">
-
-    <h1 class="text-center">Creación de Nueva Cuenta</h1>
+    <h1 class="text-center"> {{ this.productForm.controls['product'].value === 'account' ?  'Apertura de Nueva Cuenta' : 
+                                this.productForm.controls['product'].value === 'loan' ? 'Nuevo Préstamo' : 'Nueva Tarjeta de Crédito'  }}</h1>
 
     <div class="d-flex justify-content-center ">
         
-        <div class="row w-50 ">
+        <div class="row  ">
         <hr class="my-4">
         <div class="col">
-            <form   autocomplete="off" [formGroup]="productForm" (ngSubmit)="guardar()" >
-                <!-- Campo de Numero de cuenta -->
+            <form   autocomplete="off" [formGroup]="productForm" (ngSubmit)="save()" >
+                <!-- Campo de Documento -->
                 <div class="mb-3 row">
-                    <label class="col-sm-3 col-form-label">Nombre</label>
+                    <label class="col-sm-3 col-form-label"> Número de documento</label>
                     <div class="col-sm-9">
                         <input 
                             type="text" 
                             class="form-control" 
-                            formControlName="name"
-                            placeholder="Nombre"
+                            formControlName="dniRuc"
+                            placeholder="RUC o DNI"
                         >
                         <!-- <span class="form-text text-danger"
                             *ngIf="campoEsValido('nombre')"
@@ -27,43 +26,74 @@
                         </span> -->
                     </div>
                 </div>
-                <!-- Campo de Nombre -->
-                <div class="mb-3 row">
-                    <label class="col-sm-3 col-form-label">Apellido</label>
+                <!-- Campo de producto -->
+                <!-- Seleccion del tipo de cuenta -->
+                <div class="row mb-3" >
+                    <label class="col-sm-3 form-label">Tipo de Producto:</label>
                     <div class="col-sm-9">
-                        <input 
-                            type="text" 
-                            class="form-control" 
-                            formControlName="lastName"
-                            placeholder="Apellido"
+                        <select 
+                            class="form-select"
+                            formControlName="product"
                         >
-                        <!-- <span class="form-text text-danger"
-                            *ngIf="campoEsValido('nombre')"
-                        >
-                            Debe de ser de 3 letras
-                        </span> -->
-                    </div>
-                </div>
-                <!-- Campo de DBI -->
-                <div class="mb-3 row">
-                    <label class="col-sm-3 col-form-label">DNI:</label>
-                    <div class="col-sm-9">
-                        <input 
-                            type="number" 
-                            class="form-control" 
-                            formControlName="dni"
-                            placeholder="número de DNI"
-                        >
-                        <!-- <span class="form-text text-danger"
-                            *ngIf="campoEsValido('nombre')"
-                        >
-                            Debe de ser de 3 letras
-                        </span> -->
+                            <!-- el pipe lowercase esta modificando el valor debido a los corchetes -->
+                            <!-- en este caso si modifica el valor  -->
+                            <!-- <option
+                                *ngFor="let region of regiones"  
+                                [value]="region | lowercase"
+                            >  -->
+                            <option selected
+                            value="account"
+                            >  
+                                Aperturar una Cuenta
+                            </option>
+                            <option
+                                value="loan"
+                            > 
+                                Préstamo Bancario  
+                            </option>
+                            <option
+                                value="creditCard"
+                            > 
+                                Nueva Tarjeta de crédito  
+                            </option>
+                        </select>
                     </div>
                 </div>
 
-                <!-- Seleccion del tipo de operación -->
+                <!-- Campo de moneda -->
                 <div class="row mb-3" >
+                    <label class="col-sm-3 form-label">Escoja  la moneda:</label>
+                    <div class="col-sm-9">
+                        <select 
+                            class="form-select"
+                            formControlName="currency"
+                        >
+                            <!-- el pipe lowercase esta modificando el valor debido a los corchetes -->
+                            <!-- en este caso si modifica el valor  -->
+                            <!-- <option
+                                *ngFor="let region of regiones"  
+                                [value]="region | lowercase"
+                            >  -->
+                            <option selected
+                            value="PEN"
+                            >  
+                                Soles
+                            </option>
+                            <option
+                                value="USD"
+                            > 
+                                Dolares
+                            </option>
+                           
+                        </select>
+                    </div>
+                </div>
+
+                <!-- SOLO SI EL PRODUCTO ES CUENTA -->
+
+                <div *ngIf="this.productForm.controls['product'].value === 'account'">
+                    <!-- Seleccion del tipo de cuenta -->
+                    <div class="row mb-3" >
                         <label class="col-sm-3 form-label">Tipo de Cuenta:</label>
                         <div class="col-sm-9">
                             <select 
@@ -94,29 +124,140 @@
                             </select>
                         </div>
                     </div>
-
-            
-
-
-                <div class="row">
-                    <div class="col">
-                        <button
-                            type="submit"
-                            class="btn btn-primary float-end"
+                    <!-- titulares -->
+                    <div class="mb-3 row">
+                        <label class="col-sm-3 col-form-label"> Titular </label>
+                        <div class="col-sm-5">
+                            <input 
+                                type="number" 
+                                class="form-control" 
+                                formControlName="dniRucOwner"
+                                placeholder="dni o ruc del titular"
                             >
-                            <!-- [disabled]="miFormulario.invalid" -->
-                            Guardar
-                        </button>
+                            <!-- <span class="form-text text-danger"
+                                *ngIf="campoEsValido('nombre')"
+                            >
+                                Debe de ser de 3 letras
+                            </span> -->
+                        </div>
+                        <div class="col-sm-4">
+                            <select 
+                                    class="form-select"
+                                    formControlName="owner"
+                                >
+                        
+                                    <option selected
+                                    value="owner"
+                                    >  
+                                        Titular
+                                    </option>
+                                    <option
+                                        value="signatory"
+                                    > 
+                                        Firmante  
+                                    </option>
+                                </select>
+                        </div>
                     </div>
                 </div>
 
+                 <!-- SOLO SI EL PRODUCTO ES un prestamo -->
+                <div *ngIf="this.productForm.controls['product'].value === 'loan'">
+                    <div class="mb-3 row">
+                       <label class="col-sm-3 col-form-label"> Monto </label>
+                       <div class="col-sm-9">
+                           <input 
+                               type="number" 
+                               class="form-control" 
+                               formControlName="CapitalAmount"
+                               placeholder="Monto del prestamo"
+                           >
+                           <!-- <span class="form-text text-danger"
+                               *ngIf="campoEsValido('nombre')"
+                           >
+                               Debe de ser de 3 letras
+                           </span> -->
+                       </div>
+                       
+                   </div>
+                   
+                    <div class="mb-3 row">
+                       <label class="col-sm-3 col-form-label"> Cuotas </label>
+                       <div class="col-sm-9">
+                           <select 
+                               class="form-select"
+                               formControlName="dues"
+                           >
+                               <option selected
+                               value="12"
+                               >  
+                                   12 Meses
+                               </option>
+                               <option
+                                   value="24"
+                               > 
+                                   24 Meses 
+                               </option>
+                               <option
+                                   value="36"
+                               > 
+                                   36 Meses
+                               </option>
+                               <option selected
+                               value="48"
+                               >  
+                                   48 Meses
+                               </option>
+                               <option
+                                   value="60"
+                               > 
+                                   60 Meses
+                               </option>
+                               
+                           </select>
+                       </div>
+                       
+                   </div>
+
+
+                </div>
+
+                <hr>
+                <div class="row">
+                    <div class="col">
+
+                        <!-- Boton Para cerrar el modal -->
+                        <button 
+                            type="button" 
+                            class="btn btn-secondary " 
+                            data-bs-dismiss="modal"
+                        >
+                            Cerrar
+                        </button>
+
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary float-end"
+                            data-bs-dismiss="modal"
+                            [disabled]="productForm.invalid"
+                            >
+                            Guardar
+                        </button>
+                    </div>
+                </div> 
+                <div class="row">
+                    <div class="col">
+
+                    </div>
+                </div>
             </form>
         </div>
     </div>
 
-</div>
 
-    <div class="row">
+
+    <!-- <div class="row">
         <div class="col">
             <span>valid</span>
             <pre>{{ productForm.valid }}</pre>
@@ -134,4 +275,4 @@
         </div>
     </div>
 
-</div>
+</div> -->

@@ -1,57 +1,41 @@
 
 
-<div class="container mt-4 ">
+<div class="">
 
     <h1 class="text-center">Pago / Retiro de Crédito</h1>
 
     <div class="d-flex justify-content-center ">
         
-        <div class="row w-50 ">
+        <div class="row ">
         <hr class="my-4">
         <div class="col">
-            <form   autocomplete="off" [formGroup]="creditForm" (ngSubmit)="guardar()" >
-                <!-- Campo de Numero de cuenta -->
+            <form   autocomplete="off" [formGroup]="creditForm" (ngSubmit)="save()" >
+                <!-- Campo de Numero de documento -->
                 <div class="mb-3 row">
-                    <label class="col-sm-3 col-form-label">ID de crédito</label>
-                    <div class="col-sm-9">
-                        <input 
-                            type="text" 
-                            class="form-control" 
-                            formControlName="creditNumber"
-                            placeholder="Número de la cuenta"
-                        >
-                        <!-- <span class="form-text text-danger"
-                            *ngIf="campoEsValido('nombre')"
-                        >
-                            Debe de ser de 3 letras
-                        </span> -->
-                    </div>
-                </div>
-                <!-- Campo de Numero de cuenta -->
-                <div class="mb-3 row">
-                    <label class="col-sm-3 col-form-label">DNI:</label>
+                    <label class="col-sm-3 col-form-label">Número de documento</label>
                     <div class="col-sm-9">
                         <input 
                             type="number" 
                             class="form-control" 
-                            formControlName="dni"
-                            placeholder="número de DNI"
+                            formControlName="dniRuc"
+                            placeholder="DNI o RUC"
                         >
-                        <!-- <span class="form-text text-danger"
-                            *ngIf="campoEsValido('nombre')"
+                        <span class="form-text text-danger"
+                            *ngIf="attIsValid('dniRuc')"
                         >
-                            Debe de ser de 3 letras
-                        </span> -->
+                            *Campo requerido
+                        </span>
                     </div>
                 </div>
+               
 
                 <!-- Seleccion del tipo de operación -->
                 <div class="row mb-3" >
-                        <label class="col-sm-3 form-label">Tipo de Operación:</label>
+                        <label class="col-sm-3 form-label">Deudas:</label>
                         <div class="col-sm-9">
                             <select 
                                 class="form-select"
-                                formControlName="operationType"
+                                formControlName="creditNumber"
                             >
                                 <!-- el pipe lowercase esta modificando el valor debido a los corchetes -->
                                 <!-- en este caso si modifica el valor  -->
@@ -72,6 +56,33 @@
                             </select>
                         </div>
                     </div>
+                <!-- Seleccion del tipo de operación -->
+                <div class="row mb-3" >
+                        <label class="col-sm-3 form-label">Tipo de Operación:</label>
+                        <div class="col-sm-9">
+                            <select 
+                                class="form-select"
+                                formControlName="operationType"
+                            >
+                                <!-- el pipe lowercase esta modificando el valor debido a los corchetes -->
+                                <!-- en este caso si modifica el valor  -->
+                                <!-- <option
+                                    *ngFor="let region of regiones"  
+                                    [value]="region | lowercase"
+                                >  -->
+                                <option selected
+                                value="deposit"
+                                >  
+                                    Pago de cuota
+                                </option>
+                                <option
+                                    value="withdrawal"
+                                > 
+                                    Retiro de capital
+                                </option>
+                            </select>
+                        </div>
+                    </div>
 
                 <!-- Campo de Monto -->
                 <div class="mb-3 row">
@@ -83,24 +94,33 @@
                             formControlName="amount"
                             placeholder="Monto"
                         >
-                        <!-- <span class="form-text text-danger"
-                        *ngIf="campoEsValido('precio')"
+                        <span class="form-text text-danger"
+                        *ngIf="attIsValid('amount')"
                         >
                             El precio debe ser 0 o mayor
-                        </span> -->
+                        </span>
                     </div>
 
                 </div>
 
 
-
+                <hr>
                 <div class="row">
                     <div class="col">
+                        <!-- Boton Para cerrar el modal -->
+                        <button 
+                            type="button" 
+                            class="btn btn-secondary " 
+                            data-bs-dismiss="modal"
+                        >
+                            Cerrar
+                        </button>
                         <button
                             type="submit"
                             class="btn btn-primary float-end"
+                            [disabled]="creditForm.invalid"
+                            data-bs-dismiss="modal"
                             >
-                            <!-- [disabled]="miFormulario.invalid" -->
                             Guardar
                         </button>
                     </div>
@@ -112,22 +132,5 @@
 
 </div>
 
-    <div class="row">
-        <div class="col">
-            <span>valid</span>
-            <pre>{{ creditForm.valid }}</pre>
-
-            <span>Pristine</span>
-            <pre>{{ creditForm.pristine | json }}</pre>
-            
-            <span>Touched</span>
-            <pre>{{ creditForm.touched | json }}</pre>
-
-            <span>value</span>
-            <pre>{{ creditForm.value | json }}</pre>
-
-
-        </div>
-    </div>
 
 </div>

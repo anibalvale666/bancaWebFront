@@ -13,7 +13,7 @@ export class DetailProductsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  regresar() {
+  back() {
     this.router.navigate(['/products']);
   }
 }

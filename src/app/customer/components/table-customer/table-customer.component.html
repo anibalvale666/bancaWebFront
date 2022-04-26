@@ -10,6 +10,9 @@
       </tr>
     </thead>
     <tbody>
+      <div *ngIf="customers.length===0" class="text-center" >
+        <img class="img-loading" src="../../../../assets/img/loading-gif.gif" alt="loading-gif">
+      </div>
       <tr *ngFor="let customer of customers " >
         
         <!-- <ng-container *ngIf="isPerson; else empresa"> 

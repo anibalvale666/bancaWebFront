@@ -16,7 +16,7 @@ const routes: Routes = [
     children:[
       {path: '', component: HomeComponent},
       {path: 'detailcustomer/:id', component: DetailsCustomerComponent},
-      {path: 'customerproducts/:id', component: DetailsCustomerProductsComponent},
+      {path: 'customerproducts/:id/:type' , component: DetailsCustomerProductsComponent},
       {path: 'accountform', component: AccountOperationsComponent},
       {path: 'createproductform', component: CreateProductComponent},
       {path: 'creditcardform', component: CreditCardConsumptionComponent},

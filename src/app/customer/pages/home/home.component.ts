@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CustomerApi } from 'src/app/interfaces/banca-api.interface';
 import { CustomerInterface } from 'src/app/interfaces/customer.interface';
+import { BancaapiService } from '../../services/bancaapi.service';
 import { CustomerService } from '../../services/customer.service';
 
 @Component({
@@ -9,42 +11,36 @@ import { CustomerService } from '../../services/customer.service';
 })
 export class HomeComponent implements OnInit {
 
-  // cuando active esta en true muestra la lista de personas; else muestra la lista de empresas
-  active: boolean = true;
 
-  clientCustomer:CustomerInterface[] = [];
-  businessCustomers: CustomerInterface[] = [];
+  //type
+  type: number = 0;
 
-  constructor(private customerService: CustomerService) { }
+  clientCustomer:CustomerApi[] = [];
+  //businessCustomers: CustomerApi[] = [];
+
+  constructor(
+    //private customerService: CustomerService
+    private bancaService: BancaapiService
+    ) { }
   
   ngOnInit(): void {
 
-    // llamamos al servicio http y filtramos la respuesta en dos areglos, cliente y empresa 
-    // utilizamos el campo dni para filtrarlo
-    this.customerService.getCustomersD().subscribe( customers => {
-      this.clientCustomer = customers.filter( ({dni}) => !!dni ) ;
-      this.businessCustomers = customers.filter( ({dni}) => !dni ) ;
-      this.listPeople();
-    });
+    //llamamos al metodo con el primer lista que es persona
+    this.listCustomer(1);
+   
   }
+  
 
   //metodo para listar clientes personas
-  listPeople():void{
-    if(!this.active) {
-      this.active=true;
-      /*console.log("listar personas");
-      console.log(this.clientCustomer);*/
-
-    }
-
+  listCustomer(type: number):void{
+    
+   if (type!==this.type) {
+    this.bancaService.getCustomersD(type).subscribe( customers => {
+      this.clientCustomer = customers;
+      this.type = type;
+    });
+   } 
   }
-  //metodo para listar clientes Empresas
-  listCompanies():void{
-    if(this.active) {
-      this.active=false;
-      /*console.log("listar empresas");
-      console.log(this.businessCustomers);*/
-    }
-  }
+ 
 
 }

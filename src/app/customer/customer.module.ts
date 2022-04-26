@@ -13,8 +13,14 @@ import { HomeComponent } from './pages/home/home.component';
 import { TableCustomerComponent } from './components/table-customer/table-customer.component';
 import { CardNumberPipe } from './pipes/card-number.pipe';
 import { CurrencyTablePipe } from './pipes/currency-table.pipe';
-import { CurrencysPipe } from './pipes/currencys.pipe';
 import { CodCreditPipe } from './pipes/cod-credit.pipe';
+import { ACPipe } from './pipes/a-c.pipe';
+import { CciPipe } from './pipes/cci.pipe';
+import { DetailAccountsComponent } from './components/detailProduct/detail-accounts/detail-accounts.component';
+import { DetailCreditComponent } from './components/detailProduct/detail-credit/detail-credit.component';
+import { DetailCardCreditComponent } from './components/detailProduct/detail-card-credit/detail-card-credit.component';
+import { TxtTranPipe } from './pipes/txt-tran.pipe';
+
 
 @NgModule({
   declarations: [
@@ -28,8 +34,13 @@ import { CodCreditPipe } from './pipes/cod-credit.pipe';
     CreateProductComponent,
     CardNumberPipe,
     CurrencyTablePipe,
-    CurrencysPipe,
     CodCreditPipe,
+    ACPipe,
+    CciPipe,
+    DetailAccountsComponent,
+    DetailCreditComponent,
+    DetailCardCreditComponent,
+    TxtTranPipe,
   ],
 
   imports: [

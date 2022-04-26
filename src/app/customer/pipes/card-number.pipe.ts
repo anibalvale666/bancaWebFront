@@ -6,12 +6,29 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class CardNumberPipe implements PipeTransform {
 
-  transform(account: any): string {
+  transform(number: string): string {
     
-    let str1 = account.numberAccount.slice(0,4);
-    let str2 = account.numberAccount.slice(4,8);
-    let str3 = account.numberAccount.slice(8,18);
-    return str1+"-"+str2+"-"+str3;
+    if(number.length===18){
+      let str1 = number.slice(0,4);
+      let str2 = number.slice(4,8);
+      let str3 = number.slice(8,18);
+      return str1+"-"+str2+"-"+str3;
+    }else if(number.length===16){
+      let str1 = number.slice(0,4);
+      let str2 = number.slice(4,8);
+      let str3 = number.slice(8,12);
+      let str4 = number.slice(8,16);
+      return str1+"-"+str2+"-"+str3+"-"+str4;
+    }else if(number.length===10){
+      let str1 = number.slice(0,4);
+      let str2 = number.slice(4,10);
+      return str1+"-"+str2
+    }else{
+      return "";
+    }
+   
+  
+   
   }
 
 }

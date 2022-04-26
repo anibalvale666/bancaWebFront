@@ -9,15 +9,15 @@
             <hr />
             <ul class="menu-group-customer">
               <li
-                [class.active1]="active"
-                (click)="listPeople()"
+                [class.active1]="type===1"
+                (click)="listCustomer(1)"
                 class="list-group-item"
               >
                 Personas
               </li>
               <li
-                [class.active1]="!active"
-                (click)="listCompanies()"
+                [class.active1]="type===2"
+                (click)="listCustomer(2)"
                 class="list-group-item"
               >
                 Empresas
@@ -25,8 +25,8 @@
             </ul>
           </div>
           <div class="col-sm-12 col-md-8">
-            <h4 class="text-center">Lista de {{ (active) ? 'Personas' : 'Empresas' }} </h4>
-            <app-table-customer [isPerson]="active" [customers]="(active) ? clientCustomer: businessCustomers "></app-table-customer>
+            <h4 class="text-center">Lista de {{ (type ===1 ) ? 'Personas' : 'Empresas' }} </h4>
+            <app-table-customer [isPerson]="type" [customers]="clientCustomer"></app-table-customer>
           </div>
         </div>
       </div>

@@ -4,8 +4,8 @@
   <table class="table table-striped table-bordered">
     <thead>
       <tr class="color-cabecera">
-        <th>{{ (isPerson) ? 'NOMBRE COMPLETO' : 'RAZÓN SOCIAL' }} </th>
-        <th>{{ (isPerson) ? 'DNI:' : 'RUC:' }}</th>
+        <th>{{ (isPerson===1) ? 'NOMBRE COMPLETO' : 'RAZÓN SOCIAL' }} </th>
+        <th>{{ (isPerson===1) ? 'DNI:' : 'RUC:' }}</th>
         <th></th>
       </tr>
     </thead>
@@ -38,8 +38,8 @@
       </ng-template> -->
         
 
-      <td >  {{ (isPerson) ? customer.firstName + ' ' + customer.lastName : customer.businessName}}</td>
-      <td> {{ (isPerson) ? customer.dni : customer.ruc}}</td>
+      <td >  {{ (isPerson===1) ? customer.firstName + ' ' + customer.lastName : customer.firstName}}</td>
+      <td> {{ customer.numberDoc }}</td>
       <td>
         <a [routerLink]="['detailcustomer/', customer.id]" class="enlace"
           >ver detalle</a

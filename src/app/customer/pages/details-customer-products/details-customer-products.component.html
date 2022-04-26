@@ -3,85 +3,22 @@
 <section>
   <div class="container-fluid">
     <div class="card-title">
-      <h2 class="text-center">Detalle de Cuenta</h2>
+      <h2 class="text-center">Detalle de {{label}}</h2>
       <div class="card-body">
-        <div class="row">
-          <div class="col-sm-12 col-md-4 text-center card card-body">
-            <h5 class="">Cuenta *4963</h5>
-            <hr class="" />
-            <h4>Cuenta de Ahorros</h4>
-            <div class="row">
-              <label>S/ 100.00</label>
-              <span>Saldo Disponible</span>
-            </div>
-            <br />
-            <div class="row">
-              <label class="link" for="">S/ 100.00</label>
-              <span class="link">Saldo Contable</span>
-            </div>
-            <br />
-            <div class="row">
-              <p>
-                <button
-                  class="btn btn-primary"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseExample"
-                  aria-expanded="false"
-                  aria-controls="collapseExample"
-                >
-                  Detalle de Cuenta
-                </button>
-              </p>
-              <div class="collapse" id="collapseExample">
-                <div class="card card-body">
-                  <h5>General</h5>
-                  <hr />
-                  <div class="row">
-                    <span>Tipo de Cuenta</span>
-                    <h6>Cuenta de Ahorros</h6>
-                  </div>
-                  <div class="row">
-                    <span>Número de Cuenta</span>
-                    <h6>0011-0050-0200124963</h6>
-                  </div>
-                  <div class="row">
-                    <span>CCI</span>
-                    <h6>011-050-000200124963</h6>
-                  </div>
-                  <div class="row">
-                    <span>Fecha de Apertura</span>
-                    <h6>18 agosto 2020</h6>
-                  </div>
-                  <div class="row">
-                    <span>Cliente</span>
-                    <h6>Diego Andres Tuesta Perez</h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-12 col-md-8 card card-body">
-            <div class="btn-group" role="group" aria-label="Basic example">
-              <button type="button" class="btn btn-primary btn-sm">
-                Depósito
-              </button>
-              <button type="button" class="btn btn-primary btn-sm">
-                Retiro
-              </button>
-              <button type="button" class="btn btn-primary btn-sm">
-                Consumir
-              </button>
-              <button type="button" class="btn btn-primary btn-sm">
-                Pagar Crédito
-              </button>
-            </div>
-
-            <hr />
-            <h4>ÚLTIMOS MOVIMIENTOS</h4>
-            <div class="table-responsive"></div>
-          </div>
-        </div>
+        
+                <app-detail-accounts 
+                *ngIf="isAccount"
+                 [detailaccountcredit]="detailaccountcredit"  >
+                </app-detail-accounts>
+                <app-detail-credit
+                *ngIf="isCredit"
+                [detailaccountcredit]="detailaccountcredit"
+                ></app-detail-credit>
+                <app-detail-card-credit
+                *ngIf="isCardCredit"
+                [detailaccountcredit]="detailaccountcredit"
+                ></app-detail-card-credit>
+                
       </div>
     </div>
   </div>

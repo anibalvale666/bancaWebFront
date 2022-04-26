@@ -79,15 +79,16 @@ export interface AccountsXCustomerInterface {
 }
 //vista de cuentas por cliente
 export interface AccountsXCustomerInterfaceView {
-    idCustomer:    string;
+    id:    string;
     numberAccount: string;
     nameProduct:   string;
     balance:       string;
     currency:       string;
+    accountType: string;
 }
 //vista de creditos por cliente
 export interface CreditXCustomerInterfaceView {
-    idCustomer:       string;
+    id:       string;
     codCredit:        string;
     borrowedBalance:  string;
     dues:             string;
@@ -95,7 +96,50 @@ export interface CreditXCustomerInterfaceView {
     creditLine:       string;
     availableLine:    string;
     nameProduct:      string;
+    currency:         string;
+    accountType:      string;
 }
+///  interface de detalle cuenta
+export interface DetailAccountCredit {
+    idCoC:         string;
+    numberAccount: string;
+    nameProduct:   string;
+    balance:       string;
+    availableLine: string;
+    account:       string;
+    dues:          string;
+    currency:      string;
+    accountType:   string;
+    cci:           string;
+    openingDate:   Date;
+    dateExpiration:string;
+    headline:      Headline[];
+}
+//Titulares de la cuenta
+export interface Headline {
+    id:                 string;
+    idAccountxCustomer: string;
+    fullName:           string;
+    numberDoc:          string;
+    auth:               string;
+}
+
+///vista transacciones
+export interface Transaction {
+    id:         string;
+    idAccount?:  string;
+    idHeadline: string;
+    operation:  string;
+    idCredit:   null;
+    duePay:     null;
+    datePay:    Date;
+    amount:     number;
+    currency:   string;
+    type:       string;
+}
+
+
+
 
 
 

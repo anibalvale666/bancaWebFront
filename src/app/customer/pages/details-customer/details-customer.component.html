@@ -2,72 +2,87 @@
 <div class="container-fluid">
   <h2 class="text-center">Detalle de Cliente</h2>
   <br />
-  <!--  card personal -->
- <ng-template #divContenido></ng-template>
-  <section>
-    <div class="card">
-      <div class="card-title fw-bolder">Datos Personales</div>
-      <div class="card-body">
-        <div *ngIf="!customer; else divCustomer" class="text-center" >
-          <img class="img-loading" src="../../../../assets/img/loading-gif.gif" alt="loading-gif">
-        </div>
-        <ng-template #divCustomer>
+  <div *ngIf="!customerDetailApi; else divContenido" class="text-center">
+    <img
+      class="img-loading"
+      src="../../../../assets/img/loading-gif.gif"
+      alt="loading-gif"
+    />
+  </div>
+  <!--  div contenido -->
+  <ng-template #divContenido>
+    <section>
+      <div class="card">
+        <div class="card-title fw-bolder">Datos Personales</div>
+        <div class="card-body">
           <div class="row">
             <div class="col-sm-12 col-md-4">
-              <label class="fw-bold" for="name"> {{(isBussiness)? "Razón Social":"Nombre y Apellido"}} </label>
+              <label class="fw-bold" for="name">
+                {{
+                  customerDetailApi.type === 2
+                    ? "Razón Social"
+                    : "Nombre y Apellido"
+                }}
+              </label>
               <br />
-              <label for=""> {{(isBussiness)? customer.businessName : customer.firstName+" "+customer.lastName }} </label>
+              <label for="">
+                {{
+                  customerDetailApi.type === 2
+                    ? customerDetailApi.firstName
+                    : customerDetailApi.firstName +
+                      " " +
+                      customerDetailApi.lastName
+                }}
+              </label>
             </div>
             <div class="col-sm-12 col-md-4">
               <label class="fw-bold" for="">Tipo de Documento:</label>
               <br />
-              <label for="">{{(isBussiness)? "RUC":"DNI"}}</label>
+              <label for="">{{
+                customerDetailApi.type === 2 ? "RUC" : "DNI"
+              }}</label>
             </div>
             <div class="col-sm-12 col-md-4">
               <label class="fw-bold" for="">Nº de Doc:</label>
               <br />
-              <label for="">{{(isBussiness)? customer.ruc : customer.dni }}</label>
+              <label for="">{{ customerDetailApi.numberDoc }}</label>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-12 col-md-4">
               <label class="fw-bold" for="name">Dirección:</label>
               <br />
-              <label for=""> {{customer.address}} </label>
+              <label for=""> {{ customerDetailApi.address }} </label>
             </div>
             <div class="col-sm-12 col-md-4">
               <label class="fw-bold" for="">Teléfono:</label>
               <br />
-              <label for="">{{customer.phone}}</label>
+              <label for="">{{ customerDetailApi.phone }}</label>
             </div>
             <div class="col-sm-12 col-md-4">
               <label class="fw-bold" for="">Tipo de Cliente:</label>
               <br />
-              <label for=""> {{(isBussiness)? "Empresa":"Persona" }} </label>
+              <label for="">
+                {{ customerDetailApi.type === 2 ? "Empresa" : "Persona" }}
+              </label>
             </div>
           </div>
-        </ng-template>
-        
-      </div>
-    </div>
-  </section>
-  <!-- Fin card personal -->
-  <br />
-  <!-- card Cuentas -->
-  <section *ngIf="accountsxcustomerview.length>0" >
-    <div class="card">
-      <div class="card-title fw-bolder">
-        <div class="row">
-          <div class="col">Cuentas</div>
-         <!--  <div class="col monto"> {{AmountTotal}} </div> -->
         </div>
       </div>
-      <div class="card-body">
-        <div *ngIf="accountsxcustomerview.length===0; else divCuentas" class="text-center" >
-          <img class="img-loading" src="../../../../assets/img/loading-gif.gif" alt="loading-gif">
+    </section>
+    <!-- Fin card personal -->
+    <br />
+    <!-- card Cuentas -->
+    <section *ngIf="customerDetailApi.products.accounts.length > 0">
+      <div class="card">
+        <div class="card-title fw-bolder">
+          <div class="row">
+            <div class="col">Cuentas</div>
+            <!--  <div class="col monto"> {{AmountTotal}} </div> -->
+          </div>
         </div>
-        <ng-template #divCuentas >
-          <div class=" container table-responsive">
+        <div class="card-body">
+          <div class="container table-responsive">
             <table class="table table-striped table-bordered table-cuentas">
               <thead>
                 <tr class="color-cabecera">
@@ -77,84 +92,94 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of accountsxcustomerview;" [routerLink]="['../../customerproducts/', item.idCustomer]">
+                <tr
+                  *ngFor="let item of customerDetailApi.products.accounts"
+                  [routerLink]="[
+                    '../../customerproducts/',
+                    item.idProductXcustomer, 'account'
+                  ]"
+                >
                   <td>
                     <div style="width: 100%">
-                      <span class="link"> {{item | cardNumber}} </span><br />
-                      <small> {{ item.nameProduct }} </small>
+                      <span class="link">
+                        {{ item.numberAccount | cardNumber }} </span
+                      ><br />
+                      <small> {{ item.name }} </small>
                     </div>
                   </td>
                   <!-- <td class="td">S/ 100.00</td> -->
-                  <td class=""> 
+                  <td class="">
                     <div class="row">
                       <div class="col-sm-3">
-                        {{ item | currencytable }}
+                        {{ item.currency | currencytable }}
                       </div>
                       <div class="col td">
                         {{ item.balance | number }}
                       </div>
-                    </div>  
+                    </div>
                   </td>
                 </tr>
-                
               </tbody>
             </table>
           </div>
-        </ng-template>
-        
-      </div>
-    </div>
-  </section>
-  <!-- fin card cuentas -->
-  <br />
-  <!-- card Credits -->
-  <section *ngIf="creditxcustomerview.length>0">
-    <div class="card">
-      <div class="card-title fw-bolder">Créditos</div>
-      <div class="card-body">
-        <div *ngIf="creditxcustomerview.length===0; else divCredit" class="text-center" >
-          <img class="img-loading" src="../../../../assets/img/loading-gif.gif" alt="loading-gif">
         </div>
-        <ng-template #divCredit >
+      </div>
+    </section>
+    <!-- fin card cuentas -->
+    <br />
+    <!-- card Credits -->
+    <section *ngIf="customerDetailApi.products.credits.length > 0">
+      <div class="card">
+        <div class="card-title fw-bolder">Créditos</div>
+        <div class="card-body">
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead>
                 <tr class="color-cabecera">
-                  <th>TIPO Y NÚMERO</th>
-                  <th class="monto">LINEA DE CRÉDITO</th>
-                  <th class="monto">LINEA DISPONIBLE</th>
+                  <th>NÚMERO DE CRÉDITO Y TIPO</th>
+                  <th class="monto">MONTO PRÉSTADO</th>
+                  <th class="monto">INTERÉS</th>
+                  <th class="monto">MONTO MENSUAL</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item2 of creditxcustomerview" [routerLink]="['../../customerproducts/', item2.idCustomer]">
+                <tr
+                  *ngFor="let item2 of customerDetailApi.products.credits"
+                  [routerLink]="[
+                    '../../customerproducts/',
+                    item2.idProductXCustomer, 'credit'
+                  ]
+                   
+                   "
+                >
                   <td>
                     <div>
-                      <small> {{item2.nameProduct}} </small><br>
-                      <!-- <img *ngIf="!item2.dues"
-                        class="img-tarjeta-credito"
-                        src="../../../../assets/img/tarjeta.jpg"
-                        [alt]="item2.nameProduct"
-                      /><br /> -->
-                      <span class="link"> {{item2 | codCredit}} </span>
+                      <span class="link">
+                        {{ item2.numberCredit | cardNumber }} </span
+                      ><br />
+                      <small> {{ item2.name }} </small>
                     </div>
                   </td>
-                  <td class="td">
+                  <td class="">
                     <div class="row">
                       <div class="col-sm-3">
-                        {{ item2 | currencytable }}
+                        {{ item2.currency | currencytable }}
                       </div>
                       <div class="col td">
-                        {{ ((item2.dues===null)? item2.creditLine : item2.borrowedBalance) | number }}
+                        {{ item2.amountBorrowed | number }}
                       </div>
-                    </div>  
+                    </div>
                   </td>
-                  <td class="td">
+                  <td class="text-center">
+                    {{ item2.interest }}%
+                  </td>
+                  <td>
                     <div class="row">
                       <div class="col-sm-3">
-                        {{ item2 | currencytable }}
+                        {{ item2.currency | currencytable }}
                       </div>
                       <div class="col td">
-                        {{ item2.availableLine | number }}
+                        {{ item2.monthlyAmount | number }}
                       </div>
                     </div>
                   </td>
@@ -162,9 +187,69 @@
               </tbody>
             </table>
           </div>
-        </ng-template>
+        </div>
       </div>
-    </div>
-  </section>
-  <!-- end card Tarjetas  -->
+    </section>
+    <br/>
+    <!-- end card credtios  -->
+    <!-- card Card Credits -->
+    <section *ngIf="customerDetailApi.products.cardsCredit.length > 0">
+      <div class="card">
+        <div class="card-title fw-bolder">Tarjetas de Créditos</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr class="color-cabecera">
+                  <th>NÚMERO DE TARJETA Y TIPO</th>
+                  <th class="monto">LÍNEA DE CRÉDITO</th>
+                  <th class="monto">LÍNEA DISPONIBLE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let item2 of customerDetailApi.products.cardsCredit"
+                  [routerLink]="[
+                    '../../customerproducts/',
+                    item2.idProductXCustomer, 'card-credit'
+                  ]"
+                >
+                  <td>
+                    <div>
+                      <span class="link">
+                        {{ item2.numberCard | cardNumber }} </span
+                      ><br />
+                      <small> {{ item2.name }} </small>
+                    </div>
+                  </td>
+                  <td class="">
+                    <div class="row">
+                      <div class="col-sm-3">
+                        {{ item2.currency | currencytable }}
+                      </div>
+                      <div class="col td">
+                        {{ item2.creditLine| number }}
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        {{ item2.currency | currencytable }}
+                      </div>
+                      <div class="col td">
+                        {{ item2.availableLine | number  }}
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end card Tarjetas  -->
+  </ng-template>
+  <!--  end div contenido -->
 </div>

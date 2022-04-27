@@ -17,6 +17,7 @@ export class CreditPaymentsComponent implements OnInit, OnChanges {
     amount: ['', [Validators.required]],
     date: [new Date],
     operationType: ['deposit'],  // deposit is a payment of credit
+    type: ['credit'],
   });
 
   constructor( private fb: FormBuilder) { }
@@ -26,7 +27,8 @@ export class CreditPaymentsComponent implements OnInit, OnChanges {
     this.creditForm.reset({
       dniRuc: this.dniRuc,
       operationType: this.operationType,
-      
+      date: new Date,
+      type: 'credit',
     })
 
   }
@@ -36,7 +38,8 @@ export class CreditPaymentsComponent implements OnInit, OnChanges {
     this.creditForm.reset({
       dniRuc: this.dniRuc,
       operationType: this.operationType,
-      
+      date: new Date,
+      type: 'credit',
     })
   }
 

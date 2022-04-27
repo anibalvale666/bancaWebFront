@@ -248,6 +248,23 @@
           </div>
         </div>
       </div>
+      <button 
+        type="button" 
+        class="btn btn-primary mt-3" 
+        data-bs-toggle="modal" 
+        data-bs-target="#exampleModal"
+      >
+        Nuevo producto
+      </button>
+
+      <app-modal  
+        formOpen = "createProductForm" 
+          
+        [dniRuc] = 3232
+          
+      ></app-modal>
+
+
     </section>
     <!-- end card Tarjetas  -->
   </ng-template>

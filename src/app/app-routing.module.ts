@@ -1,15 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './auth/pages/login/login.component';
+import { AuthGuard } from './auth/guards/auth.guard';
 
 const routes: Routes = [
   {
-    path: '',
-    component: HomeComponent,
+    path: 'login',
+    component: LoginComponent,
   },
   {
     path: 'customer',
     loadChildren: () => import('./customer/customer.module').then( m => m.CustomerModule),
+    canLoad: [ AuthGuard ],
+    canActivate: [ AuthGuard ],
   },
   {
     path: 'products',
@@ -22,7 +26,7 @@ const routes: Routes = [
   {
     path: '**',
     // component: ErrorPageComponent,
-    redirectTo: '',
+    redirectTo: 'login',
   }
 ];
 

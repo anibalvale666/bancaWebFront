@@ -55,8 +55,28 @@
   </div>
   <div class="col-sm-12 col-md-8 card card-body">
     <div class="btn-group" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-primary btn-sm">Depósito</button>
-      <button type="button" class="btn btn-primary btn-sm">Retiro</button>
+      <button 
+        type="button" 
+        class="btn btn-primary btn-sm"
+        data-bs-toggle="modal" 
+        data-bs-target="#exampleModal"
+        (click) = "setValue('accountForm', 'deposit')"
+      
+      >Depósito</button>
+      <button 
+        type="button" 
+        class="btn btn-primary btn-sm"
+        data-bs-toggle="modal" 
+        data-bs-target="#exampleModal"
+        (click) = "setValue('accountForm', 'withdrawal')"
+      >Retiro</button>
+      <app-modal  
+        [formOpen] = "formSelected" 
+        [numberAccount] = "numberAccount"
+        [operationType]="operationType"
+        [id_user]="param_id"
+      ></app-modal>
+
     </div>
     <hr />
     <h4>ÚLTIMOS MOVIMIENTOS</h4>

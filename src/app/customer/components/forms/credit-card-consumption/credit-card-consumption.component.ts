@@ -19,6 +19,8 @@ export class CreditCardConsumptionComponent implements OnInit, OnChanges {
     expirationDate: ['', Validators.required],
     amount: ['',  [Validators.required, Validators.min(1)]],
     operationType: ['deposit', Validators.required], // deposit = payment of credit card, withdrawal = consumption of creditCard
+    date: [new Date],
+    type: ['creditCard'],
   });
 
   constructor( private fb: FormBuilder) { }
@@ -28,6 +30,9 @@ export class CreditCardConsumptionComponent implements OnInit, OnChanges {
       creditCardNumber: this.creditCardNumber,
       dniRuc: this.dniRuc,
       operationType: this.operationType,
+      date: new Date,
+      type: 'creditCard',
+  
     })
   }
 
@@ -36,6 +41,8 @@ export class CreditCardConsumptionComponent implements OnInit, OnChanges {
       creditCardNumber: this.creditCardNumber,
       dniRuc: this.dniRuc,
       operationType: this.operationType,
+      date: new Date,
+      type: 'creditCard',
     })
   }
 

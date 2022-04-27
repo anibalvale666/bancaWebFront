@@ -9,7 +9,7 @@ import { CustomerApi, CustomerDetailAPI } from 'src/app/interfaces/banca-api.int
 export class BancaapiService {
 
    //api local
-  private _urlapilocal: string = "http://localhost/api/v1/banca.php?";
+  private _urlapilocal: string = "https://pruebaapi2.000webhostapp.com/api/banca.php?";
   constructor(
     private http: HttpClient
   ) { }

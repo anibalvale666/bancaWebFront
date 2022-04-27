@@ -59,9 +59,21 @@
   </div>
   <div class="col-sm-12 col-md-8 card card-body">
     <div class="btn-group" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-primary btn-sm">
+      <button 
+        type="button" 
+        class="btn btn-primary btn-sm"
+        data-bs-toggle="modal" 
+        data-bs-target="#exampleModal"
+      >
         Pagar Crédito
       </button>
+
+      <app-modal  
+        formOpen = "creditPaymentForm" 
+        operationType="deposit"
+        [dniRuc] = "dniRuc"
+        
+      ></app-modal>
     </div>
     <hr />
     <h4>ÚLTIMOS PAGOS</h4>

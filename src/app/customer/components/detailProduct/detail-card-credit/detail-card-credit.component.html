@@ -58,12 +58,34 @@
   </div>
   <div class="col-sm-12 col-md-8 card card-body">
     <div class="btn-group" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-primary btn-sm">
-        Cargar Credito
+      <button 
+        type="button" 
+        class="btn btn-primary btn-sm"
+        data-bs-toggle="modal" 
+        data-bs-target="#exampleModal"
+        (click) = "setValue( 'withdrawal')"
+      >
+        Cargar Crédito
       </button>
-      <button type="button" class="btn btn-primary btn-sm">
-        Pagar Credito
+      <button 
+        type="button" 
+        class="btn btn-primary btn-sm"
+        data-bs-toggle="modal" 
+        data-bs-target="#exampleModal"
+        (click) = "setValue('deposit')"
+      >
+        Pagar Crédito
       </button>
+      <app-modal  
+        formOpen = "creditCardForm" 
+        [operationType]="operationType"
+          
+        [dniRuc] = "dniRuc"
+          
+          
+          [creditCardNumber] = "creditCardNumber"
+
+      ></app-modal>
     </div>
     <hr />
     <h4>ÚLTIMOS MOVIMIENTOS</h4>

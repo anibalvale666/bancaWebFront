@@ -56,10 +56,10 @@ export class CreateProductComponent implements OnInit, OnChanges {
   
 
   //funcion para la deteccion de errores en el html
-  attIsValid( att: string) {
-    return this.productForm.controls[att].errors 
-        && this.productForm.controls[att].touched;
-  }
+  // attIsValid( att: string) {
+  //   return this.productForm.controls[att].errors 
+  //       && this.productForm.controls[att].touched;
+  // }
 
   //funcion submit, solo envia si el form es valido
   save() {

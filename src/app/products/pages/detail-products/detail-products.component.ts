@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Product } from '../../interfaces/product.interface';
 import { ProductService } from '../../services/product.service';
 
+
+
 @Component({
   selector: 'app-detail-products',
   templateUrl: './detail-products.component.html',
@@ -31,8 +33,10 @@ export class DetailProductsComponent implements OnInit {
     this.router.navigate(['/products']);
   }
 
-  //metodo para hacer el llamado del detalle de producto
+  // metodo para hacer el llamado del detalle de producto
   listFeatures() {
     this.features = this.product.description_detail.split('#');
   }
+
 }
+

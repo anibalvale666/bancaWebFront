@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormService } from '../../../services/form.service';
 
 @Component({
   selector: 'app-credit-card-consumption',
@@ -23,7 +24,9 @@ export class CreditCardConsumptionComponent implements OnInit, OnChanges {
     type: ['creditCard'],
   });
 
-  constructor( private fb: FormBuilder) { }
+  constructor( private fb: FormBuilder,
+               private formService: FormService  
+  ) { }
   // para estar atento a los cambios en los padres del componente
   ngOnChanges(changes: SimpleChanges): void {
     this.creditCardForm.reset({
@@ -59,10 +62,14 @@ export class CreditCardConsumptionComponent implements OnInit, OnChanges {
       this.creditCardForm.markAllAsTouched();
       return;
     }
-    
+    this.formService.addCreditCardTransaction(this.creditCardForm.value).subscribe();
     // console.log(this.creditCardForm.value);
     this.creditCardForm.reset({
-      operationType: 'deposit'
+      creditCardNumber: this.creditCardNumber,
+      dniRuc: this.dniRuc,
+      operationType: this.operationType,
+      date: new Date,
+      type: 'creditCard',
     });
   }
 }

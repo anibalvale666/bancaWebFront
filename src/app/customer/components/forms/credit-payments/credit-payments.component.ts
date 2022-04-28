@@ -1,5 +1,7 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormService } from '../../../services/form.service';
+import { loanTransaction } from '../../../../interfaces/form.interface';
 
 @Component({
   selector: 'app-credit-payments',
@@ -12,7 +14,7 @@ export class CreditPaymentsComponent implements OnInit, OnChanges {
   @Input() operationType!: string;
 
   creditForm: FormGroup = this.fb.group({
-    creditNumber: [''],
+    creditNumber: ['1312'],
     dniRuc: ['', [Validators.required]],
     amount: ['', [Validators.required]],
     date: [new Date],
@@ -20,11 +22,14 @@ export class CreditPaymentsComponent implements OnInit, OnChanges {
     type: ['credit'],
   });
 
-  constructor( private fb: FormBuilder) { }
+  constructor( private fb: FormBuilder,
+               private formService: FormService              
+  ) { }
 
   // para estar atento a los cambios en los padres del componente
   ngOnChanges(changes: SimpleChanges): void {
     this.creditForm.reset({
+      creditNumber: '1312',
       dniRuc: this.dniRuc,
       operationType: this.operationType,
       date: new Date,
@@ -36,6 +41,7 @@ export class CreditPaymentsComponent implements OnInit, OnChanges {
   
   ngOnInit(): void {
     this.creditForm.reset({
+      creditNumber: '1312',
       dniRuc: this.dniRuc,
       operationType: this.operationType,
       date: new Date,
@@ -57,10 +63,15 @@ export class CreditPaymentsComponent implements OnInit, OnChanges {
       return;
     }
   
-    // console.log(this.miFormulario.value);
+    this.formService.addLoanTransaction(this.creditForm.value).subscribe();
+    
     console.log(this.creditForm.value);
     this.creditForm.reset({
-      operationType: 'deposit',
+      creditNumber: '1312',
+      dniRuc: this.dniRuc,
+      operationType: this.operationType,
+      date: new Date,
+      type: 'credit',
     });
   }
 }

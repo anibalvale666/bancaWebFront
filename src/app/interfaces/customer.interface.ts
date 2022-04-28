@@ -43,13 +43,14 @@ export interface CreditCard {
 
 export interface Transaction {
     id: string;
-    idCustomer: string;
+    id_customer: string;
     idAccount?: string;
     idLoan?: string;
     idCreditCard?: string;
     amount: number;
-    transactionDate: Date;
-    description?: string;
+    date: Date;
+    operationType: string;
+    
 }
 
 ////PArte de DIEGO

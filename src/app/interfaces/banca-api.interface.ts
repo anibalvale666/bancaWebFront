@@ -9,7 +9,7 @@ export interface CustomerApi {
     type:      string;
 }
 
-export interface CustomerDetailAPI {
+export interface  CustomerDetailAPI {
     id:        number;
     firstName: string;
     lastName:  string;

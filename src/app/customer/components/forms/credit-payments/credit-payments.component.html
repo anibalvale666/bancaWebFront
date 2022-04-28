@@ -15,7 +15,7 @@
                     <label class="col-sm-3 col-form-label">Número de documento</label>
                     <div class="col-sm-9">
                         <input 
-                            type="number" 
+                            type="text" 
                             class="form-control" 
                             formControlName="dniRuc"
                             placeholder="DNI o RUC"
@@ -31,18 +31,22 @@
 
                 <!-- Seleccion del tipo de operación -->
                 <div class="row mb-3" >
-                        <label class="col-sm-3 form-label">Deudas:</label>
+                        <label class="col-sm-3 form-label">Número de deuda:</label>
                         <div class="col-sm-9">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                formControlName="creditNumber"
+                                placeholder=""
+                                [attr.disabled]="true"
+                            >
+                        </div>  
+                        <!-- <div class="col-sm-9">
                             <select 
                                 class="form-select"
                                 formControlName="creditNumber"
                             >
-                                <!-- el pipe lowercase esta modificando el valor debido a los corchetes -->
-                                <!-- en este caso si modifica el valor  -->
-                                <!-- <option
-                                    *ngFor="let region of regiones"  
-                                    [value]="region | lowercase"
-                                >  -->
+                               
                                 <option selected
                                 value="payment"
                                 >  
@@ -54,7 +58,7 @@
                                     Retiro  
                                 </option>
                             </select>
-                        </div>
+                        </div> -->
                     </div>
                 <!-- Seleccion del tipo de operación -->
                 <div class="row mb-3" >

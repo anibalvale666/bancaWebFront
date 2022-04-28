@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormService } from '../../../services/form.service';
 
 @Component({
   selector: 'app-account-operations',
@@ -24,7 +25,9 @@ export class AccountOperationsComponent implements OnInit, OnChanges {
     type: ['account']
   });
 
-  constructor( private fb: FormBuilder) { }
+  constructor( private fb: FormBuilder,
+               private formService: FormService  
+  ) { }
   // para estar atento a los cambios en los padres del componente
   ngOnChanges(changes: SimpleChanges): void {
     this.accountForm.reset({
@@ -60,8 +63,17 @@ export class AccountOperationsComponent implements OnInit, OnChanges {
       return;
     }
     console.log(this.accountForm.value);
+
+    this.formService.addTransaction(this.accountForm.value)
+    .subscribe(); 
+
+
     this.accountForm.reset({
-      operationType: 'deposit',
+      id_customer: this.id,
+      accountNumber: this.numberAccount,
+      operationType: this.operationType,
+      date: new Date(),
+      type: 'account'
     });
   
   }

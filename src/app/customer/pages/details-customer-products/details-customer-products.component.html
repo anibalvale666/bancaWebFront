@@ -8,15 +8,13 @@
         
                 <app-detail-accounts 
                 *ngIf="isAccount"
-                 [detailaccountcredit]="detailaccountcredit"  >
+                  >
                 </app-detail-accounts>
                 <app-detail-credit
                 *ngIf="isCredit"
-                [detailaccountcredit]="detailaccountcredit"
                 ></app-detail-credit>
                 <app-detail-card-credit
                 *ngIf="isCardCredit"
-                [detailaccountcredit]="detailaccountcredit"
                 ></app-detail-card-credit>
                 
       </div>

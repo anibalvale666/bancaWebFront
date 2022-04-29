@@ -23,6 +23,7 @@ import { DetailAccountsComponent } from './components/detailProduct/detail-accou
 import { DetailCreditComponent } from './components/detailProduct/detail-credit/detail-credit.component';
 import { DetailCardCreditComponent } from './components/detailProduct/detail-card-credit/detail-card-credit.component';
 import { TxtTranPipe } from './pipes/txt-tran.pipe';
+import { SortPipe } from './pipes/sort.pipe';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { TxtTranPipe } from './pipes/txt-tran.pipe';
     DetailCreditComponent,
     DetailCardCreditComponent,
     TxtTranPipe,
+    SortPipe,
   ],
 
   imports: [

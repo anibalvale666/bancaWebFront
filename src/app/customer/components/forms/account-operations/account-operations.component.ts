@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormService } from '../../../services/form.service';
 
 @Component({
   selector: 'app-account-operations',
@@ -10,31 +11,41 @@ export class AccountOperationsComponent implements OnInit, OnChanges {
 
   
   // accountForm
-  @Input() numberAccount!: number;
+  @Input() numberAccount!: string;
   @Input() operationType!: string;
-
+  @Input() id!: number;
+  
   
   accountForm: FormGroup = this.fb.group({
+    id_customer: [this.id],
     accountNumber:  [ '' , Validators.required],
     operationType:  [ 'deposit' , Validators.required],  
-    amount:         [ '' , [Validators.required, Validators.min(1)]],  
+    amount:         [ '' , [Validators.required, Validators.min(1)]],
+    date: [new Date()],
+    type: ['account']
   });
 
-  constructor( private fb: FormBuilder) { }
+  constructor( private fb: FormBuilder,
+               private formService: FormService  
+  ) { }
   // para estar atento a los cambios en los padres del componente
   ngOnChanges(changes: SimpleChanges): void {
     this.accountForm.reset({
+      id_customer: this.id,
       accountNumber: this.numberAccount,
       operationType: this.operationType,
-
+      date: new Date(),
+      type: 'account'
     })
   }
 
   ngOnInit(): void {
     this.accountForm.reset({
+      id_customer: this.id,
       accountNumber: this.numberAccount,
       operationType: this.operationType,
-
+      date: new Date(),
+      type: 'account'
     })
   }
 
@@ -52,8 +63,17 @@ export class AccountOperationsComponent implements OnInit, OnChanges {
       return;
     }
     console.log(this.accountForm.value);
+
+    this.formService.addTransaction(this.accountForm.value)
+    .subscribe(); 
+
+
     this.accountForm.reset({
-      operationType: 'deposit',
+      id_customer: this.id,
+      accountNumber: this.numberAccount,
+      operationType: this.operationType,
+      date: new Date(),
+      type: 'account'
     });
   
   }

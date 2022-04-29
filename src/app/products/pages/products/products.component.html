@@ -25,61 +25,48 @@
 <!-- GRUPO DE TARJETAS -->
 <div class="tarjetas-group ">
 
-    <!-- TARJETAS SOBRE CUENTAS -->
-    <div class="cards mt-5">
-        <h1>Una cuenta que se ajusta a tus necesidades</h1>
-        <div class="card"  [routerLink]="['detail/', '123']">
-            <i class="fa-solid fa-piggy-bank"></i>
-            <h2 class="sub">Cuenta de Ahorros</h2>
-            <p class="desc">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae ex quasi adipisci 
-                harum voluptatum quidem dolor animi libero perspiciatis veritatis repellat enim.
-            </p>
-        </div>
-        <div class="card">
-            <i class="fa-solid fa-money-bill-transfer"></i>
-            <h2 class="sub">Cuenta corriente</h2>
-            <p class="desc">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae ex quasi adipisci 
-                harum voluptatum quidem dolor animi libero perspiciatis veritatis repellat enim.            </p>
-        </div>
-        <div class="card">
-            <i class="fa-solid fa-building-columns"></i>
-            <h2 class="sub">Cuenta a plazo fijo</h2>
-            <p class="desc">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae ex quasi adipisci 
-                harum voluptatum quidem dolor animi libero perspiciatis veritatis repellat enim.            </p>
-        </div>
-  
-    </div>
+    <div *ngIf="!productsAccount.length && !productsLoan.length; else divContent" class="text-center" >
+        <img
+          class="img-loading mt-5"
+          src="../../../../assets/img/loading-gif.gif"
+          alt="loading-gif"
+          height="250px"
+        />
+      </div>
 
-    <!-- TARJETAS SOBRE PRESTAMOS Y CREDITO -->
-    <div class="cards my-5">
-        <h1>Prestamos y tarjeta de crédito con las mejores tasas</h1>
-        <div class="card">
-            <i class="fa-solid fa-coins"></i>
-            <h2 class="sub">Prestamo Personal</h2>
-            <p class="desc">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae ex quasi adipisci 
-                harum voluptatum quidem dolor animi libero perspiciatis veritatis repellat enim.
-            </p>
+    <!-- TARJETAS SOBRE CUENTAS -->
+    <ng-template #divContent>
+        <div class="cards mt-5">
+            <h1>Una cuenta que se ajusta a tus necesidades</h1>
+
+            <div *ngFor="let product of productsAccount" class="card"  [routerLink]="['detail/', product.id ]">
+                <i [class]="product.logo"></i>
+                <h2 class="sub">{{product.name_product}}</h2>
+                <p class="desc">
+                    {{product.description_product}}
+                </p>
+            </div>
+    
         </div>
-        <div class="card">
-            <i class="fa-solid fa-money-bill"></i>
-            <h2 class="sub">Prestamo Empresarial</h2>
-            <p class="desc">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae ex quasi adipisci 
-                harum voluptatum quidem dolor animi libero perspiciatis veritatis repellat enim.            </p>
-        </div>
-        <div class="card">
-            <i class="fa-solid fa-credit-card"></i>
-            <h2 class="sub">Tarjeta de Crédito</h2>
-            <p class="desc">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae ex quasi adipisci 
-                harum voluptatum quidem dolor animi libero perspiciatis veritatis repellat enim.            </p>
-        </div>
+
+
+        <!-- TARJETAS SOBRE PRESTAMOS Y CREDITO -->
   
-    </div>
+        <div class="cards mt-5">
+            <h1>Prestamos y tarjeta de crédito con las mejores tasas</h1>
+
+            <div *ngFor="let product of productsLoan" class="card"  [routerLink]="['detail/', product.id]">
+                <i [class]="product.logo"></i>
+                <h2 class="sub">{{product.name_product}}</h2>
+                <p class="desc">
+                    {{product.description_product}}
+                </p>
+            </div>
+    
+        </div>
+    </ng-template>
+
+    
   
 </div>
 

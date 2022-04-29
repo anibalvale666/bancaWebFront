@@ -13,15 +13,16 @@ export class ModalComponent implements OnInit {
   
   
   // variables de accountForm
-  @Input() numberAccount!: number;
+  @Input() numberAccount!: string;
   @Input() operationType!: string;
   @Input() id_user!: number; // id del usuario que realizara la operacion
 
   // variables de createProductForm and credicardForm and creditpaymentform
-  @Input() dniRuc!: number;
+  @Input() dniRuc!: string;
   
   // variables de creditCardForm
-  @Input() creditCardNumber!: number;
+  @Input() creditCardNumber!: string;
+  @Input() loanNumber!: string;
 
 
   constructor() { }

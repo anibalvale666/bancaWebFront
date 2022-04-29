@@ -10,11 +10,12 @@ import { loanTransaction } from '../../../../interfaces/form.interface';
 })
 export class CreditPaymentsComponent implements OnInit, OnChanges {
 
-  @Input() dniRuc!: number;
+  @Input() dniRuc!: string;
   @Input() operationType!: string;
+  @Input() loanNumber!: string;
 
   creditForm: FormGroup = this.fb.group({
-    creditNumber: ['1312'],
+    creditNumber: [this.loanNumber],
     dniRuc: ['', [Validators.required]],
     amount: ['', [Validators.required]],
     date: [new Date],
@@ -29,7 +30,7 @@ export class CreditPaymentsComponent implements OnInit, OnChanges {
   // para estar atento a los cambios en los padres del componente
   ngOnChanges(changes: SimpleChanges): void {
     this.creditForm.reset({
-      creditNumber: '1312',
+      creditNumber: this.loanNumber,
       dniRuc: this.dniRuc,
       operationType: this.operationType,
       date: new Date,
@@ -41,7 +42,7 @@ export class CreditPaymentsComponent implements OnInit, OnChanges {
   
   ngOnInit(): void {
     this.creditForm.reset({
-      creditNumber: '1312',
+      creditNumber: this.loanNumber,
       dniRuc: this.dniRuc,
       operationType: this.operationType,
       date: new Date,

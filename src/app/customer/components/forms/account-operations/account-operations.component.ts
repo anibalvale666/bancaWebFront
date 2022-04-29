@@ -11,7 +11,7 @@ export class AccountOperationsComponent implements OnInit, OnChanges {
 
   
   // accountForm
-  @Input() numberAccount!: number;
+  @Input() numberAccount!: string;
   @Input() operationType!: string;
   @Input() id!: number;
   

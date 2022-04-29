@@ -9,7 +9,7 @@ import { FormService } from '../../../services/form.service';
 })
 export class CreateProductComponent implements OnInit, OnChanges {
 
-  @Input() dniRuc!: number;
+  @Input() dniRuc!: string;
 
   productForm: FormGroup = this.fb.group({
     dniRuc: ['',Validators.required],

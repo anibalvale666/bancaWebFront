@@ -44,12 +44,12 @@ export interface CreditCard {
 export interface Transaction {
     id: string;
     id_customer: string;
-    idAccount?: string;
-    idLoan?: string;
-    idCreditCard?: string;
+    id_account?: string;
+    id_loan?: string;
+    id_credit_card?: string;
     amount: number;
     date: Date;
-    operationType: string;
+    operation: string;
     
 }
 

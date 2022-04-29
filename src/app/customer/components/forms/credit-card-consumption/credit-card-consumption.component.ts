@@ -9,12 +9,12 @@ import { FormService } from '../../../services/form.service';
 })
 export class CreditCardConsumptionComponent implements OnInit, OnChanges {
 
-  @Input() creditCardNumber!: number;
-  @Input() dniRuc!: number;
+  @Input() creditCardNumber!: string;
+  @Input() dniRuc!: string;
   @Input() operationType!: string;
 
   creditCardForm: FormGroup = this.fb.group({
-    creditCardNumber: ['', Validators.required],
+    creditCardNumber: [this.creditCardNumber, Validators.required],
     dniRuc: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
     cvc: ['', [Validators.required, Validators.maxLength(3)]],  
     expirationDate: ['', Validators.required],

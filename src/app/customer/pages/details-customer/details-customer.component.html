@@ -7,7 +7,7 @@
       class="img-loading"
       src="../../../../assets/img/loading-gif.gif"
       alt="loading-gif"
-    />
+    /> 
   </div>
   <!--  div contenido -->
   <ng-template #divContenido>
@@ -111,7 +111,7 @@
                   <td class="">
                     <div class="row">
                       <div class="col-sm-3">
-                        {{ item.currency | currencytable }}
+                        <!-- {{ item.currency | currencytable }} -->
                       </div>
                       <div class="col td">
                         {{ item.balance | number }}
@@ -163,7 +163,7 @@
                   <td class="">
                     <div class="row">
                       <div class="col-sm-3">
-                        {{ item2.currency | currencytable }}
+                        <!-- {{ item2.currency | currencytable:'PEN' }} -->
                       </div>
                       <div class="col td">
                         {{ item2.amountBorrowed | number }}
@@ -176,7 +176,7 @@
                   <td>
                     <div class="row">
                       <div class="col-sm-3">
-                        {{ item2.currency | currencytable }}
+                        <!-- {{ item2.currency | currencytable }} -->
                       </div>
                       <div class="col td">
                         {{ item2.monthlyAmount | number }}
@@ -225,7 +225,7 @@
                   <td class="">
                     <div class="row">
                       <div class="col-sm-3">
-                        {{ item2.currency | currencytable }}
+                        <!-- {{ item2.currency | currencytable }} -->
                       </div>
                       <div class="col td">
                         {{ item2.creditLine| number }}
@@ -235,7 +235,7 @@
                   <td>
                     <div class="row">
                       <div class="col-sm-3">
-                        {{ item2.currency | currencytable }}
+                        <!-- {{ item2.currency | currencytables }} -->
                       </div>
                       <div class="col td">
                         {{ item2.availableLine | number  }}
@@ -260,7 +260,7 @@
       <app-modal  
         formOpen = "createProductForm" 
           
-        [dniRuc] = 3232
+        dniRuc = "3232"
           
       ></app-modal>
 

@@ -11,7 +11,6 @@ import { CustomerService } from '../../services/customer.service';
 })
 export class HomeComponent implements OnInit {
 
-
   //type
   type: number = 0;
 

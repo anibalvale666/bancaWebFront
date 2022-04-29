@@ -1,32 +1,64 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DetailAccountCredit } from 'src/app/interfaces/customer.interface';
 import { ActivatedRoute } from '@angular/router';
+import { DetailService } from 'src/app/customer/services/detail.service';
+import { account } from '../../../../interfaces/banca-api.interface';
+import { Transaction } from '../../../../interfaces/customer.interface';
+
+
 
 @Component({
   selector: 'app-detail-accounts',
   templateUrl: './detail-accounts.component.html',
-  styleUrls: ['./detail-accounts.component.css']
+  styleUrls: ['./detail-accounts.component.css'] 
 })
 export class DetailAccountsComponent implements OnInit {
+  //obtenemos el id de la cuenta seleccionada
   param_id = this.activatedRoute.snapshot.params['id'];
+  
+  // Variables del formulario modal
   // tipo de formulario seleccionado
   formSelected: string = 'accountForm'; // accountForm, createProductForm, creditCardForm, creditPaymentForm
-  // accountForm
-  
-  // TODO enviar numero de cuenta dinamicamente
-  numberAccount: number = 1234560978;
+  numberAccount!: string;
   operationType: string = 'withdrawal'; // este campo solo puede ser de dos tipos;  deposit or withdrawal
+  
+  // para el pipe i18nSelect
+  accountsMap = {
+    'savings': 'Cuenta de Ahorro',
+    'current': 'Cuenta Corriente',
+    'fixed': 'Cuenta a plazo fijo',
+  }
 
-  @Input() detailaccountcredit!: DetailAccountCredit;
-  constructor(    private activatedRoute: ActivatedRoute,) { }
+  // Objeto que tremos del back con los detalles de la cuenta
+  accountDetail!: account;
+
+  // Lista de transacciones de la cuenta
+  transactions: Transaction[]= [];
+
+  constructor( private activatedRoute: ActivatedRoute,
+               private detailService: DetailService 
+  ) { }
   
   ngOnInit(): void {
+    this.detailService.getAccountDetail(this.param_id).subscribe( detailaccountcredit => {
+      this.accountDetail = detailaccountcredit;
+      console.log(detailaccountcredit);
+      console.log(typeof this.accountDetail.balance);
+      
+      this.detailService.getAccountTransactions(this.accountDetail.id).subscribe( transactions => {
+        this.transactions = transactions;
+        console.log(this.transactions);
+      });
+    });
+
   }
 
   setValue(value:string, operation: string= 'withdrawal'){
     this.formSelected = value;
-    this.operationType = operation;
+    this.operationType = operation; 
+    this.numberAccount = this.accountDetail.account_number;
   }
 
 
+  
 }

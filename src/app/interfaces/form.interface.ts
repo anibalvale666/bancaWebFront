@@ -1,4 +1,5 @@
 
+// INTERFACES PARA LOS FORMULARIOS
 
 export interface accountTransaction {
     id_customer: string;
@@ -6,7 +7,7 @@ export interface accountTransaction {
     operationType:  string;
     amount: number;
     date: Date;
-    type: string;
+    type: string; // account
 }
 
 export interface createProduct{
@@ -34,7 +35,7 @@ export interface creditCardConsumption{
     amount: number,
     operationType: string,
     date: Date,
-    type: string,
+    type: string, // creditCard
 }
 
 
@@ -44,5 +45,5 @@ export interface loanTransaction {
     amount: number,
     date: Date,
     operationType: string,
-    type: string,
+    type: string, // loan
 }

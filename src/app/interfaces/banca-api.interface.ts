@@ -59,3 +59,41 @@ export interface Credit {
     name:               string;
 }
 
+
+
+// detail interfaces
+export interface account {
+    id: string;
+    account_type: string;
+    account_number: string;
+    cci: string;
+    balance: number;
+    opening_date: string;
+    owner: string;
+    currency: string;
+  }
+
+  export interface loan {
+    id: string;
+    loan_number: string;
+    capital_amount: number;
+    interes_rate: number;
+    dues: number;
+    opening_date: Date;
+    monthly_fee: number;
+    active: boolean;
+    type: string;
+    currency: string;
+  }
+
+  export interface creditCard {
+    id: string;
+    opening_date: Date;
+    credit_card_number: string;
+    cvc: string;         
+    expiration_date: Date;     
+    credit_line: number; 
+    available_line: number;
+    currency: string;
+    type: string;
+  }

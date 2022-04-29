@@ -25,7 +25,7 @@
             </ul>
           </div>
           <div class="col-sm-12 col-md-8">
-            <h4 class="text-center">Lista de {{ (type ===1 ) ? 'Personas' : 'Empresas' }} </h4>
+            <h4 class="text-center">Lista de {{ (type === 1 ) ? 'Personas' : 'Empresas' }} </h4>
             <app-table-customer [isPerson]="type" [customers]="clientCustomer"></app-table-customer>
           </div>
         </div>

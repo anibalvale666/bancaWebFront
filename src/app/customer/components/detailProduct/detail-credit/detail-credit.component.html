@@ -1,14 +1,14 @@
 <div class="row">
   <div class="col-sm-12 col-md-4 text-center card card-body">
-    <h5 class="">Crédito *1234</h5>
+    <h5 class="">Crédito {{ creditApi.numbercredit | aC }} </h5>
     <hr />
     <div class="row">
-      <h4>Crédito Personal</h4>
-      <label>S/. 10000</label>
+      <h4> {{creditApi.product.name}} </h4>
+      <label>{{creditApi.currency | currencytable }} {{creditApi.amountborrowed}} </label>
       <span>Monto Prestado</span>
-      <label>24</label>
+      <label> {{creditApi.quotas}} </label>
       <span>Cuotas</span>
-      <label>S/ 500</label>
+      <label>{{creditApi.currency | currencytable }} {{creditApi.monthlyamount}} </label>
       <span>Monto Mensual</span>
     </div>
     <br />
@@ -32,19 +32,19 @@
             <hr />
             <div class="row">
               <span>Tipo de Credito</span>
-              <h6 class="fw-bold">Credito Personal</h6>
+              <h6 class="fw-bold">{{ creditApi.product.name }}</h6>
             </div>
             <div class="row">
               <span> Número de Credito </span>
-              <h6 class="fw-bold">1223-1223-11111111</h6>
+              <h6 class="fw-bold"> {{creditApi.numbercredit | cardNumber }} </h6>
             </div>
             <div class="row">
               <span>Interes</span>
-              <h6 class="fw-bold">10%</h6>
+              <h6 class="fw-bold"> {{creditApi.interest}}% </h6>
             </div>
             <div class="row">
               <span>Fecha de Credito</span>
-              <h6 class="fw-bold">12 abril 2015</h6>
+              <h6 class="fw-bold"> {{creditApi.date | date:"dd/MM/YYYY" }} </h6>
             </div>
             <div class="row">
               <span>Titulares</span>

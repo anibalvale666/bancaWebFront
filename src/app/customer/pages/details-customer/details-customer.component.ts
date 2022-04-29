@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
-import { CustomerDetailAPI } from 'src/app/interfaces/banca-api.interface';
+import { AccountApi, CardCreditApi, CreditApi, CustomerApi } from 'src/app/interfaces/banca-api.interface';
 import {
   AccountsXCustomerInterfaceView,
   CreditXCustomerInterfaceView,
@@ -17,7 +17,7 @@ import { CustomerService } from '../../services/customer.service';
 })
 export class DetailsCustomerComponent implements OnInit {
   //objeto referenciado a la interfaz de customer
-  customer!: CustomerInterface;
+  //customer!: CustomerInterface;
   //objeto referenciado a la interfaz cuentasxclienteview
   accountsxcustomerview: AccountsXCustomerInterfaceView[] = [];
   //objeto referenciado a la interfaz cretisxclienteview
@@ -31,7 +31,13 @@ export class DetailsCustomerComponent implements OnInit {
 
   /**********Nuevo Comienzo */
 
-  customerDetailApi!: CustomerDetailAPI;
+  //customerDetailApi!: CustomerDetailAPI;
+  //customerDetailApi!: CustomerDetailAPI;
+  /*********Pre Final */
+  customerApi!: CustomerApi;
+  accountsxCustomerApi : AccountApi[]=[];
+  creditsxCustomerApi: CreditApi[]=[];
+  cardsCreditApi: CardCreditApi[]=[];
 
 /********* */
   get AmountTotal(): number {
@@ -47,44 +53,40 @@ export class DetailsCustomerComponent implements OnInit {
     //obtenemos el parametro de la ruta
     const param = this.activatedRoute.snapshot.params['id'];
     
-    this.detailCustomer(param);
+    this.getCustomer(param);
+    this.getAccountsXCustomer(param);
+    this.getCreditsXCustomer(param);
+    this.getCardCreditXCustomer(param);
+    
     /*this.detailAccounts(param);
     this.detailCredits(param);*/
     //hacemos la suscripcion del servicio para obtener los datos de los creditos del customer
   }
   //metodo para hacer el llamado del detalle de cliente
-  private detailCustomer(param:number){
+  private getCustomer(param:number){
      //hacemos la suscripcion del servicio para obtener los datos del customer
-     this.bancaService.getCustomerDetail(param).subscribe((customerDetail) => {
-      this.customerDetailApi = customerDetail;
+     this.bancaService.getCustomerXId(param).subscribe((customerDetail) => {
+      this.customerApi = customerDetail;
       /*(this.customerDetailApi.numberDoc.length===11)
         ? (this.isBussiness = true)
         : (this.isBussiness = false);*/
     }); 
   }
-   //metodo para hacer el llamado del detalle de cuentas por cliente
-  /*private detailAccounts(param:number){
-      //hacemos la suscripcion del servicio para obtener los datos de las cuentas del customer
-      this.customerService
-      .getAccountsXCustomerView(param)
-      .subscribe((account) => {
-        this.accountsxcustomerview = account;
-        /*this.accountsxcustomerview.forEach((item) => {
-          this.amountTotal += Number(item.balance);
-        });
-      });
+  private getAccountsXCustomer(param: number){
+    this.bancaService.getAccountsXCustomer(param).subscribe((accounts)=>{
+      this.accountsxCustomerApi = accounts;
+    });
   }
-   //metodo para hacer el llamado del detalle de creditos por cliente
-  private detailCredits(param:number){
-     //hacemos la suscripcion del servicio para obtener los datos de las tarjetas del customer
-     this.customerService
-     .getCreditXCustomerView(param)
-     .subscribe((account) => {
-       this.creditxcustomerview = account;
-       /*this.accountsxcustomerview.forEach((item) => {
-         this.amountTotal += Number(item.balance);
-       });
-     });
-  }*/
+  private getCreditsXCustomer(param: number){
+    this.bancaService.getCreditsXCustomer(param).subscribe((credits)=>{
+      this.creditsxCustomerApi= credits;
+    });
+  }
+  private getCardCreditXCustomer(param: number){
+    this.bancaService.getCardCreditsXCustomer(param).subscribe((cardCredits)=>{
+      this.cardsCreditApi = cardCredits;
+    });
+  }
+  
 
 }

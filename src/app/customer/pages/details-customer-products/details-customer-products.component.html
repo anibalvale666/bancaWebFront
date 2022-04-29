@@ -5,18 +5,21 @@
     <div class="card-title">
       <h2 class="text-center">Detalle de {{label }}</h2>
       <div class="card-body">
-        
+
+          
                 <app-detail-accounts 
-                *ngIf="isAccount"
-                 [detailaccountcredit]="detailaccountcredit"  >
+                *ngIf="accountApi"
+                 [accountApi]="accountApi">
                 </app-detail-accounts>
+
                 <app-detail-credit
-                *ngIf="isCredit"
-                [detailaccountcredit]="detailaccountcredit"
+                *ngIf="creditApi"
+                [creditApi]="creditApi"
                 ></app-detail-credit>
+
                 <app-detail-card-credit
-                *ngIf="isCardCredit"
-                [detailaccountcredit]="detailaccountcredit"
+                *ngIf="cardCreditApi"
+                [cardCreditApi]="cardCreditApi"
                 ></app-detail-card-credit>
                 
       </div>

@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col-sm-12 col-md-4 text-center card card-body">
-    <h5 class="">Cuenta *1234</h5>
+    <h5 class="">Cuenta {{accountApi.numberaccount | aC }} </h5>
     <hr />
     <div class="row">
-      <h4>Cuenta Corriente</h4>
-      <label>S/. 10000</label>
+      <h4>{{ accountApi.product.name | titlecase }}</h4>
+      <label> {{ accountApi.currency | currencytable }}  {{ accountApi.balance | number }}</label>
       <span>Saldo Disponible</span>
     </div>
     <br />
@@ -28,19 +28,19 @@
             <hr />
             <div class="row">
               <span>Tipo de Cuenta</span>
-              <h6 class="fw-bold">Cuenta de Ahorro</h6>
+              <h6 class="fw-bold"> {{accountApi.product.name | titlecase}} </h6>
             </div>
             <div class="row">
               <span> Número de Cuenta </span>
-              <h6 class="fw-bold">1223-1223-11111111</h6>
+              <h6 class="fw-bold"> {{accountApi.numberaccount | cardNumber }} </h6>
             </div>
             <div class="row">
               <span>CCI</span>
-              <h6 class="fw-bold">123-123-123123123</h6>
+              <h6 class="fw-bold"> {{ accountApi.cci | cci }} </h6>
             </div>
             <div class="row">
               <span>Fecha de Apertura</span>
-              <h6 class="fw-bold">12 abril 2015</h6>
+              <h6 class="fw-bold"> {{accountApi.date | date:"dd/MM/YYYY"  }} </h6>
             </div>
             <div class="row">
               <span>Titulares</span>

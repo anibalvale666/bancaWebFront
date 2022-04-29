@@ -1,15 +1,67 @@
 export interface CustomerApi {
-    id:        string;
-    firstName: string;
-    lastName:  string;
-    typeDoc:   string;
-    numberDoc: string;
+    id:        number;
+    firstname: string;
+    lastname:  string;
+    typedoc:   number;
+    numberdoc: string;
     address:   string;
     phone:     string;
-    type:      string;
+    type:      number;
+}
+export interface AccountApi {
+    id:            number;
+    idcustomer:    number;
+    idproduct:     number;
+    currency:      string;
+    date:          Date;
+    numberaccount: string;
+    cci:           string;
+    balance:       number;
+    product:       ProductApi;
+}
+export interface CreditApi {
+    id:             number;
+    idcustomer:     number;
+    idproduct:      number;
+    currency:       string;
+    date:           Date;
+    amountborrowed: number;
+    quotas:         number;
+    interest:       number;
+    monthlyamount:  number;
+    amountpaid:     number;
+    quotaspaid:     number;
+    numbercredit:   string;
+    product:        ProductApi;
+}
+export interface CardCreditApi {
+    id:            number;
+    idcustomer:    number;
+    idproduct:     number;
+    currency:      string;
+    date:          Date;
+    numbercard:    string;
+    cvv:           string;
+    creditline:    number;
+    availableline: number;
+    expirationday: string;
+    product:       ProductApi;
 }
 
-export interface CustomerDetailAPI {
+export interface ProductApi {
+    id:                    number;
+    name:                  string;
+    descriptionshort:      string;
+    descriptionlong:       string;
+    category:              number;
+    logoawesome:           string;
+    maintenancecommission: number;
+    withdrawalpermonth:    number;
+    withdrawalday:         number;
+}
+
+
+/*export interface CustomerDetailAPI {
     id:        number;
     firstName: string;
     lastName:  string;
@@ -57,5 +109,5 @@ export interface Credit {
     numberCredit:       string;
     currency:           string;
     name:               string;
-}
+}*/
 

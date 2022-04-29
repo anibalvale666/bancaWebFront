@@ -1,12 +1,12 @@
 <div class="row">
   <div class="col-sm-12 col-md-4 text-center card card-body">
-    <h5 class="">Tarjeta *1234</h5>
+    <h5 class="">Tarjeta {{ cardCreditApi.numbercard | aC }}</h5>
     <hr />
     <div class="row">
-      <h4>Tarjeta de Credito</h4>
-      <label>S/. 10000</label>
+      <h4>{{ cardCreditApi.product.name }}</h4>
+      <label> {{cardCreditApi.currency }} {{cardCreditApi.creditline}}  </label>
       <span>Linea de Credito</span>
-      <label>S/. 10000</label>
+      <label>{{ cardCreditApi.currency }} {{cardCreditApi.availableline}} </label>
       <span>Linea disponible</span>
       
     </div>
@@ -31,19 +31,19 @@
             <hr />
             <div class="row">
               <span>Tarjeta</span>
-              <h6 class="fw-bold">Tarjeta de Credito</h6>
+              <h6 class="fw-bold"> {{cardCreditApi.product.name}} </h6>
             </div>
             <div class="row">
               <span> Número de Tarjeta </span>
-              <h6 class="fw-bold">1223-1223-1111-1111</h6>
+              <h6 class="fw-bold"> {{cardCreditApi.numbercard | cardNumber }} </h6>
             </div>
             <div class="row">
               <span>CVV</span>
-              <h6 class="fw-bold">111</h6>
+              <h6 class="fw-bold"> {{cardCreditApi.cvv}} </h6>
             </div>
             <div class="row">
               <span>Fecha de Vencimiento</span>
-              <h6 class="fw-bold">11/25</h6>
+              <h6 class="fw-bold"> {{cardCreditApi.expirationday}} </h6>
             </div>
             <div class="row">
               <span>Titulares</span>

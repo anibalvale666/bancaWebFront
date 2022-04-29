@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AccountApi, CardCreditApi, CreditApi } from 'src/app/interfaces/banca-api.interface';
 import { DetailAccountCredit, Transaction } from 'src/app/interfaces/customer.interface';
+import { BancaapiService } from '../../services/bancaapi.service';
 import { CustomerService } from '../../services/customer.service';
 
 @Component({
@@ -10,7 +12,9 @@ import { CustomerService } from '../../services/customer.service';
 })
 export class DetailsCustomerProductsComponent implements OnInit {
   
-  detailaccountcredit!: DetailAccountCredit;
+  accountApi!: AccountApi; 
+  creditApi!: CreditApi;
+  cardCreditApi!:CardCreditApi;
   detailTransaction: Transaction[] = [];
 
   // tipo de producto
@@ -26,56 +30,41 @@ export class DetailsCustomerProductsComponent implements OnInit {
       return "Tarjeta de Crédito";
     }
   }
-  
 
-  
-  get isAccount() : boolean {
-    if (this.type==="account") {
-      return true;
-    }
-    return false;
-  }
-  get isCredit(): boolean{
-    if (this.type==="credit") {
-      return true;
-    }
-    return false;
-  }
-
-  get isCardCredit(): boolean{
-    if (this.type==="card-credit") {
-      return true;
-    }
-    return false;
-  }
 
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private customerService: CustomerService
+    private bancaService: BancaapiService
   ) { }
 
   ngOnInit(): void {
     const id:number = this.activatedRoute.snapshot.params['id'];
     this.type = this.activatedRoute.snapshot.params['type'];
-   
-    //this.detailAccountCredit(id,type);
-    //this.transactions(id,type);
+    
+    if (this.type==="account") {
+      this.getAccountXCustomer(id);
+    }else if(this.type==="credit"){
+      this.getCreditXCustomer(id);
+    }else{
+      this.getCardCreditXCustomer(id);
+    }
     
   }
-  /*private detailAccountCredit(id:number ,type:string ){
-    this.customerService.getAccountCredit(id,type).subscribe(
-      res=>{
-        this.detailaccountcredit = res;
-      }
-    );
+  private getAccountXCustomer(param: number){
+    this.bancaService.getAccountXCustomer(param).subscribe((accounts)=>{
+      this.accountApi = accounts;
+    });
   }
-  private transactions(id:number, type:string){
-    this.customerService.getTransacciones(id,type).subscribe(
-      res=>{
-        this.detailTransaction = res;
-      }
-    );
-  }*/
+  private getCreditXCustomer(param: number){
+    this.bancaService.getCreditXCustomer(param).subscribe((credits)=>{
+      this.creditApi= credits;
+    });
+  }
+  private getCardCreditXCustomer(param: number){
+    this.bancaService.getCardCreditXCustomer(param).subscribe((cardCredits)=>{
+      this.cardCreditApi = cardCredits;
+    });
+  }
 
 }

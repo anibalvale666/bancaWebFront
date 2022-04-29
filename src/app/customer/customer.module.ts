@@ -39,7 +39,7 @@ import { TxtTranPipe } from './pipes/txt-tran.pipe';
     CardNumberPipe,
     CurrencyTablePipe,
     CodCreditPipe,
-    
+
     ACPipe,
     CciPipe,
     DetailAccountsComponent,
@@ -56,6 +56,6 @@ import { TxtTranPipe } from './pipes/txt-tran.pipe';
   exports: [
     ModalComponent
   ]
-
+ 
 })
 export class CustomerModule {}

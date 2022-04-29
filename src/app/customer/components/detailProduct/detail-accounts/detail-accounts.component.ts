@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DetailAccountCredit } from 'src/app/interfaces/customer.interface';
+import { AccountApi } from 'src/app/interfaces/banca-api.interface';
 
 @Component({
   selector: 'app-detail-accounts',
@@ -8,7 +9,7 @@ import { DetailAccountCredit } from 'src/app/interfaces/customer.interface';
 })
 export class DetailAccountsComponent implements OnInit {
 
-  @Input() detailaccountcredit!: DetailAccountCredit;
+  @Input() accountApi!: AccountApi;
   constructor() { }
   
   ngOnInit(): void {

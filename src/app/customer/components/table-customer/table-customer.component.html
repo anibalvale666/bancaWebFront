@@ -14,10 +14,10 @@
         <img class="img-loading" src="../../../../assets/img/loading-gif.gif" alt="loading-gif">
       </div>
       <tr *ngFor="let customer of customers " >
-        
-        <!-- <ng-container *ngIf="isPerson; else empresa"> 
 
-        <td >{{customer.firstName + ' ' + customer.lastName}}</td>
+        <!-- <ng-container *ngIf="isPerson; else empresa">
+
+        <td >{{customer.firstname + ' ' + customer.lastname}}</td>
         <td>{{customer.dni}}</td>
         <td>
           <a [routerLink]="['detailcustomer/', customer.id]" class="enlace"
@@ -25,7 +25,7 @@
           >
         </td>
 
-      </ng-container> 
+      </ng-container>
 
       <ng-template #empresa>
         <td >{{customer.businessName}}</td>
@@ -36,10 +36,10 @@
           >
         </td>
       </ng-template> -->
-        
 
-      <td >  {{ (isPerson===1) ? customer.firstName + ' ' + customer.lastName : customer.firstName}}</td>
-      <td> {{ customer.numberDoc }}</td>
+
+      <td >  {{ (isPerson===1) ? customer.firstname + ' ' + customer.lastname : customer.firstname}}</td>
+      <td> {{ customer.numberdoc }}</td>
       <td>
         <a [routerLink]="['detailcustomer/', customer.id]" class="enlace"
           >ver detalle</a

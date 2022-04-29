@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
   listCustomer(type: number):void{
     
    if (type!==this.type) {
-    this.bancaService.getCustomersD(type).subscribe( customers => {
+    this.bancaService.getCustomers(type).subscribe( customers => {
       this.clientCustomer = customers;
       this.type = type;
     });

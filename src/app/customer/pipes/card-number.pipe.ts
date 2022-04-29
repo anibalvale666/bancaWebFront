@@ -17,7 +17,7 @@ export class CardNumberPipe implements PipeTransform {
       let str1 = number.slice(0,4);
       let str2 = number.slice(4,8);
       let str3 = number.slice(8,12);
-      let str4 = number.slice(8,16);
+      let str4 = number.slice(12,16);
       return str1+"-"+str2+"-"+str3+"-"+str4;
     }else if(number.length===10){
       let str1 = number.slice(0,4);

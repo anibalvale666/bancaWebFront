@@ -1,12 +1,13 @@
-export interface CustomerApi {
+export interface Customer {
     id:        string;
-    firstName: string;
-    lastName:  string;
-    typeDoc:   string;
-    numberDoc: string;
+    first_name: string;
+    last_name:  string;
+    type_doc:   string;
+    number_doc: string;
     address:   string;
     phone:     string;
-    type:      string;
+    type_customer:      string;
+    type_user: string;
 }
 
 export interface  CustomerDetailAPI {
@@ -77,7 +78,7 @@ export interface account {
     id: string;
     loan_number: string;
     capital_amount: number;
-    interes_rate: number;
+    interest_rate: number;
     dues: number;
     opening_date: Date;
     monthly_fee: number;

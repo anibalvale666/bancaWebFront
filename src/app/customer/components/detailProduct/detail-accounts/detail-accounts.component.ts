@@ -14,7 +14,8 @@ import { Transaction } from '../../../../interfaces/customer.interface';
 })
 export class DetailAccountsComponent implements OnInit {
   //obtenemos el id de la cuenta seleccionada
-  param_id = this.activatedRoute.snapshot.params['id'];
+  idAccount = this.activatedRoute.snapshot.params['id'];
+  idOwner = this.activatedRoute.snapshot.params['idowner'];
   
   // Variables del formulario modal
   // tipo de formulario seleccionado
@@ -40,7 +41,7 @@ export class DetailAccountsComponent implements OnInit {
   ) { }
   
   ngOnInit(): void {
-    this.detailService.getAccountDetail(this.param_id).subscribe( detailaccountcredit => {
+    this.detailService.getAccountDetail(this.idAccount).subscribe( detailaccountcredit => {
       this.accountDetail = detailaccountcredit;
       console.log(detailaccountcredit);
       console.log(typeof this.accountDetail.balance);

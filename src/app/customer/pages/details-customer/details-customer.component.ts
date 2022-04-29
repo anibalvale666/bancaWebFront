@@ -9,6 +9,8 @@ import {
 } from 'src/app/interfaces/customer.interface';
 import { BancaapiService } from '../../services/bancaapi.service';
 import { CustomerService } from '../../services/customer.service';
+import { DetailService } from '../../services/detail.service';
+import { Customer, account, loan, creditCard } from '../../../interfaces/banca-api.interface';
 
 @Component({
   selector: 'app-details-customer',
@@ -16,75 +18,49 @@ import { CustomerService } from '../../services/customer.service';
   styleUrls: ['./details-customer.component.css'],
 })
 export class DetailsCustomerComponent implements OnInit {
-  //objeto referenciado a la interfaz de customer
-  customer!: CustomerInterface;
-  //objeto referenciado a la interfaz cuentasxclienteview
-  accountsxcustomerview: AccountsXCustomerInterfaceView[] = [];
-  //objeto referenciado a la interfaz cretisxclienteview
-  creditxcustomerview: CreditXCustomerInterfaceView[] = [];
-  //validar si es empresa o persona
-  isBussiness: boolean = false;
-  //validar currency
-  isDollar: boolean = false;
-  //monto
-  private amountTotal: number = 0.0;
 
-  /**********Nuevo Comienzo */
+  user!: Customer;
+  accounts: account[] = [];
+  loans: loan[] = [];
+  creditCards: creditCard[] = [];
 
-  customerDetailApi!: CustomerDetailAPI;
 
-/********* */
-  get AmountTotal(): number {
-    return this.amountTotal;
+  accountsMap = {
+    'savings': 'Cuenta de Ahorro',
+    'current': 'Cuenta Corriente',
+    'fixed': 'Cuenta a plazo fijo',
   }
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private bancaService: BancaapiService
+    private detailService: DetailService
   ) {}
 
   ngOnInit(): void {
     //obtenemos el parametro de la ruta
     const param = this.activatedRoute.snapshot.params['id'];
-    
-    this.detailCustomer(param);
-    /*this.detailAccounts(param);
-    this.detailCredits(param);*/
-    //hacemos la suscripcion del servicio para obtener los datos de los creditos del customer
-  }
-  //metodo para hacer el llamado del detalle de cliente
-  private detailCustomer(param:number){
-     //hacemos la suscripcion del servicio para obtener los datos del customer
-     this.bancaService.getCustomerDetail(param).subscribe((customerDetail) => {
-      this.customerDetailApi = customerDetail;
-      /*(this.customerDetailApi.numberDoc.length===11)
-        ? (this.isBussiness = true)
-        : (this.isBussiness = false);*/
-    }); 
-  }
-   //metodo para hacer el llamado del detalle de cuentas por cliente
-  /*private detailAccounts(param:number){
-      //hacemos la suscripcion del servicio para obtener los datos de las cuentas del customer
-      this.customerService
-      .getAccountsXCustomerView(param)
-      .subscribe((account) => {
-        this.accountsxcustomerview = account;
-        /*this.accountsxcustomerview.forEach((item) => {
-          this.amountTotal += Number(item.balance);
+    this.detailService.getCustomer(param)
+        .subscribe( (customer: Customer) => {
+          this.user = customer;
+
+          this.detailService.getAccountsCustomer(customer.id)
+              .subscribe( (accounts: account[]) => {
+                this.accounts = accounts;
+              });
+          this.detailService.getLoansCustomer(customer.id)
+              .subscribe( (loans: loan[]) => {
+                this.loans = loans;
+              });
+          this.detailService.getCreditCardsCustomer(customer.id)
+              .subscribe( (creditCards: creditCard[]) => {
+                this.creditCards = creditCards;
+              });
+        
+            
         });
-      });
+
   }
-   //metodo para hacer el llamado del detalle de creditos por cliente
-  private detailCredits(param:number){
-     //hacemos la suscripcion del servicio para obtener los datos de las tarjetas del customer
-     this.customerService
-     .getCreditXCustomerView(param)
-     .subscribe((account) => {
-       this.creditxcustomerview = account;
-       /*this.accountsxcustomerview.forEach((item) => {
-         this.amountTotal += Number(item.balance);
-       });
-     });
-  }*/
+
+ 
 
 }

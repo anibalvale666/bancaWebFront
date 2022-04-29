@@ -10,23 +10,6 @@ export interface accountTransaction {
     type: string; // account
 }
 
-export interface createProduct{
-    
-    dniRuc: string,
-    product: string, // creditCard, Loan, account
-    currency: string, // USD, PEN
-    OpeningDate: Date,
-    
-    // Si es cuenta
-    accountType: string,  // savings, current and fixed
-    dniRucOwner: string,
-    owner: string, // owner or signatory
-    
-    // si es prestamo
-    CapitalAmount: string, 
-    dues: number, // numero de cuotas
-}
-
 export interface creditCardConsumption{
     creditCardNumber: string,
     dniRuc: string,
@@ -47,3 +30,21 @@ export interface loanTransaction {
     operationType: string,
     type: string, // loan
 }
+
+export interface createProduct{
+    
+    dniRuc: string,
+    product: string, // creditCard, loan, account
+    currency: string, // USD, PEN
+    OpeningDate: Date,
+    
+    // Si es cuenta
+    accountType: string,  // savings, current and fixed
+    dniRucOwner: string,
+    owner: string, // owner or signatory
+    
+    // si es prestamo
+    CapitalAmount: string, 
+    dues: number, // numero de cuotas
+}
+

@@ -1,4 +1,4 @@
-// Aqui iran las interfaz de producto
+// Aqui iran las interface de producto
 export interface Product {
     id: number;
     name_product:        string;

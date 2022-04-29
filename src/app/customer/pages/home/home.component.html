@@ -9,15 +9,15 @@
             <hr />
             <ul class="menu-group-customer">
               <li
-                [class.active1]="type===1"
-                (click)="listCustomer(1)"
+                [class.active1]="type_customer==='personal'"
+                (click)="listCustomer('personal')"
                 class="list-group-item"
               >
                 Personas
               </li>
               <li
-                [class.active1]="type===2"
-                (click)="listCustomer(2)"
+                [class.active1]="type_customer==='business'"
+                (click)="listCustomer('business')"
                 class="list-group-item"
               >
                 Empresas
@@ -25,8 +25,15 @@
             </ul>
           </div>
           <div class="col-sm-12 col-md-8">
-            <h4 class="text-center">Lista de {{ (type === 1 ) ? 'Personas' : 'Empresas' }} </h4>
-            <app-table-customer [isPerson]="type" [customers]="clientCustomer"></app-table-customer>
+          <div *ngIf="loading;else divContent" class="text-center" >
+            <img class="img-loading" src="../../../../assets/img/loading-gif.gif" alt="loading-gif">
+          </div>
+          <ng-template #divContent>
+            
+            <h4 class="text-center">Lista de {{ (type_customer === "personal" ) ? 'Personas' : 'Empresas' }} </h4>
+            <hr>
+            <app-table-customer [isPerson]="type_customer" [customers]="clientCustomer"></app-table-customer>
+          </ng-template>
           </div>
         </div>
       </div>

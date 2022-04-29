@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
           if(data.type=='admin'){
             this.router.navigate(['/customer']);
           }else {
-            this.router.navigate(['/customer/detailcustomer/', data.id]);
+            this.router.navigate(['/customer/', data.id]);
           }
   
         }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerApi } from 'src/app/interfaces/banca-api.interface';
+import { Customer } from 'src/app/interfaces/banca-api.interface';
 import { CustomerInterface } from 'src/app/interfaces/customer.interface';
 import { BancaapiService } from '../../services/bancaapi.service';
 import { CustomerService } from '../../services/customer.service';
@@ -11,11 +11,10 @@ import { CustomerService } from '../../services/customer.service';
 })
 export class HomeComponent implements OnInit {
 
-
   //type
-  type: number = 0;
-
-  clientCustomer:CustomerApi[] = [];
+  type_customer: string = 'personal';
+  loading: boolean = true;
+  clientCustomer:Customer[] = [];
   //businessCustomers: CustomerApi[] = [];
 
   constructor(
@@ -26,18 +25,28 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 
     //llamamos al metodo con el primer lista que es persona
-    this.listCustomer(1);
+
+    this.bancaService.getCustomersD('personal').subscribe( customers => {
+      this.clientCustomer = customers;
+      this.type_customer = 'personal';  
+      this.loading = false;
+    });
    
   }
   
 
   //metodo para listar clientes personas
-  listCustomer(type: number):void{
+  listCustomer(type: string):void{
     
    if (type!==this.type) {
     this.bancaService.getCustomers(type).subscribe( customers => {
+
+   if (type!==this.type_customer) {
+    this.bancaService.getCustomersD(type).subscribe( customers => {
+
       this.clientCustomer = customers;
-      this.type = type;
+      this.type_customer = type;
+      this.loading = false;
     });
    } 
   }

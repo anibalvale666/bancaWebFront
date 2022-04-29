@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormService } from '../../../services/form.service';
 
 @Component({
   selector: 'app-create-product',
@@ -8,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CreateProductComponent implements OnInit, OnChanges {
 
-  @Input() dniRuc!: number;
+  @Input() dniRuc!: string;
 
   productForm: FormGroup = this.fb.group({
     dniRuc: ['',Validators.required],
@@ -26,7 +27,9 @@ export class CreateProductComponent implements OnInit, OnChanges {
     dues: ['12'], // numero de cuotas
   });
 
-  constructor( private fb: FormBuilder) { }
+  constructor( private fb: FormBuilder,
+               private formService: FormService  
+  ) { }
 
   // para estar atento a los cambios en los padres del componente
   ngOnChanges(changes: SimpleChanges): void {
@@ -37,6 +40,7 @@ export class CreateProductComponent implements OnInit, OnChanges {
       accountType: 'savings',
       owner: 'owner',
       dues: '12',
+      OpeningDate: new Date,
     })
   }
 
@@ -48,6 +52,7 @@ export class CreateProductComponent implements OnInit, OnChanges {
       accountType: 'savings',
       owner: 'owner',
       dues: '12',
+      OpeningDate: new Date,
     })
   }
 
@@ -56,10 +61,10 @@ export class CreateProductComponent implements OnInit, OnChanges {
   
 
   //funcion para la deteccion de errores en el html
-  attIsValid( att: string) {
-    return this.productForm.controls[att].errors 
-        && this.productForm.controls[att].touched;
-  }
+  // attIsValid( att: string) {
+  //   return this.productForm.controls[att].errors 
+  //       && this.productForm.controls[att].touched;
+  // }
 
   //funcion submit, solo envia si el form es valido
   save() {
@@ -69,6 +74,8 @@ export class CreateProductComponent implements OnInit, OnChanges {
       return;
     }
     console.log(this.productForm.value);
+
+    this.formService.addProduct(this.productForm.value).subscribe();
   
     this.productForm.reset({
       product: 'creditCard',
@@ -76,6 +83,7 @@ export class CreateProductComponent implements OnInit, OnChanges {
       accountType: 'savings',
       owner: 'owner',
       dues: '12',
+      OpeningDate: new Date,
     });
   }
 

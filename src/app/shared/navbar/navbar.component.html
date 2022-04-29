@@ -8,20 +8,27 @@
         <div (click)="CancelBtn()" class="icon cancel-btn">
           <i class="fas fa-times"></i>
         </div>
-        <li routerLink="">
+        <!-- <li routerLink="">
           <a
             class="color-a"
             routerLinkActive="active1"
             [routerLinkActiveOptions]="{ exact: true }"
             >Inicio</a
           >
-        </li>
-        <li routerLink="customer">
+        </li> -->
+        <li *ngIf="isLogin()" routerLink="customer">
           <a class="color-a" routerLinkActive="active1">Clientes</a>
+        </li>
+        <li *ngIf="!isLogin()" routerLink="login">
+          <a class="color-a" routerLinkActive="active1">Login</a>
         </li>
         <li routerLink="products">
           <a class="color-a" routerLinkActive="active1">Productos</a>
         </li>
+        <li *ngIf="isLogin()" routerLink="login" (click)="logout()">
+          <a class="color-a" routerLinkActive="active1">Logout</a>
+        </li>
+      
       </ul>
       <div [class.hide]="menu" (click)="MenuBtn()" class="icon menu-btn">
         <i class="fas fa-bars"></i>

@@ -12,14 +12,14 @@ export class HomeComponent implements OnInit, OnChanges{
 
 
     // accountForm
-    numberAccount: number = 1234560978;
+    numberAccount: string = "1234560978";
     operationType: string = 'withdrawal'; // este campo solo puede ser de dos tipos;  deposit or withdrawal
   
     // createProductForm and credicardForm and creditpaymentform
-    dniRuc: number = 67507035;
+    dniRuc: string = "67507035";
     
     // creditCardForm
-    creditCardNumber: number = 11122233344455;
+    creditCardNumber: string = "11122233344455";
 
 
   constructor() { }

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CustomerApi } from 'src/app/interfaces/banca-api.interface';
+import { Customer } from 'src/app/interfaces/banca-api.interface';
 import { CustomerInterface } from 'src/app/interfaces/customer.interface';
 
 @Component({
@@ -9,9 +9,9 @@ import { CustomerInterface } from 'src/app/interfaces/customer.interface';
 })
 export class TableCustomerComponent implements OnInit {
   // Boleano para cambiar  la tabla a talba empresa o tabla clientes; si esta en true es cliente
-  @Input() isPerson: number = 1;
+  @Input() isPerson: string = 'personal';
   //lista de los clientes o empresas
-  @Input() customers: CustomerApi[] = [];
+  @Input() customers: Customer[] = [];
 
   constructor() { }
 

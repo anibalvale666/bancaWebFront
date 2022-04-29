@@ -1,18 +1,16 @@
 
-<hr />
+
 <div class="table-responsive">
   <table class="table table-striped table-bordered">
     <thead>
       <tr class="color-cabecera">
-        <th>{{ (isPerson===1) ? 'NOMBRE COMPLETO' : 'RAZÓN SOCIAL' }} </th>
-        <th>{{ (isPerson===1) ? 'DNI:' : 'RUC:' }}</th>
+        <th>{{ (isPerson==='personal') ? 'NOMBRE COMPLETO' : 'RAZÓN SOCIAL' }} </th>
+        <th>{{ (isPerson==='personal') ? 'DNI:' : 'RUC:' }}</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-      <div *ngIf="customers.length===0" class="text-center" >
-        <img class="img-loading" src="../../../../assets/img/loading-gif.gif" alt="loading-gif">
-      </div>
+ 
       <tr *ngFor="let customer of customers " >
 
         <!-- <ng-container *ngIf="isPerson; else empresa">
@@ -38,10 +36,15 @@
       </ng-template> -->
 
 
+
       <td >  {{ (isPerson===1) ? customer.firstname + ' ' + customer.lastname : customer.firstname}}</td>
       <td> {{ customer.numberdoc }}</td>
+
+      <td >  {{ (isPerson==='personal') ? customer.first_name + ' ' + customer.last_name : customer.first_name}}</td>
+      <td> {{ customer.number_doc }}</td>
+
       <td>
-        <a [routerLink]="['detailcustomer/', customer.id]" class="enlace"
+        <a [routerLink]="[customer.id]" class="enlace"
           >ver detalle</a
         >
       </td>

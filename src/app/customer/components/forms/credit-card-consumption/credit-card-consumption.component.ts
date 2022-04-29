@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormService } from '../../../services/form.service';
 
 @Component({
   selector: 'app-credit-card-consumption',
@@ -8,26 +9,33 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CreditCardConsumptionComponent implements OnInit, OnChanges {
 
-  @Input() creditCardNumber!: number;
-  @Input() dniRuc!: number;
+  @Input() creditCardNumber!: string;
+  @Input() dniRuc!: string;
   @Input() operationType!: string;
 
   creditCardForm: FormGroup = this.fb.group({
-    creditCardNumber: ['', Validators.required],
+    creditCardNumber: [this.creditCardNumber, Validators.required],
     dniRuc: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
     cvc: ['', [Validators.required, Validators.maxLength(3)]],  
     expirationDate: ['', Validators.required],
     amount: ['',  [Validators.required, Validators.min(1)]],
     operationType: ['deposit', Validators.required], // deposit = payment of credit card, withdrawal = consumption of creditCard
+    date: [new Date],
+    type: ['creditCard'],
   });
 
-  constructor( private fb: FormBuilder) { }
+  constructor( private fb: FormBuilder,
+               private formService: FormService  
+  ) { }
   // para estar atento a los cambios en los padres del componente
   ngOnChanges(changes: SimpleChanges): void {
     this.creditCardForm.reset({
       creditCardNumber: this.creditCardNumber,
       dniRuc: this.dniRuc,
       operationType: this.operationType,
+      date: new Date,
+      type: 'creditCard',
+  
     })
   }
 
@@ -36,6 +44,8 @@ export class CreditCardConsumptionComponent implements OnInit, OnChanges {
       creditCardNumber: this.creditCardNumber,
       dniRuc: this.dniRuc,
       operationType: this.operationType,
+      date: new Date,
+      type: 'creditCard',
     })
   }
 
@@ -52,10 +62,14 @@ export class CreditCardConsumptionComponent implements OnInit, OnChanges {
       this.creditCardForm.markAllAsTouched();
       return;
     }
-    
+    this.formService.addCreditCardTransaction(this.creditCardForm.value).subscribe();
     // console.log(this.creditCardForm.value);
     this.creditCardForm.reset({
-      operationType: 'deposit'
+      creditCardNumber: this.creditCardNumber,
+      dniRuc: this.dniRuc,
+      operationType: this.operationType,
+      date: new Date,
+      type: 'creditCard',
     });
   }
 }

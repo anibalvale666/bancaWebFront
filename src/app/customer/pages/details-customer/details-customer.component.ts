@@ -9,6 +9,8 @@ import {
 } from 'src/app/interfaces/customer.interface';
 import { BancaapiService } from '../../services/bancaapi.service';
 import { CustomerService } from '../../services/customer.service';
+import { DetailService } from '../../services/detail.service';
+import { Customer, account, loan, creditCard } from '../../../interfaces/banca-api.interface';
 
 @Component({
   selector: 'app-details-customer',
@@ -16,6 +18,7 @@ import { CustomerService } from '../../services/customer.service';
   styleUrls: ['./details-customer.component.css'],
 })
 export class DetailsCustomerComponent implements OnInit {
+
   //objeto referenciado a la interfaz de customer
   //customer!: CustomerInterface;
   //objeto referenciado a la interfaz cuentasxclienteview
@@ -29,7 +32,13 @@ export class DetailsCustomerComponent implements OnInit {
   //monto
   private amountTotal: number = 0.0;
 
-  /**********Nuevo Comienzo */
+
+
+  user!: Customer;
+  accounts: account[] = [];
+  loans: loan[] = [];
+  creditCards: creditCard[] = [];
+
 
   //customerDetailApi!: CustomerDetailAPI;
   //customerDetailApi!: CustomerDetailAPI;
@@ -39,19 +48,23 @@ export class DetailsCustomerComponent implements OnInit {
   creditsxCustomerApi: CreditApi[]=[];
   cardsCreditApi: CardCreditApi[]=[];
 
-/********* */
-  get AmountTotal(): number {
-    return this.amountTotal;
+
+
+  accountsMap = {
+    'savings': 'Cuenta de Ahorro',
+    'current': 'Cuenta Corriente',
+    'fixed': 'Cuenta a plazo fijo',
   }
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private bancaService: BancaapiService
+    private detailService: DetailService
   ) {}
 
   ngOnInit(): void {
     //obtenemos el parametro de la ruta
     const param = this.activatedRoute.snapshot.params['id'];
+
     
     this.getCustomer(param);
     this.getAccountsXCustomer(param);
@@ -88,5 +101,28 @@ export class DetailsCustomerComponent implements OnInit {
     });
   }
   
+
+    this.detailService.getCustomer(param)
+        .subscribe( (customer: Customer) => {
+          this.user = customer;
+
+          this.detailService.getAccountsCustomer(customer.id)
+              .subscribe( (accounts: account[]) => {
+                this.accounts = accounts;
+              });
+          this.detailService.getLoansCustomer(customer.id)
+              .subscribe( (loans: loan[]) => {
+                this.loans = loans;
+              });
+          this.detailService.getCreditCardsCustomer(customer.id)
+              .subscribe( (creditCards: creditCard[]) => {
+                this.creditCards = creditCards;
+              });
+        
+            
+        });
+
+  }
+
 
 }

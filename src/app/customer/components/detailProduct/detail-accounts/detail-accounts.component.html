@@ -1,3 +1,4 @@
+
 <div class="row">
   <div class="col-sm-12 col-md-4 text-center card card-body">
     <h5 class="">Cuenta {{accountApi.numberaccount | aC }} </h5>
@@ -47,44 +48,125 @@
               <ul>
                 <li class="fw-bold">Diego Andres Tuesta Perez</li>
               </ul>
+
+
+ <div *ngIf="!accountDetail; else divContent" class="text-center" >
+  <img
+    class="img-loading mt-5"
+    src="../../../../assets/img/loading-gif.gif"
+    alt="loading-gif"
+    height="250px"
+  />
+</div>
+<!--  div contenido -->
+<ng-template #divContent>
+
+  <div class="row">
+    <div class="col-sm-12 col-md-4 text-center card card-body">
+      <h5 class="">Cuenta {{accountDetail.account_number | cardNumber}}</h5>
+      <hr />
+      <div class="row">
+        <h4> {{ accountDetail.account_type | i18nSelect:accountsMap}} </h4>
+
+        <label> {{ accountDetail.balance | currencytable:accountDetail.currency }} </label>
+        <!-- <span>Saldo Disponible</span> -->
+      </div>
+      <br />
+      <div class="row">
+        <p>
+          <button
+            class="btn btn-primary"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseExample"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            Ver más
+          </button>
+        </p>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
+            <div>
+              <h5>General</h5>
+              <hr />
+              <div class="row">
+                <span>Tipo de Cuenta</span>
+                <h6 class="fw-bold"> {{ accountDetail.account_type | i18nSelect:accountsMap }} </h6>
+              </div>
+              <div class="row">
+                <span> Número de Cuenta </span>
+                <h6 class="fw-bold"> {{accountDetail.account_number}}</h6>
+              </div>
+              <div class="row">
+                <span>CCI</span>
+                <h6 class="fw-bold"> {{accountDetail.cci | cci}}</h6>
+              </div>
+              <div class="row">
+                <span>Fecha de Apertura</span>
+                <h6 class="fw-bold"> {{accountDetail.opening_date | date:'dd MMMM yyyy'}}</h6>
+              </div>
+              <div class="row">
+                <span>Otros Titulares</span>
+                <ul>
+                  <li class="fw-bold">{{ accountDetail.owner}}</li>
+                </ul>
+              </div>
+
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-sm-12 col-md-8 card card-body">
-    <div class="btn-group" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-primary btn-sm">Depósito</button>
-      <button type="button" class="btn btn-primary btn-sm">Retiro</button>
+    <div class="col-sm-12 col-md-8 card card-body">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button 
+          type="button" 
+          class="btn btn-primary btn-sm"
+          data-bs-toggle="modal" 
+          data-bs-target="#exampleModal"
+          (click) = "setValue('accountForm', 'deposit')"
+        
+        >Depósito</button>
+        <button 
+          type="button" 
+          class="btn btn-primary btn-sm"
+          data-bs-toggle="modal" 
+          data-bs-target="#exampleModal"
+          (click) = "setValue('accountForm', 'withdrawal')"
+        >Retiro</button>
+        <app-modal  
+          [formOpen] = "formSelected" 
+          [numberAccount] = "numberAccount"
+          [operationType]="operationType"
+          [id_user]="idOwner"
+        ></app-modal>
+
+      </div>
+      <hr />
+      <h4>ÚLTIMOS MOVIMIENTOS</h4>
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th width="30%">Fecha</th>
+              <th width="40%">Movimiento</th>
+              <th width="30%">Monto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!--  <div *ngIf="detailTransaction.length===0" class="text-center" >
+              <img class="img-loading" src="../../../../assets/img/loading-gif.gif" alt="loading-gif">
+            </div> -->
+            <tr *ngFor="let transaction of transactions | sort:'date':true">
+              <td>{{transaction.date | date:'dd MMMM yyyy'}}</td>
+              <td> {{transaction.operation === 'deposit' ? 'Depósito' : 'Retiro' }} </td>
+              <td>{{ transaction.amount | number:'1.2-2' }} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <hr />
-    <h4>ÚLTIMOS MOVIMIENTOS</h4>
-    <div class="table-responsive">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th width="30%">Fecha</th>
-            <th width="40%">Movimiento</th>
-            <th width="30%">Monto</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!--  <div *ngIf="detailTransaction.length===0" class="text-center" >
-            <img class="img-loading" src="../../../../assets/img/loading-gif.gif" alt="loading-gif">
-          </div> -->
-          <tr>
-            <td></td>
-            <td></td>
-            <td>
-              <div class="row">
-                <div class="col"></div>
-                <div class="col td"></div>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
   </div>
-</div>
+
+</ng-template>

@@ -1,5 +1,7 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormService } from '../../../services/form.service';
+import { loanTransaction } from '../../../../interfaces/form.interface';
 
 @Component({
   selector: 'app-credit-payments',
@@ -8,25 +10,31 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class CreditPaymentsComponent implements OnInit, OnChanges {
 
-  @Input() dniRuc!: number;
+  @Input() dniRuc!: string;
   @Input() operationType!: string;
+  @Input() loanNumber!: string;
 
   creditForm: FormGroup = this.fb.group({
-    creditNumber: [''],
+    creditNumber: [this.loanNumber],
     dniRuc: ['', [Validators.required]],
     amount: ['', [Validators.required]],
     date: [new Date],
     operationType: ['deposit'],  // deposit is a payment of credit
+    type: ['credit'],
   });
 
-  constructor( private fb: FormBuilder) { }
+  constructor( private fb: FormBuilder,
+               private formService: FormService              
+  ) { }
 
   // para estar atento a los cambios en los padres del componente
   ngOnChanges(changes: SimpleChanges): void {
     this.creditForm.reset({
+      creditNumber: this.loanNumber,
       dniRuc: this.dniRuc,
       operationType: this.operationType,
-      
+      date: new Date,
+      type: 'credit',
     })
 
   }
@@ -34,9 +42,11 @@ export class CreditPaymentsComponent implements OnInit, OnChanges {
   
   ngOnInit(): void {
     this.creditForm.reset({
+      creditNumber: this.loanNumber,
       dniRuc: this.dniRuc,
       operationType: this.operationType,
-      
+      date: new Date,
+      type: 'credit',
     })
   }
 
@@ -54,10 +64,15 @@ export class CreditPaymentsComponent implements OnInit, OnChanges {
       return;
     }
   
-    // console.log(this.miFormulario.value);
+    this.formService.addLoanTransaction(this.creditForm.value).subscribe();
+    
     console.log(this.creditForm.value);
     this.creditForm.reset({
-      operationType: 'deposit',
+      creditNumber: '1312',
+      dniRuc: this.dniRuc,
+      operationType: this.operationType,
+      date: new Date,
+      type: 'credit',
     });
   }
 }

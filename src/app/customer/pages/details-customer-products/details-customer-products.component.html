@@ -8,18 +8,31 @@
 
           
                 <app-detail-accounts 
+
                 *ngIf="accountApi"
                  [accountApi]="accountApi">
+
+                *ngIf="isAccount"
+                  >
+
                 </app-detail-accounts>
 
                 <app-detail-credit
+
                 *ngIf="creditApi"
                 [creditApi]="creditApi"
+
+                *ngIf="isCredit"
+
                 ></app-detail-credit>
 
                 <app-detail-card-credit
+
                 *ngIf="cardCreditApi"
                 [cardCreditApi]="cardCreditApi"
+
+                *ngIf="isCardCredit"
+
                 ></app-detail-card-credit>
                 
       </div>

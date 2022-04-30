@@ -17,7 +17,7 @@ export class BancaapiService {
   // regresamos una lista de customer segun el tipo de user: personal o business
    getCustomersD(type: string): Observable<Customer[]> {
     // return this.http.get<Customer[]>(`${this._urlapilocal}listcustomer=${type}`);
-    return this.http.get<Customer[]>(` http://localhost:3000/customer?type_customer=${type}`);
+    return this.http.get<Customer[]>(`http://localhost:8080/api/customers?type=${type}`);
   }
 
   // getCustomerDetail(id: number): Observable<CustomerDetailAPI> {

@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
-import { Auth } from '../interface/auth.interface';
+import { Customer } from '../../interfaces/customer.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private _auth: Auth | undefined;
+  private _auth: Customer | undefined;
 
 
-  get auth(): Auth {
+  get auth(): Customer {
     return  {...this._auth!};
   }
 
@@ -23,7 +23,7 @@ export class AuthService {
         return of(false);
       }
       
-      return this.http.get<Auth>(`https://625ecf573b039517f1fcb8a7.mockapi.io/Login/${localStorage.getItem('token') }`)
+      return this.http.get<Customer>(`http://localhost:8080/api/customers/doc/${localStorage.getItem('token') }`)
         .pipe(
           switchMap( auth => {
             this._auth = auth;
@@ -34,11 +34,11 @@ export class AuthService {
 
 
   login(obj: any) {
-    return this.http.get<Auth>(`https://625ecf573b039517f1fcb8a7.mockapi.io/Login/${obj.dniRuc}`)
+    return this.http.get<Customer>(`http://localhost:8080/api/customers/doc/${obj.dniRuc}`)
           .pipe(
             tap( auth => this._auth = auth ),
-            tap( auth => localStorage.setItem('token', auth.dniRuc ) ),
-          );
+            tap( auth => localStorage.setItem('token', auth.doc ) ),
+            );
   }
 
   logout() {

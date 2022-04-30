@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
       (data) => {
         console.log(data);
         if(data) {
-          if(data.type=='admin'){
+          if(data.type_user=='admin'){
             this.router.navigate(['/customer']);
           }else {
             this.router.navigate(['/customer/', data.id]);

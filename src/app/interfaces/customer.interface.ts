@@ -2,14 +2,15 @@
 
 export interface Customer {
     id: string;
-    dni?: number;
-    firstName?: string;
-    lastName?: string;
+    first_name?: string;
+    last_name?: string;
+    doc: string;
+    type_doc: string; // dni, ruc
     address?: string;
-    phone?: number;
-    email: string;
-    ruc?: string;
-    businessName?: string;
+    phone?: string;
+    password: string;
+    type_user: string; // admin, customer
+    type: string; // personal, business
 }
 
 export interface Account {

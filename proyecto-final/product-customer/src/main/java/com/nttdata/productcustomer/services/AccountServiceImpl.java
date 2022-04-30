@@ -28,7 +28,7 @@ public class AccountServiceImpl implements AccountService{
     @Override
     public List<Account> findAllAccounts() {
         List<Account> accounts =  accountRepository.findAll();
-        accounts.forEach(a -> a.setProduct(productClientRepository.gerProduct(a.getIdproduct()).getBody()));
+        //accounts.forEach(a -> a.setProduct(productClientRepository.gerProduct(a.getIdproduct()).getBody()));
         return accounts;
     }
 
@@ -43,7 +43,7 @@ public class AccountServiceImpl implements AccountService{
     @Override
     public Account createdAccount(Account account) {
         GeneratedCode gene = new GeneratedCode();
-        account.setDate(new Date());
+        account.setOpeningdate(new Date());
         account.setNumberaccount(gene.Generated(18));
         account.setCci(gene.Generated(18));
         account.setBalance(0.00);

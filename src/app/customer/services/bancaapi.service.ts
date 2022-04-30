@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Customer, CustomerDetailAPI } from 'src/app/interfaces/banca-api.interface';
+import { Customer } from 'src/app/interfaces/banca-api.interface';
 
 @Injectable({
   providedIn: 'root'

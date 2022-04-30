@@ -10,91 +10,71 @@ export interface Customer {
     type_user: string;
 }
 
-export interface  CustomerDetailAPI {
-    id:        number;
-    firstName: string;
-    lastName:  string;
-    typeDoc:   number;
-    numberDoc: string;
-    address:   string;
-    phone:     string;
-    type:      number;
-    products:  Products;
-}
-
-export interface Products {
-    total:       number;
-    accounts:    Account[];
-    credits:     Credit[];
-    cardsCredit: CardsCredit[];
-}
-
+// detail interfaces
 export interface Account {
-    id:                 string;
-    idProductXcustomer: string;
-    numberAccount:      string;
-    balance:            string;
-    currency:           string;
-    name:               string;
+    id:            number;
+    idcustomer:    number;
+    idproduct:     number;
+    currency:      string;
+    openingdate:   Date;
+    numberaccount: string;
+    cci:           string;
+    balance:       number;
+    accounttype:   string;
+    product:       Product;
 }
 
-export interface CardsCredit {
-    id:                 string;
-    idProductXCustomer: string;
-    numberCard:         string;
-    creditLine:         string;
-    availableLine:      string;
-    currency:           string;
-    name:               string;
+export interface Product {
+    id:                  number;
+    nameproduct:        string;
+    descriptionproduct: string;
+    descriptiondetail:  string;
+    category:            string;
+    logo:                string;
+    img:                 string;
 }
+
 
 export interface Credit {
-    id:                 string;
-    idProductXCustomer: string;
-    amountBorrowed:     string;
-    quotas:             string;
-    interest:           string;
-    monthlyAmount:      string;
-    numberCredit:       string;
-    currency:           string;
-    name:               string;
+    id:             number;
+    idcustomer:     number;
+    idproduct:      number;
+    currency:       string;
+    openingdate:    Date;
+    amountborrowed: number;
+    quotas:         number;
+    interest:       number;
+    monthlyamount:  number;
+    amountpaid:     number;
+    quotaspaid:     number;
+    numbercredit:   string;
+    product:        Product;
 }
 
 
+export interface CreditCard {
+    id:            number;
+    idcustomer:    number;
+    idproduct:     number;
+    currency:      string;
+    openingdate:   Date;
+    numbercard:    string;
+    cvc:           string;
+    creditline:    number;
+    availableline: number;
+    expirationday: Date;
+    product:       Product;
+}
 
-// detail interfaces
-export interface account {
-    id: string;
-    account_type: string;
-    account_number: string;
-    cci: string;
-    balance: number;
-    opening_date: string;
-    owner: string;
-    currency: string;
-  }
-
-  export interface loan {
-    id: string;
-    loan_number: string;
-    capital_amount: number;
-    interest_rate: number;
-    dues: number;
-    opening_date: Date;
-    monthly_fee: number;
-    active: boolean;
-    type: string;
-    currency: string;
-  }
-
-  export interface creditCard {
-    id: string;
-    opening_date: Date;
-    credit_card_number: string;
-    cvc: string;         
-    expiration_date: Date;     
-    credit_line: number; 
-    available_line: number;
-    currency: string;
-    type: string;
-  }
+export interface Transaction {
+    id:           number;
+    idcustomer:   number;
+    idheadline:   number;
+    idaccount:    number;
+    idcredit:     number;
+    idcardcredit: number;
+    date:         Date;
+    quota:        number;
+    operation:    string;
+    amount:       number;
+}

@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DetailAccountCredit } from 'src/app/interfaces/customer.interface';
-import { Transaction } from '../../../../interfaces/customer.interface';
 import { ActivatedRoute } from '@angular/router';
 import { DetailService } from '../../../services/detail.service';
-import { creditCard } from 'src/app/interfaces/banca-api.interface';
+import { CreditCard, Transaction } from 'src/app/interfaces/banca-api.interface';
+
 
 @Component({
   selector: 'app-detail-card-credit',
@@ -22,7 +22,7 @@ export class DetailCardCreditComponent implements OnInit {
 
 
   // Objeto que tremos del back con los detalles de la cuenta
-  creditCardDetail!: creditCard;
+  creditCardDetail!: CreditCard;
   // Lista de transacciones de la tarjeta de credito
   transactions: Transaction[]= [];
 
@@ -35,8 +35,8 @@ export class DetailCardCreditComponent implements OnInit {
       this.creditCardDetail = detailaccountcredit;
       console.log(detailaccountcredit);
       console.log(typeof this.creditCardDetail);
-      this.creditCardNumber = this.creditCardDetail.credit_card_number;
-      this.detailService.getAccountTransactions(this.creditCardDetail.id).subscribe( transactions => {
+      this.creditCardNumber = this.creditCardDetail.numbercard;
+      this.detailService.getAccountTransactions(this.creditCardDetail.id,'card-credit').subscribe( transactions => {
         this.transactions = transactions;
         console.log(this.transactions);
       });

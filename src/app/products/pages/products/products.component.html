@@ -41,7 +41,7 @@
 
             <div *ngFor="let product of productsAccount" class="card"  [routerLink]="['detail/', product.id ]">
                 <i [class]="product.logo"></i>
-                <h2 class="sub">{{product.name_product}}</h2>
+                <h2 class="sub">{{product.nameproduct}}</h2>
                 <p class="desc">
                     {{product.description_product}}
                 </p>
@@ -57,7 +57,7 @@
 
             <div *ngFor="let product of productsLoan" class="card"  [routerLink]="['detail/', product.id]">
                 <i [class]="product.logo"></i>
-                <h2 class="sub">{{product.name_product}}</h2>
+                <h2 class="sub">{{product.nameproduct}}</h2>
                 <p class="desc">
                     {{product.description_product}}
                 </p>

@@ -24,12 +24,12 @@ public class Account {
     private String currency;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
+    private Date openingdate;
 
     private String numberaccount;
     private String cci;
     private Double balance;
-
+    private String accounttype;
    @Transient
 
    private ProductClient product;

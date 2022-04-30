@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Transaction } from '../../interfaces/customer.interface';
+import { Transaction } from '../../interfaces/banca-api.interface';
 
 
 // El pipe recibe un objeto en este caso las transacciones lo ordena por fecha
@@ -11,7 +11,7 @@ import { Transaction } from '../../interfaces/customer.interface';
 export class SortPipe implements PipeTransform {
 
   orderValue: number = 1;
-  transform(transaction: Transaction[], orderPor:string = 'NAN', order:boolean= true, ): Transaction[] {
+  transform(transaction: Transaction[], orderBy:string = 'NAN', order:boolean= true, ): Transaction[] {
 
       if( order ) {
           this.orderValue = 1;
@@ -19,10 +19,10 @@ export class SortPipe implements PipeTransform {
           this.orderValue = -1;
       }
 
-      if(orderPor === 'NAN'){
+      if(orderBy === 'NAN'){
           return transaction;
       } else {
-          return transaction.sort((a, b) => (a[orderPor  as keyof Transaction]! > b[orderPor  as keyof Transaction]! ) ? this.orderValue : -this.orderValue);
+          return transaction.sort((a, b) => (a[orderBy  as keyof Transaction]! > b[orderBy  as keyof Transaction]! ) ? this.orderValue : -this.orderValue);
       }
   }
  

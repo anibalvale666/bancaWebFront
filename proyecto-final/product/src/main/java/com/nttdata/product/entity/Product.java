@@ -28,7 +28,7 @@ public class Product {
     private Integer withdrawalday;
 */
 
-    private String name_product;
+    private String nameproduct;
     private String description_product;
     private String description_detail;
     private String category;

@@ -25,7 +25,7 @@ public class Credit {
     private String currency;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
+    private Date openingdate;
 
     private Double amountborrowed;
     private Integer quotas;

@@ -2,9 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DetailAccountCredit } from 'src/app/interfaces/customer.interface';
 import { ActivatedRoute } from '@angular/router';
 import { DetailService } from 'src/app/customer/services/detail.service';
-import { account } from '../../../../interfaces/banca-api.interface';
-import { Transaction } from '../../../../interfaces/customer.interface';
-
+import { Account, Transaction } from '../../../../interfaces/banca-api.interface';
 
 
 @Component({
@@ -31,7 +29,7 @@ export class DetailAccountsComponent implements OnInit {
   }
 
   // Objeto que tremos del back con los detalles de la cuenta
-  accountDetail!: account;
+  accountDetail!: Account;
 
   // Lista de transacciones de la cuenta
   transactions: Transaction[]= [];
@@ -46,7 +44,7 @@ export class DetailAccountsComponent implements OnInit {
       console.log(detailaccountcredit);
       console.log(typeof this.accountDetail.balance);
       
-      this.detailService.getAccountTransactions(this.accountDetail.id).subscribe( transactions => {
+      this.detailService.getAccountTransactions(this.accountDetail.id, 'account').subscribe( transactions => {
         this.transactions = transactions;
         console.log(this.transactions);
       });
@@ -57,7 +55,7 @@ export class DetailAccountsComponent implements OnInit {
   setValue(value:string, operation: string= 'withdrawal'){
     this.formSelected = value;
     this.operationType = operation; 
-    this.numberAccount = this.accountDetail.account_number;
+    this.numberAccount = this.accountDetail.numberaccount;
   }
 
 

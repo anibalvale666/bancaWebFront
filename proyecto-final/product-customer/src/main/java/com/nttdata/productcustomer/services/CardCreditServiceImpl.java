@@ -30,11 +30,11 @@ public class CardCreditServiceImpl implements  CardCreditService{
     @Override
     public CardCredit saveCardCredit(CardCredit cardCredit) {
         GeneratedCode gene = new GeneratedCode();
-        cardCredit.setDate(new Date());
+        cardCredit.setOpeningdate(new Date());
         cardCredit.setNumbercard(gene.Generated(16));
-        cardCredit.setCvv(gene.Generated(3));
+        cardCredit.setCvc(gene.Generated(3));
         cardCredit.setAvailableline(cardCredit.getCreditline());
-        cardCredit.setExpirationday("11/26");
+        cardCredit.setExpirationday(new Date("2022-04-27 22:39:42"));
         return cardCreditRepository.save(cardCredit);
     }
 

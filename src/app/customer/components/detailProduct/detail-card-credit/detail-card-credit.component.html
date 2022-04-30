@@ -10,13 +10,13 @@
 <ng-template #divContent>
   <div class="row">
     <div class="col-sm-12 col-md-4 text-center card card-body">
-      <h5 class="">Tarjeta {{creditCardDetail.credit_card_number | cardNumber }}</h5>
+      <h5 class="">Tarjeta {{creditCardDetail.numbercard | cardNumber }}</h5>
       <hr />
       <div class="row">
         <h4>Tarjeta de Crédito</h4>
-        <label>{{creditCardDetail.credit_line | currencytable:creditCardDetail.currency}} </label>
+        <label>{{creditCardDetail.creditline | currencytable:creditCardDetail.currency}} </label>
         <span>Linea de Crédito</span>
-        <label>{{creditCardDetail.available_line | currencytable:creditCardDetail.currency }}</label>
+        <label>{{creditCardDetail.availableline | currencytable:creditCardDetail.currency }}</label>
         <span>Linea disponible</span>
         
       </div>
@@ -45,7 +45,7 @@
               </div>
               <div class="row">
                 <span> Número de Tarjeta </span>
-                <h6 class="fw-bold">{{creditCardDetail.credit_card_number | cardNumber }}</h6>
+                <h6 class="fw-bold">{{creditCardDetail.numbercard | cardNumber }}</h6>
               </div>
               <div class="row">
                 <span>CVV</span>
@@ -53,7 +53,7 @@
               </div>
               <div class="row">
                 <span>Fecha de Vencimiento</span>
-                <h6 class="fw-bold">{{creditCardDetail.expiration_date | date:'MMMM yyyy'}}</h6>
+                <h6 class="fw-bold">{{creditCardDetail.expirationday | date:'MMMM yyyy'}}</h6>
               </div>
               <!-- <div class="row">
                 <span>Titulares</span>

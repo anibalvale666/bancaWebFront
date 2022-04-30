@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
-import { CustomerDetailAPI } from 'src/app/interfaces/banca-api.interface';
 import {
   AccountsXCustomerInterfaceView,
   CreditXCustomerInterfaceView,
@@ -10,7 +9,9 @@ import {
 import { BancaapiService } from '../../services/bancaapi.service';
 import { CustomerService } from '../../services/customer.service';
 import { DetailService } from '../../services/detail.service';
-import { Customer, account, loan, creditCard } from '../../../interfaces/banca-api.interface';
+import { CreditCard, Account, Credit } from '../../../interfaces/banca-api.interface';
+import { Customer } from '../../../interfaces/customer.interface';
+
 
 @Component({
   selector: 'app-details-customer',
@@ -20,9 +21,9 @@ import { Customer, account, loan, creditCard } from '../../../interfaces/banca-a
 export class DetailsCustomerComponent implements OnInit {
 
   user!: Customer;
-  accounts: account[] = [];
-  loans: loan[] = [];
-  creditCards: creditCard[] = [];
+  accounts: Account[] = [];
+  loans: Credit[] = [];
+  creditCards: CreditCard[] = [];
 
 
   accountsMap = {
@@ -42,21 +43,19 @@ export class DetailsCustomerComponent implements OnInit {
     this.detailService.getCustomer(param)
         .subscribe( (customer: Customer) => {
           this.user = customer;
-
+          console.log(this.user);
           this.detailService.getAccountsCustomer(customer.id)
-              .subscribe( (accounts: account[]) => {
+              .subscribe( (accounts: Account[]) => {
                 this.accounts = accounts;
               });
           this.detailService.getLoansCustomer(customer.id)
-              .subscribe( (loans: loan[]) => {
+              .subscribe( (loans: Credit[]) => {
                 this.loans = loans;
               });
           this.detailService.getCreditCardsCustomer(customer.id)
-              .subscribe( (creditCards: creditCard[]) => {
+              .subscribe( (creditCards: CreditCard[]) => {
                 this.creditCards = creditCards;
               });
-        
-            
         });
 
   }

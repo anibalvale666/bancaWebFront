@@ -31,7 +31,7 @@ public class CreditServiceImpl implements CreditService{
     @Override
     public Credit saveCredit(Credit credit) {
         GeneratedCode gene = new GeneratedCode();
-        credit.setDate( new Date());
+        credit.setOpeningdate( new Date());
         credit.setInterest(10);
         Double montoTotal = (credit.getAmountborrowed()+(credit.getInterest()*0.10))/credit.getQuotas();
         credit.setMonthlyamount(montoTotal);

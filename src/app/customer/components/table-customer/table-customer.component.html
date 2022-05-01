@@ -37,7 +37,7 @@
         
 
       <td >  {{ (isPerson==='personal') ? customer.first_name + ' ' + customer.last_name : customer.first_name}}</td>
-      <td> {{ customer.number_doc }}</td>
+      <td> {{ customer.doc }}</td>
       <td>
         <a [routerLink]="[customer.id]" class="enlace"
           >ver detalle</a

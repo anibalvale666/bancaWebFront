@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Customer } from 'src/app/interfaces/banca-api.interface';
-import { CustomerInterface } from 'src/app/interfaces/customer.interface';
+import { Customer } from 'src/app/interfaces/banca.interface';
 import { BancaapiService } from '../../services/bancaapi.service';
-import { CustomerService } from '../../services/customer.service';
 
 @Component({
   selector: 'app-home',

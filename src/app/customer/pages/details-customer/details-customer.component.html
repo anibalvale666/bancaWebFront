@@ -73,7 +73,7 @@
     <!-- Fin card personal -->
     <br />
     <!-- card Cuentas -->
-    <section *ngIf="accounts.length > 0">
+    <section *ngIf="accounts && accounts.length > 0">
       <div class="card">
         <div class="card-title fw-bolder">
           <div class="row">
@@ -129,7 +129,7 @@
     <!-- fin card cuentas -->
     <br />
     <!-- card Credits -->
-    <section *ngIf="loans.length > 0">
+    <section *ngIf="loans && loans.length > 0">
       <div class="card">
         <div class="card-title fw-bolder">Créditos</div>
         <div class="card-body">
@@ -195,7 +195,7 @@
     <br/>
     <!-- end card credtios  -->
     <!-- card Card Credits -->
-    <section *ngIf="creditCards.length > 0">
+    <section *ngIf="creditCards && creditCards.length > 0">
       <div class="card">
         <div class="card-title fw-bolder">Tarjetas de Créditos</div>
         <div class="card-body">
@@ -250,25 +250,25 @@
           </div>
         </div>
       </div>
-      <button 
-        type="button" 
-        class="btn btn-primary mt-3" 
-        data-bs-toggle="modal" 
-        data-bs-target="#exampleModal"
-      >
-        Nuevo producto
-      </button>
-
-      <app-modal  
-        formOpen = "createProductForm" 
-          
-        dniRuc = "3232"
-          
-      ></app-modal>
-
-
     </section>
     <!-- end card Tarjetas  -->
+
+    <button 
+    type="button" 
+    class="btn btn-primary mt-3" 
+    data-bs-toggle="modal" 
+    data-bs-target="#exampleModal"
+  >
+    Nuevo producto
+  </button>
+  <app-modal  
+  formOpen = "createProductForm" 
+  [id_user] = "user.id"
+  [doc] = "user.doc"
+    
+></app-modal>
+
+
   </ng-template>
   <!--  end div contenido -->
 </div>

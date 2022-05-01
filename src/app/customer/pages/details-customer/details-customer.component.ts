@@ -1,16 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap } from 'rxjs';
-import {
-  AccountsXCustomerInterfaceView,
-  CreditXCustomerInterfaceView,
-  CustomerInterface,
-} from 'src/app/interfaces/customer.interface';
-import { BancaapiService } from '../../services/bancaapi.service';
-import { CustomerService } from '../../services/customer.service';
+
 import { DetailService } from '../../services/detail.service';
-import { CreditCard, Account, Credit } from '../../../interfaces/banca-api.interface';
-import { Customer } from '../../../interfaces/customer.interface';
+import { CreditCard, Account, Credit, Customer } from '../../../interfaces/banca.interface';
 
 
 @Component({

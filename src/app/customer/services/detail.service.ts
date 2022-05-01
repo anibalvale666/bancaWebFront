@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Customer } from '../../interfaces/customer.interface';
-import { Account, Credit,CreditCard, Transaction } from '../../interfaces/banca-api.interface';
+import { Account, Credit,CreditCard, Transaction, Customer } from '../../interfaces/banca.interface';
 
 
 @Injectable({
@@ -45,19 +44,19 @@ export class DetailService {
   }
 
   // retornamos una lista de cuentas segun el id del customer
-  getAccountsCustomer(id_customer: string): Observable<Account []> {
+  getAccountsCustomer(id_customer: number): Observable<Account []> {
     // return this.http.get<account[]>(`http://localhost:3000/cuenta_detail/${id_customer}`);
     return this.http.get<Account []>(`http://localhost:8080/api/accounts?customer=${id_customer}`);
   }
 
     // retornamos una lista de prestamos segun el id del customer
-  getLoansCustomer(id_customer: string): Observable<Credit[]> {
+  getLoansCustomer(id_customer: number): Observable<Credit[]> {
     // return this.http.get<loan[]>(`http://localhost:3000/loan_detail/${id_customer}`);
     return this.http.get<Credit[]>(`http://localhost:8080/api/credits?customer=${id_customer}`);
   }
 
     // retornamos una lista de tarjetas de credito segun el id del customer
-  getCreditCardsCustomer(id_customer: string): Observable<CreditCard[]> {
+  getCreditCardsCustomer(id_customer: number): Observable<CreditCard[]> {
     // return this.http.get<creditCard[]>(`http://localhost:3000/cc_detail/${id_customer}`);
     return this.http.get<CreditCard[]>(`http://localhost:8080/api/card-credits?customer=${id_customer}`); 
   }

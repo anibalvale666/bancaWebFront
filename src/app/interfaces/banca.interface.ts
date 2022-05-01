@@ -1,13 +1,14 @@
 export interface Customer {
-    id:        string;
-    first_name: string;
-    last_name:  string;
-    type_doc:   string;
-    number_doc: string;
-    address:   string;
-    phone:     string;
-    type_customer:      string;
-    type_user: string;
+    id: number;
+    first_name?: string;
+    last_name?: string;
+    doc: string;
+    type_doc: string; // dni, ruc
+    address?: string;
+    phone?: string;
+    password: string;
+    type_user: string; // admin, customer
+    type: string; // personal, business
 }
 
 // detail interfaces

@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { CreditXCustomerInterfaceView } from 'src/app/interfaces/customer.interface';
+
 
 @Pipe({
   name: 'codCredit'
 })
 export class CodCreditPipe implements PipeTransform {
 
-  transform(credit: CreditXCustomerInterfaceView): string {
+  transform(credit: any): string {
 
     let valor:string ="";
     if (credit.codCredit!==null) {

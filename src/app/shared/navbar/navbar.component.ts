@@ -25,6 +25,7 @@ export class NavbarComponent implements OnInit {
     //funcion click
   }
 
+  //Verificar si esta logueado, o ya fue logeado
   isLogin(): Boolean{
     if(!localStorage.getItem('token')){
       return false;

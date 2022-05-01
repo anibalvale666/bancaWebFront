@@ -77,6 +77,7 @@
           class="btn btn-primary btn-sm"
           data-bs-toggle="modal" 
           data-bs-target="#exampleModal"
+
         >
           Pagar Crédito
         </button>
@@ -86,6 +87,8 @@
           formOpen = "creditPaymentForm" 
           operationType="deposit"
           [loanNumber] = "loanDetail.numbercredit"
+          [idProduct]="idProduct"
+          [id_user]="idUser"
         ></app-modal>
       </div>
       <hr />

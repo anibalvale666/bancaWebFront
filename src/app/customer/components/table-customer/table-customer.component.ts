@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Customer } from 'src/app/interfaces/banca-api.interface';
-import { CustomerInterface } from 'src/app/interfaces/customer.interface';
+import { Customer } from 'src/app/interfaces/banca.interface';
 
 @Component({
   selector: 'app-table-customer',

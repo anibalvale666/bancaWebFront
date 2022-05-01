@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DetailAccountCredit, Transaction } from 'src/app/interfaces/customer.interface';
+import {  Transaction } from 'src/app/interfaces/banca.interface';
 import { CustomerService } from '../../services/customer.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { CustomerService } from '../../services/customer.service';
 })
 export class DetailsCustomerProductsComponent implements OnInit {
   
-  detailaccountcredit!: DetailAccountCredit;
+
   detailTransaction: Transaction[] = [];
 
   // tipo de producto

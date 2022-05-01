@@ -88,6 +88,7 @@
           [numberAccount] = "numberAccount"
           [operationType]="operationType"
           [id_user]="idOwner"
+          [idProduct]="idProduct"
         ></app-modal>
 
       </div>
@@ -106,11 +107,11 @@
             <!--  <div *ngIf="detailTransaction.length===0" class="text-center" >
               <img class="img-loading" src="../../../../assets/img/loading-gif.gif" alt="loading-gif">
             </div> -->
-            <tr *ngFor="let transaction of transactions | sort:'date':true">
-              <td>{{transaction.date | date:'dd MMMM yyyy'}}</td>
-              <td> {{transaction.operation === 'deposit' ? 'Depósito' : 'Retiro' }} </td>
-              <td>{{ transaction.amount | number:'1.2-2' }} </td>
-            </tr>
+              <tr  *ngFor="let transaction of transactions | sort:'date':true">
+                <td>{{transaction.date | date:'dd MMMM yyyy'}}</td>
+                <td> {{transaction.operation === 'deposit' ? 'Depósito' : 'Retiro' }} </td>
+                <td>{{ transaction.amount | number:'1.2-2' }} </td>
+              </tr>
           </tbody>
         </table>
       </div>

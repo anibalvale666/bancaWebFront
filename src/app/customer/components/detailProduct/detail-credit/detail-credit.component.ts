@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DetailAccountCredit } from 'src/app/interfaces/customer.interface';
 import { ActivatedRoute } from '@angular/router';
 import { DetailService } from '../../../services/detail.service';
-import { Credit,Transaction } from '../../../../interfaces/banca-api.interface';
+import { Credit,Transaction } from '../../../../interfaces/banca.interface';
 
 @Component({
   selector: 'app-detail-credit',
@@ -11,12 +10,14 @@ import { Credit,Transaction } from '../../../../interfaces/banca-api.interface';
 })
 export class DetailCreditComponent implements OnInit {
   //obtenemos el id de la cuenta seleccionada
-  param_id = this.activatedRoute.snapshot.params['id'];
+  idProduct = this.activatedRoute.snapshot.params['id'];
+  idUser = this.activatedRoute.snapshot.params['idowner'];
   
   // Variables del formulario modal
   // tipo de formulario seleccionado
   loanNumber!: string;
   operationType: string = 'withdrawal'; // este campo solo puede ser de dos tipos;  deposit or withdrawal
+
   // dniRuc: string = '123123';
   // para el pipe i18nSelect
   accountsMap = {
@@ -36,7 +37,7 @@ export class DetailCreditComponent implements OnInit {
   ) { }
   
   ngOnInit(): void {
-    this.detailService.getLoanDetail(this.param_id).subscribe( loanDetail => {
+    this.detailService.getLoanDetail(this.idProduct).subscribe( loanDetail => {
       this.loanDetail = loanDetail;
       console.log(loanDetail);
       console.log(typeof this.loanDetail);
@@ -49,9 +50,8 @@ export class DetailCreditComponent implements OnInit {
 
   }
 
-  // setValue(operation: string= 'withdrawal'){
-  //   this.operationType = operation; 
-  //   this.loanNumber = this.loanDetail.loan_number;
+  // setValue(){
+  //   this.idProduct = this.loanDetail.id;
   // }
 
 

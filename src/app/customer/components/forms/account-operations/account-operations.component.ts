@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormService } from '../../../services/form.service';
+import { TransactionBack } from '../../../../interfaces/form.interface';
 
 @Component({
   selector: 'app-account-operations',
@@ -13,11 +14,12 @@ export class AccountOperationsComponent implements OnInit, OnChanges {
   // accountForm
   @Input() numberAccount!: string;
   @Input() operationType!: string;
-  @Input() id!: number;
+  @Input() idUser!: number;
+  @Input() idProduct!: number;
   
-  
+
   accountForm: FormGroup = this.fb.group({
-    id_customer: [this.id],
+    idcustomer: [this.idUser],
     accountNumber:  [ '' , Validators.required],
     operationType:  [ 'deposit' , Validators.required],  
     amount:         [ '' , [Validators.required, Validators.min(1)]],
@@ -30,8 +32,9 @@ export class AccountOperationsComponent implements OnInit, OnChanges {
   ) { }
   // para estar atento a los cambios en los padres del componente
   ngOnChanges(changes: SimpleChanges): void {
+    
     this.accountForm.reset({
-      id_customer: this.id,
+      idcustomer: this.idUser,
       accountNumber: this.numberAccount,
       operationType: this.operationType,
       date: new Date(),
@@ -41,7 +44,7 @@ export class AccountOperationsComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.accountForm.reset({
-      id_customer: this.id,
+      idcustomer: this.idUser,
       accountNumber: this.numberAccount,
       operationType: this.operationType,
       date: new Date(),
@@ -64,12 +67,17 @@ export class AccountOperationsComponent implements OnInit, OnChanges {
     }
     console.log(this.accountForm.value);
 
-    this.formService.addTransaction(this.accountForm.value)
-    .subscribe(); 
+    const accountOperation: TransactionBack ={
+      idcustomer: this.idUser,
+      idaccount : this.idProduct,
+      operation: this.accountForm.value.operationType,
+      amount: this.accountForm.value.amount,
+    }
 
+    this.formService.addTransaction(accountOperation).subscribe();
 
     this.accountForm.reset({
-      id_customer: this.id,
+      idcustomer: this.idUser,
       accountNumber: this.numberAccount,
       operationType: this.operationType,
       date: new Date(),

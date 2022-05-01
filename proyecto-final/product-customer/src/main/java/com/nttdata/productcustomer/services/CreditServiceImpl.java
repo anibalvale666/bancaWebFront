@@ -33,8 +33,9 @@ public class CreditServiceImpl implements CreditService{
         GeneratedCode gene = new GeneratedCode();
         credit.setOpeningdate( new Date());
         credit.setInterest(10);
-        Double montoTotal = (credit.getAmountborrowed()+(credit.getInterest()*0.10))/credit.getQuotas();
+        Double montoTotal = (credit.getAmountborrowed()*1.10)/credit.getQuotas();
         credit.setMonthlyamount(montoTotal);
+        credit.setQuotaspaid(0);
         credit.setAmountpaid(0.00);
         credit.setNumbercredit(gene.Generated(10));
         return creditRepository.save(credit);

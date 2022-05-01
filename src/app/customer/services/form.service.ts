@@ -1,40 +1,43 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { accountTransaction, createProduct, creditCardConsumption, loanTransaction } from '../../interfaces/form.interface';
+import {
+  accountTransaction,
+  creditCardConsumption,
+  loanTransaction,
+  AccountBack,
+  LoanBack,
+  CreditCardBack,
+} from '../../interfaces/form.interface';
 import { Observable } from 'rxjs';
+import { TransactionBack } from '../../interfaces/form.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FormService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  
-  addProduct(product: createProduct): Observable<any> {
-    const headers = { 'content-type': 'application/json'}  
-    const body=JSON.stringify(product);
-    return this.http.post( "http://localhost:3000/product", body,{'headers':headers})
+  // funcion para la creacion de producto
+  addProduct(
+    product: AccountBack | LoanBack | CreditCardBack,
+    type_product: string
+  ): Observable<any> {
+    const headers = { 'content-type': 'application/json' };
+    const body = JSON.stringify(product);
+    console.log(body);
+    return this.http.post(`api/${type_product}`, body, {
+      headers: headers,
+    });
   }
   
-  addTransaction(transaction: accountTransaction): Observable<any> {
-    const headers = { 'content-type': 'application/json'}  
-    const body=JSON.stringify(transaction);
-    return this.http.post( "http://localhost:3000/transaction", body,{'headers':headers})
-  }
-  
-  addCreditCardTransaction(cdTransaction: creditCardConsumption ): Observable<any> {
-    const headers = { 'content-type': 'application/json'}  
-    const body=JSON.stringify(cdTransaction);
-    return this.http.post( "http://localhost:3000/creditCardConsumption", body,{'headers':headers})
+  // Agrega transacciones de cuenta tarjetas y creditos
+  addTransaction(transaction: TransactionBack): Observable<any> {
+    const headers = { 'content-type': 'application/json' };
+    const body = JSON.stringify(transaction);
+    return this.http.post('api/transactions', body, {
+      headers: headers,
+    });
   }
 
 
-  addLoanTransaction(loan: loanTransaction ): Observable<any> {
-    const headers = { 'content-type': 'application/json'}  
-    const body=JSON.stringify(loan);
-    return this.http.post( "http://localhost:3000/loan", body,{'headers':headers})
-  }
 }
-
-

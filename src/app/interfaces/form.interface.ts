@@ -31,6 +31,8 @@ export interface loanTransaction {
     type: string, // loan
 }
 
+
+
 export interface createProduct{
     
     dniRuc: string,
@@ -48,5 +50,37 @@ export interface createProduct{
     dues: number, // numero de cuotas
 }
 
+
+// interfaces de envio al back
+export interface AccountBack {
+    idcustomer: number,
+    idproduct: number,
+    currency: string,
+    accounttype: string,
+}
+export interface LoanBack {
+    idcustomer: number,
+    idproduct: number,
+    currency: string,
+    amountborrowed: number,
+    quotas: number,
+}
+
+export interface CreditCardBack {
+    idcustomer: number,
+    idproduct: number,
+    currency: string,
+}
+
+
+export interface TransactionBack {
+    idcustomer: number,
+    idheadline?: number,
+    idaccount?: number,
+    idcredit?: number,
+    idcardcredit?: number,
+    operation: string,
+    amount: number
+}
 
 

@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DetailAccountCredit } from 'src/app/interfaces/customer.interface';
 import { ActivatedRoute } from '@angular/router';
 import { DetailService } from '../../../services/detail.service';
-import { CreditCard, Transaction } from 'src/app/interfaces/banca-api.interface';
+import { CreditCard, Transaction } from 'src/app/interfaces/banca.interface';
 
 
 @Component({
@@ -13,13 +12,14 @@ import { CreditCard, Transaction } from 'src/app/interfaces/banca-api.interface'
 export class DetailCardCreditComponent implements OnInit {
 
   //obtenemos el id de la cuenta seleccionada
-  param_id = this.activatedRoute.snapshot.params['id'];
+  idProduct = this.activatedRoute.snapshot.params['id'];
+  idOwner = this.activatedRoute.snapshot.params['idowner'];
 
  
   operationType: string = 'withdrawal'; // este campo solo puede ser de dos tipos;  deposit or withdrawal
   // dniRuc: string = "67507035";
   creditCardNumber: string = "";
-
+ 
 
   // Objeto que tremos del back con los detalles de la cuenta
   creditCardDetail!: CreditCard;
@@ -31,7 +31,7 @@ export class DetailCardCreditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.detailService.getCreditCardDetail(this.param_id).subscribe( detailaccountcredit => {
+    this.detailService.getCreditCardDetail(this.idProduct).subscribe( detailaccountcredit => {
       this.creditCardDetail = detailaccountcredit;
       console.log(detailaccountcredit);
       console.log(typeof this.creditCardDetail);

@@ -2,6 +2,7 @@ package com.nttdata.productcustomer.services;
 
 import com.nttdata.productcustomer.client.ProductClientRepository;
 
+import com.nttdata.productcustomer.entity.Account;
 import com.nttdata.productcustomer.entity.CardCredit;
 import com.nttdata.productcustomer.repository.CardCreditRepository;
 import com.nttdata.productcustomer.utils.GeneratedCode;
@@ -67,6 +68,15 @@ public class CardCreditServiceImpl implements  CardCreditService{
         cardsCredits.forEach(c -> c.setProduct(productClientRepository.gerProduct(c.getIdproduct()).getBody()));
         return cardsCredits;
     }
+    @Override
+    public CardCredit updateCreditCard (Long id, CardCredit cardCredit) {
+      CardCredit ccDB = cardCreditRepository.findById(id).orElse(null);
+
+      ccDB.setAvailableline(cardCredit.getAvailableline());
+      return cardCreditRepository.save(ccDB);
+
+    }
+
 
     @Override
     public CardCredit updateAvailibleLine(Long id, Double quantity, String ope) {

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins="*")
@@ -38,14 +39,22 @@ public class AccountController {
     //Para crear una cuenta
     @PostMapping
     public  ResponseEntity<Account> saveAccount(@RequestBody Account account){
-        Account newAccount = accountService.createdAccount(account);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newAccount);
+        // newAccount = accountService.createdAccount(account);
+        Map.Entry<Boolean,Account> newAccount = accountService.createdAccount(account);
+        if(newAccount.getKey()) {
+          return ResponseEntity.status(HttpStatus.CREATED).body(newAccount.getValue());
+        }
+        else {
+          return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+
+
     }
     @GetMapping("/{id}/balance")
     public ResponseEntity<Account> updateBalance(@PathVariable Long id,
                                                  @RequestParam(name = "quantity", required = true)
                                                  Double quantity,
-        @RequestParam(name ="operation", required = true ) Integer ope){
+        @RequestParam(name ="operation", required = true ) String ope){
         Account account = accountService.updateBalance(id,quantity,ope);
         if(null == account){
             return ResponseEntity.notFound().build();
@@ -61,6 +70,17 @@ public class AccountController {
         return ResponseEntity.ok(account);
 
     }
+
+  @PutMapping("/{id}")
+  public ResponseEntity<Account> updateAmount(@PathVariable("id") long id, @RequestBody Account account) {
+    Account _account = accountService.updateAccount(id, account);
+    if (_account==null){
+      return ResponseEntity.notFound().build();
+    }
+    return ResponseEntity.ok(_account);
+  }
+
+
 
 
 

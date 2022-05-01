@@ -6,52 +6,47 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  
-  
   loginForm: FormGroup = this.fb.group({
-    dniRuc:  [ '' , Validators.required],
-    password:  [ '' , Validators.required],  
+    dniRuc: ['', Validators.required],
+    password: ['', Validators.required],
   });
 
-  constructor(private fb: FormBuilder,
-              private authService: AuthService,
-              private router: Router,        
-    ) { }
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   //funcion para la deteccion de errores en el html
-  attIsValid( att: string) {
-    return this.loginForm.controls[att].errors 
-        && this.loginForm.controls[att].touched;
+  attIsValid(att: string) {
+    return (
+      this.loginForm.controls[att].errors &&
+      this.loginForm.controls[att].touched
+    );
   }
-  
+
   //funcion submit, solo envia si el form es valido
   login() {
-
-    if(this.loginForm.invalid) {
+    if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
     }
     console.log(this.loginForm.value);
-    this.authService.login(this.loginForm.value).subscribe(
-      (data) => {
-        console.log(data);
-        if(data) {
-          if(data.type_user=='admin'){
-            this.router.navigate(['/customer']);
-          }else {
-            this.router.navigate(['/customer/', data.id]);
-          }
-  
+    this.authService.login(this.loginForm.value).subscribe((data) => {
+      console.log(data);
+      if (data) {
+        if (data.type_user == 'admin') {
+          this.router.navigate(['/customer']);
+        } else {
+          this.router.navigate(['/customer/', data.id]);
         }
       }
-    );
+    });
     this.loginForm.reset({});
   }
-
 }

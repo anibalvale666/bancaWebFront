@@ -21,7 +21,6 @@ export class CreditCardConsumptionComponent implements OnInit, OnChanges {
   @Input() idProduct!: number;
   @Input() idUser!: number;
 
-
   creditCardForm: FormGroup = this.fb.group({
     creditCardNumber: [this.creditCardNumber, Validators.required],
     dniRuc: [
@@ -68,25 +67,20 @@ export class CreditCardConsumptionComponent implements OnInit, OnChanges {
 
   //funcion submit, solo envia si el form es valido
   save() {
-    console.log(this.creditCardForm.value);
     if (this.creditCardForm.invalid) {
       this.creditCardForm.markAllAsTouched();
       return;
     }
 
-    
-    const cardOperation: TransactionBack ={
+    const cardOperation: TransactionBack = {
       idcustomer: this.idUser,
-      idcardcredit : this.idProduct,
+      idcardcredit: this.idProduct,
       operation: this.creditCardForm.value.operationType,
       amount: this.creditCardForm.value.amount,
-    }
-    console.log(cardOperation);
+    };
 
-    this.formService
-      .addTransaction(cardOperation)
-      .subscribe();
-    // console.log(this.creditCardForm.value);
+    this.formService.addTransaction(cardOperation).subscribe();
+
     this.creditCardForm.reset({
       creditCardNumber: this.creditCardNumber,
       dniRuc: this.dniRuc,

@@ -31,6 +31,5 @@ public class Account {
     private Double balance;
     private String accounttype;
    @Transient
-
    private ProductClient product;
 }

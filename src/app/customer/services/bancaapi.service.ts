@@ -4,25 +4,15 @@ import { Observable } from 'rxjs';
 import { Customer } from 'src/app/interfaces/banca.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BancaapiService {
+  constructor(private http: HttpClient) {}
 
-   //api local
-  private _urlapilocal: string = "https://pruebaapi2.000webhostapp.com/api/banca.php?";
-  constructor(
-    private http: HttpClient
-  ) { }
-  
   // regresamos una lista de customer segun el tipo de user: personal o business
-   getCustomersD(type: string): Observable<Customer[]> {
-    // return this.http.get<Customer[]>(`${this._urlapilocal}listcustomer=${type}`);
-    return this.http.get<Customer[]>(`http://localhost:8080/api/customers?type=${type}`);
+  getCustomersD(type: string): Observable<Customer[]> {
+    return this.http.get<Customer[]>(
+      `http://localhost:8080/api/customers?type=${type}`
+    );
   }
-
-  // getCustomerDetail(id: number): Observable<CustomerDetailAPI> {
-  //   return this.http.get<CustomerDetailAPI>(`${this._urlapilocal}newcustomerdetail=${id}`);
-  // }
-
-
 }

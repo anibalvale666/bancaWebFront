@@ -7,134 +7,116 @@
     <div class="d-flex justify-content-center ">
         
         <div class="row ">
-        <hr class="my-4">
-        <div class="col">
-            <form   autocomplete="off" [formGroup]="creditForm" (ngSubmit)="save()" >
-                <!-- Campo de Numero de documento -->
-                <div class="mb-3 row">
-                    <label class="col-sm-3 col-form-label">Número de documento</label>
-                    <div class="col-sm-9">
-                        <input 
-                            type="text" 
-                            class="form-control" 
-                            formControlName="dniRuc"
-                            placeholder="DNI o RUC"
-                        >
-                        <span class="form-text text-danger"
-                            *ngIf="attIsValid('dniRuc')"
-                        >
-                            *Campo requerido
-                        </span>
-                    </div>
-                </div>
-               
-
-                <!-- Seleccion del tipo de operación -->
-                <div class="row mb-3" >
-                        <label class="col-sm-3 form-label">Número de deuda:</label>
+            <hr class="my-4">
+            <div class="col">
+                <form   autocomplete="off" [formGroup]="creditForm" (ngSubmit)="save()" >
+                    <!-- Campo de Numero de documento -->
+                    <div class="mb-3 row">
+                        <label class="col-sm-3 col-form-label">Número de documento</label>
                         <div class="col-sm-9">
                             <input 
                                 type="text" 
                                 class="form-control" 
-                                formControlName="creditNumber"
-                                placeholder=""
-                                [attr.disabled]="true"
+                                formControlName="dniRuc"
+                                placeholder="DNI o RUC"
                             >
-                        </div>  
-                        <!-- <div class="col-sm-9">
-                            <select 
-                                class="form-select"
-                                formControlName="creditNumber"
+                            <span class="form-text text-danger"
+                                *ngIf="attIsValid('dniRuc')"
                             >
-                               
-                                <option selected
-                                value="payment"
-                                >  
-                                    Pago    
-                                </option>
-                                <option
-                                    value="Withdrawal"
-                                > 
-                                    Retiro  
-                                </option>
-                            </select>
-                        </div> -->
+                                *Campo requerido
+                            </span>
+                        </div>
                     </div>
-                <!-- Seleccion del tipo de operación -->
-                <div class="row mb-3" >
-                        <label class="col-sm-3 form-label">Tipo de Operación:</label>
+                
+
+                    <!-- Seleccion del tipo de operación -->
+                    <div class="row mb-3" >
+                            <label class="col-sm-3 form-label">Número de deuda:</label>
+                            <div class="col-sm-9">
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    formControlName="creditNumber"
+                                    placeholder=""
+                                    [attr.disabled]="true"
+                                >
+                            </div>  
+        
+                        </div>
+                    <!-- Seleccion del tipo de operación -->
+                    <div class="row mb-3" >
+                            <label class="col-sm-3 form-label">Tipo de Operación:</label>
+                            <div class="col-sm-9">
+                                <select 
+                                    class="form-select"
+                                    formControlName="operationType"
+                                >
+                                    <!-- el pipe lowercase esta modificando el valor debido a los corchetes -->
+                                    <!-- en este caso si modifica el valor  -->
+                                    <!-- <option
+                                        *ngFor="let region of regiones"  
+                                        [value]="region | lowercase"
+                                    >  -->
+                                    <option selected
+                                    value="deposit"
+                                    >  
+                                        Pago de cuota
+                                    </option>
+                                    <option
+                                        value="withdrawal"
+                                    > 
+                                        Retiro de capital
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                    <!-- Campo de Monto -->
+                    <div class="mb-3 row">
+                        <label class="col-sm-3 col-form-label">Monto</label>
                         <div class="col-sm-9">
-                            <select 
-                                class="form-select"
-                                formControlName="operationType"
+                            <input 
+                                type="number" 
+                                class="form-control" 
+                                formControlName="amount"
+                                placeholder="Monto"
                             >
-                                <!-- el pipe lowercase esta modificando el valor debido a los corchetes -->
-                                <!-- en este caso si modifica el valor  -->
-                                <!-- <option
-                                    *ngFor="let region of regiones"  
-                                    [value]="region | lowercase"
-                                >  -->
-                                <option selected
-                                value="deposit"
-                                >  
-                                    Pago de cuota
-                                </option>
-                                <option
-                                    value="withdrawal"
-                                > 
-                                    Retiro de capital
-                                </option>
-                            </select>
+                            <span class="form-text text-danger"
+                            *ngIf="attIsValid('amount')"
+                            >
+                                El precio debe ser 0 o mayor
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            <!-- Boton Para cerrar el modal -->
+                            <button 
+                                type="button" 
+                                class="btn btn-secondary " 
+                                data-bs-dismiss="modal"
+                            >
+                                Cerrar
+                            </button>
+                            <button
+                                type="submit"
+                                class="btn btn-primary float-end"
+                                [disabled]="creditForm.invalid"
+                                data-bs-dismiss="modal"
+                                >
+                                Guardar
+                            </button>
                         </div>
                     </div>
 
-                <!-- Campo de Monto -->
-                <div class="mb-3 row">
-                    <label class="col-sm-3 col-form-label">Monto</label>
-                    <div class="col-sm-9">
-                        <input 
-                            type="number" 
-                            class="form-control" 
-                            formControlName="amount"
-                            placeholder="Monto"
-                        >
-                        <span class="form-text text-danger"
-                        *ngIf="attIsValid('amount')"
-                        >
-                            El precio debe ser 0 o mayor
-                        </span>
-                    </div>
-
-                </div>
-
-
-                <hr>
-                <div class="row">
-                    <div class="col">
-                        <!-- Boton Para cerrar el modal -->
-                        <button 
-                            type="button" 
-                            class="btn btn-secondary " 
-                            data-bs-dismiss="modal"
-                        >
-                            Cerrar
-                        </button>
-                        <button
-                            type="submit"
-                            class="btn btn-primary float-end"
-                            [disabled]="creditForm.invalid"
-                            data-bs-dismiss="modal"
-                            >
-                            Guardar
-                        </button>
-                    </div>
-                </div>
-
-            </form>
+                </form>
+            </div>
         </div>
+
     </div>
-
-</div>
-
 
 </div>

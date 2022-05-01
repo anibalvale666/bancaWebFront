@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './auth/pages/login/login.component';
 import { AuthGuard } from './auth/guards/auth.guard';
 
@@ -11,13 +10,15 @@ const routes: Routes = [
   },
   {
     path: 'customer',
-    loadChildren: () => import('./customer/customer.module').then( m => m.CustomerModule),
-    canLoad: [ AuthGuard ],
-    canActivate: [ AuthGuard ],
+    loadChildren: () =>
+      import('./customer/customer.module').then((m) => m.CustomerModule),
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'products',
-    loadChildren: () => import('./products/products.module').then(m => m.ProductsModule),
+    loadChildren: () =>
+      import('./products/products.module').then((m) => m.ProductsModule),
   },
   // {
   //   path: '404',
@@ -27,11 +28,11 @@ const routes: Routes = [
     path: '**',
     // component: ErrorPageComponent,
     redirectTo: 'login',
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

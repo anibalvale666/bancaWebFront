@@ -76,10 +76,9 @@ export class CreditPaymentsComponent implements OnInit, OnChanges {
       operation: this.creditForm.value.operationType,
       amount: this.creditForm.value.amount,
     }
-    console.log(creditOperation);
+
     this.formService.addTransaction(creditOperation).subscribe();
 
-    console.log(this.creditForm.value);
     this.creditForm.reset({
       creditNumber: this.loanNumber,
       dniRuc: this.dniRuc,

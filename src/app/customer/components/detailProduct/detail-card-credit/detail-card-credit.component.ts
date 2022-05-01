@@ -33,12 +33,10 @@ export class DetailCardCreditComponent implements OnInit {
   ngOnInit(): void {
     this.detailService.getCreditCardDetail(this.idProduct).subscribe( detailaccountcredit => {
       this.creditCardDetail = detailaccountcredit;
-      console.log(detailaccountcredit);
-      console.log(typeof this.creditCardDetail);
       this.creditCardNumber = this.creditCardDetail.numbercard;
       this.detailService.getAccountTransactions(this.creditCardDetail.id,'card-credit').subscribe( transactions => {
         this.transactions = transactions;
-        console.log(this.transactions);
+
       });
     });
   }

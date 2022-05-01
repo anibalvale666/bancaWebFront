@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
-  accountTransaction,
-  creditCardConsumption,
-  loanTransaction,
   AccountBack,
   LoanBack,
   CreditCardBack,
@@ -24,7 +21,6 @@ export class FormService {
   ): Observable<any> {
     const headers = { 'content-type': 'application/json' };
     const body = JSON.stringify(product);
-    console.log(body);
     return this.http.post(`api/${type_product}`, body, {
       headers: headers,
     });
@@ -38,6 +34,8 @@ export class FormService {
       headers: headers,
     });
   }
+
+
 
 
 }

@@ -18,7 +18,7 @@ export class DetailCreditComponent implements OnInit {
   loanNumber!: string;
   operationType: string = 'withdrawal'; // este campo solo puede ser de dos tipos;  deposit or withdrawal
 
-  // dniRuc: string = '123123';
+
   // para el pipe i18nSelect
   accountsMap = {
     'savings': 'Cuenta de Ahorro',
@@ -39,12 +39,10 @@ export class DetailCreditComponent implements OnInit {
   ngOnInit(): void {
     this.detailService.getLoanDetail(this.idProduct).subscribe( loanDetail => {
       this.loanDetail = loanDetail;
-      console.log(loanDetail);
-      console.log(typeof this.loanDetail);
-      
+
+   
       this.detailService.getAccountTransactions(this.loanDetail.id,'credit').subscribe( transactions => {
         this.transactions = transactions;
-        console.log(this.transactions);
       });
     });
 

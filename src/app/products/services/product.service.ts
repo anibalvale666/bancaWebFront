@@ -4,11 +4,10 @@ import { Product } from '../interfaces/product.interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
-
-  constructor( private http: HttpClient ) { }
+  constructor(private http: HttpClient) {}
   baseUrl = 'http://localhost:8080/api/products';
 
   // Regresamos la data de todos los productos
@@ -20,5 +19,4 @@ export class ProductService {
   dataByid(id: number): Observable<Product> {
     return this.http.get<Product>(`http://localhost:8080/api/products/${id}`);
   }
-
 }

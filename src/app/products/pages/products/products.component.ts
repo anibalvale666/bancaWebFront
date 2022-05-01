@@ -8,24 +8,22 @@ import { Product } from '../../interfaces/product.interface';
   styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent implements OnInit {
-
   // variables para los productos
   products: Product[] = [];
   productsAccount: Product[] = [];
   productsLoan: Product[] = [];
 
-  
-  constructor( private productService: ProductService ) { }
-
+  constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.productService.data().subscribe(data => {
+    this.productService.data().subscribe((data) => {
       // console.log(data);
       this.products = data;
-      this.productsAccount = data.filter(product => product.category === 'account');
-      this.productsLoan = data.filter(product => product.category === 'loan');
+      this.productsAccount = data.filter(
+        (product) => product.category === 'account'
+      );
+      this.productsLoan = data.filter((product) => product.category === 'loan');
       // console.log(this.productsLoan);
     });
   }
-
 }

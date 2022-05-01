@@ -40,12 +40,11 @@ export class DetailAccountsComponent implements OnInit {
   ngOnInit(): void {
     this.detailService.getAccountDetail(this.idAccount).subscribe( detailaccountcredit => {
       this.accountDetail = detailaccountcredit;
-      console.log(detailaccountcredit);
-      console.log(typeof this.accountDetail.balance);
+
       
       this.detailService.getAccountTransactions(this.accountDetail.id, 'account').subscribe( transactions => {
         this.transactions = transactions;
-        console.log(this.transactions);
+  
       });
     });
 

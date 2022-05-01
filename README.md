@@ -1,27 +1,37 @@
-# BancaWebFront
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.1.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+# Banca Web del Perú📝
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Una aplicación que simula un sistema Bancario, los clientes pueden ingresar, crear cuentas, crear préstamos y adquirir tarjetas de crédito.
+Tambien pueden realizar operaciones sobre sus cuentas, y por último hay una vista de los productos que ofrece el sistema con sus respectivas características
 
-## Build
+# Screenshot
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+<img src='./assets/img/ahorros.jpg' alt='app img' width='400' />
 
-## Running unit tests
+# Herramientas y Tecnologias utilizadas
+* [Angular](https://angular.io/) - Angular Front End
+* [Bootstrap](https://getbootstrap.com/) Bootstrap 
+* [mysql](https://github.com/JedWatson/classnames#readme) - Base de datos
+* [xampp](https://github.com/JedWatson/classnames#readme) - para gestionar la base de datos
+* [Java Spring Boot](https://github.com/JedWatson/classnames#readme) - Java Spring Boot BackEnd con arquitectura microservicios.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# Despliegue
 
-## Running end-to-end tests
+[GitHub Pages]()
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+# Para Correr esta aplicación
 
-## Further help
+1. Clonar el repositorio.
+2. En la carpeta ```DB``` se encuentra la base de datos, importarlo con xampp y levantarlo.
+3. En la carpeta ```proyecto-final``` se encuentra el BackEnd.
+4. Se deben levantar los 6 servicios del BackEnd.
+2. En la carpeta clonada, correr ```npm install```.
+3. Luego, correr ```npm start``` el proyecto esta configurado para correr solo con 'npm start', correrlo con ```ng serve``` dara problemas de CORS.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+# Credits
+
+Anibal Valenzuela: [Git Hub](https://github.com/anibalvale666) 
+Diego Tuesta: [Git Hub](https://github.com/DiegoTuesta) 

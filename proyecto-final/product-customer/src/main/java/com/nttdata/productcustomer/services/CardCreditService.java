@@ -14,4 +14,5 @@ public interface CardCreditService {
     public CardCredit findById(Long id);
     public List<CardCredit> listAllCardCredits();
     public CardCredit updateAvailibleLine(Long id, Double quantity, String ope );
+  public CardCredit updateCreditCard (Long id, CardCredit cardCredit);
 }

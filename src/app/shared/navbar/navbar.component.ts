@@ -9,8 +9,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   menu: boolean = false;
-  constructor(private router: Router,
-              private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService) {}
   //-----Para cerrar el sidebar----//
   CancelBtn() {
     this.menu = false;
@@ -26,8 +25,8 @@ export class NavbarComponent implements OnInit {
   }
 
   //Verificar si esta logueado, o ya fue logeado
-  isLogin(): Boolean{
-    if(!localStorage.getItem('token')){
+  isLogin(): Boolean {
+    if (!localStorage.getItem('token')) {
       return false;
     }
     return true;

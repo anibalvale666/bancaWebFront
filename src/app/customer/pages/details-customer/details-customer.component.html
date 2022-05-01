@@ -3,11 +3,7 @@
   <h2 class="text-center">Detalle de Cliente</h2>
   <br />
   <div *ngIf="!user; else divContenido" class="text-center">
-    <img
-      class="img-loading"
-      src="../../../../assets/img/loading-gif.gif"
-      alt="loading-gif"
-    /> 
+    <img class="img-loading" src="../../../../assets/img/loading-gif.gif" alt="loading-gif" />
   </div>
   <!--  div contenido -->
   <ng-template #divContenido>
@@ -93,18 +89,14 @@
               </thead>
               <tbody>
                 <!-- '../../customerproducts/', -->
-                <tr
-                  *ngFor="let accountItem of accounts"
-                  [routerLink]="[
+                <tr *ngFor="let accountItem of accounts" [routerLink]="[
                   'customerproducts/',
                   accountItem.id, 'account'
-                  ]"
-                >
+                  ]">
                   <td>
                     <div style="width: 100%">
                       <span class="link">
-                        {{ accountItem.numberaccount | cardNumber }} </span
-                      ><br />
+                        {{ accountItem.numberaccount | cardNumber }} </span><br />
                       <small> {{ accountItem.accounttype | i18nSelect:accountsMap }} </small>
                     </div>
                   </td>
@@ -144,21 +136,18 @@
                 </tr>
               </thead>
               <tbody>
-                <tr
-                  *ngFor="let loanItem of loans"
-                  [routerLink]="[
+                <tr *ngFor="let loanItem of loans" [routerLink]="[
                   'customerproducts/',
                     loanItem.id, 'credit'
                   ]
                    
-                   "
-                >
+                   ">
                   <td>
                     <div>
                       <span class="link">
-                        {{ loanItem.numbercredit | cardNumber }} 
-                        </span>
-                        <br />
+                        {{ loanItem.numbercredit | cardNumber }}
+                      </span>
+                      <br />
                       <small> Préstamo {{ loanItem.product.nameproduct }} </small>
                     </div>
                   </td>
@@ -192,7 +181,7 @@
         </div>
       </div>
     </section>
-    <br/>
+    <br />
     <!-- end card credtios  -->
     <!-- card Card Credits -->
     <section *ngIf="creditCards && creditCards.length > 0">
@@ -209,25 +198,21 @@
                 </tr>
               </thead>
               <tbody>
-                <tr
-                  *ngFor="let creditCardItem of creditCards"
-                  [routerLink]="[
+                <tr *ngFor="let creditCardItem of creditCards" [routerLink]="[
                     'customerproducts/',
                     creditCardItem.id, 'card-credit'
-                  ]"
-                >
+                  ]">
                   <td>
                     <div>
                       <span class="link">
-                        {{ creditCardItem.numbercard | cardNumber }} </span
-                      ><br />
+                        {{ creditCardItem.numbercard | cardNumber }} </span><br />
                       <small> Tarjeta de Crédito </small>
                     </div>
                   </td>
                   <td class="">
                     <div class="row">
                       <div class="col-sm-3">
-                        <!-- {{ item2.currency | currencytable }} -->
+
                       </div>
                       <div class="col td">
                         {{ creditCardItem.creditline| currencytable:creditCardItem.currency }}
@@ -237,7 +222,7 @@
                   <td>
                     <div class="row">
                       <div class="col-sm-3">
-                        <!-- {{ item2.currency | currencytables }} -->
+
                       </div>
                       <div class="col td">
                         {{ creditCardItem.availableline | currencytable:creditCardItem.currency  }}
@@ -253,20 +238,10 @@
     </section>
     <!-- end card Tarjetas  -->
 
-    <button 
-    type="button" 
-    class="btn btn-primary mt-3" 
-    data-bs-toggle="modal" 
-    data-bs-target="#exampleModal"
-  >
-    Nuevo producto
-  </button>
-  <app-modal  
-  formOpen = "createProductForm" 
-  [id_user] = "user.id"
-  [doc] = "user.doc"
-    
-></app-modal>
+    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Nuevo producto
+    </button>
+    <app-modal formOpen="createProductForm" [id_user]="user.id" [doc]="user.doc"></app-modal>
 
 
   </ng-template>

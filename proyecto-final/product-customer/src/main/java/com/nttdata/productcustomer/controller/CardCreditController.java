@@ -1,6 +1,7 @@
 package com.nttdata.productcustomer.controller;
 
 
+import com.nttdata.productcustomer.entity.Account;
 import com.nttdata.productcustomer.entity.CardCredit;
 import com.nttdata.productcustomer.services.CardCreditService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,5 +63,16 @@ public class CardCreditController {
         return ResponseEntity.ok(cardCredit);
 
     }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CardCredit> updateAmount(@PathVariable("id") long id, @RequestBody CardCredit cardCredit) {
+      CardCredit _cc = cardCreditService.updateCreditCard(id, cardCredit);
+      if (_cc==null){
+        return ResponseEntity.notFound().build();
+      }
+      return ResponseEntity.ok(_cc);
+    }
+
 
 }

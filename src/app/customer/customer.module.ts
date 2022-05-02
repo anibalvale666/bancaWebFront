@@ -16,37 +16,34 @@ import { ModalComponent } from './components/modal/modal.component';
 
 import { CardNumberPipe } from './pipes/card-number.pipe';
 import { CurrencyTablePipe } from './pipes/currency-table.pipe';
-import { CodCreditPipe } from './pipes/cod-credit.pipe';
-import { ACPipe } from './pipes/a-c.pipe';
 import { CciPipe } from './pipes/cci.pipe';
+
 import { DetailAccountsComponent } from './components/detailProduct/detail-accounts/detail-accounts.component';
 import { DetailCreditComponent } from './components/detailProduct/detail-credit/detail-credit.component';
 import { DetailCardCreditComponent } from './components/detailProduct/detail-card-credit/detail-card-credit.component';
-import { TxtTranPipe } from './pipes/txt-tran.pipe';
 import { SortPipe } from './pipes/sort.pipe';
 
 
 @NgModule({
-  declarations: [
-    TableCustomerComponent,
+  declarations: [ 
     HomeComponent,
     DetailsCustomerComponent,
     DetailsCustomerProductsComponent,
+    
     CreditCardConsumptionComponent,
     CreditPaymentsComponent,
     AccountOperationsComponent,
     CreateProductComponent,
-    ModalComponent,
-    CardNumberPipe,
-    CurrencyTablePipe,
-    CodCreditPipe,
     
-    ACPipe,
-    CciPipe,
+    ModalComponent,
     DetailAccountsComponent,
     DetailCreditComponent,
     DetailCardCreditComponent,
-    TxtTranPipe,
+    TableCustomerComponent,
+
+    CardNumberPipe,
+    CurrencyTablePipe,
+    CciPipe,
     SortPipe,
   ],
 

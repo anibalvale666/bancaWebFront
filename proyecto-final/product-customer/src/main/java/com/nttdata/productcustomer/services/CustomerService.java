@@ -8,8 +8,10 @@ public interface CustomerService {
     public List<Customer> listAllCustomer();
     public Customer customerbyId(Long id);
 
+    public Customer customerbyDoc(String doc);
+
     public Customer createCustomer(Customer customer);
 
-    public List<Customer> listCustomerbyType(Integer type);
+    public List<Customer> listCustomerbyType(String type_customer);
 
 }

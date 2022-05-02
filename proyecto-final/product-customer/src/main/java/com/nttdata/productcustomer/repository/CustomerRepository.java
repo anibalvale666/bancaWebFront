@@ -8,6 +8,8 @@ import java.util.List;
 
 
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
-    List<Customer> findByType(Integer type);
-
+    List<Customer> findByType(String type);
+    Customer findByDoc(String doc);
 }
+
+

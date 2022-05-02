@@ -12,21 +12,27 @@
                 *ngSwitchCase="'accountForm'"
                 [numberAccount]="numberAccount"
                 [operationType]="operationType"
-                [id]="id_user"
+                [idUser]="id_user"
+                [idProduct]="idProduct"
               ></app-account-operations>
               <app-create-product 
                 *ngSwitchCase="'createProductForm'"
-                [dniRuc]  = "dniRuc"
+                [idUser]  = "id_user"
+                [doc] = "doc"
               ></app-create-product>
               <app-credit-card-consumption 
                 *ngSwitchCase="'creditCardForm'"
                 [creditCardNumber] = "creditCardNumber"
-                [dniRuc] = "dniRuc"
+                [idUser]="id_user"
+                [idProduct]="idProduct"
+                [dniRuc] = "doc"
                 [operationType]="operationType"
               ></app-credit-card-consumption>
               <app-credit-payments 
                 *ngSwitchCase="'creditPaymentForm'"
-                [dniRuc] = "dniRuc"
+                [idUser]="id_user"
+                [dniRuc] = "doc"
+                [idProduct]="idProduct"
                 [loanNumber] = "loanNumber"
                 [operationType]="operationType"
               ></app-credit-payments>

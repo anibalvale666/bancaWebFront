@@ -1,15 +1,15 @@
 package com.nttdata.productcustomer.services;
 
 import com.nttdata.productcustomer.client.ProductClientRepository;
+import com.nttdata.productcustomer.entity.Account;
 import com.nttdata.productcustomer.entity.Credit;
+import com.nttdata.productcustomer.entity.Customer;
 import com.nttdata.productcustomer.repository.CreditRepository;
 import com.nttdata.productcustomer.utils.GeneratedCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-
+import java.util.*;
 
 
 @Service
@@ -19,7 +19,8 @@ public class CreditServiceImpl implements CreditService{
     private CreditRepository creditRepository;
     @Autowired
     private ProductClientRepository productClientRepository;
-
+    @Autowired
+    private CustomerService customerService;
 
     @Override
     public List<Credit> findByIdcustomer(Long idcustomer) {
@@ -29,15 +30,30 @@ public class CreditServiceImpl implements CreditService{
         return credits;
     }
     @Override
-    public Credit saveCredit(Credit credit) {
+    public Map.Entry<Boolean,Credit> saveCredit(Credit credit) {
+
+      //Primero verificamos si es cliente persona o empresa
+      Customer customer = customerService.customerbyId(credit.getIdcustomer());
+      Boolean exist = false;
+      if(Objects.equals(customer.getType(), "personal")) {
+        exist = (this.findByIdcustomer(customer.getId()).size() != 0);
+      }
+
+      if(!exist  || Objects.equals(customer.getType(), "business") ) {
         GeneratedCode gene = new GeneratedCode();
-        credit.setDate( new Date());
+        credit.setOpeningdate(new Date());
         credit.setInterest(10);
-        Double montoTotal = (credit.getAmountborrowed()+(credit.getInterest()*0.10))/credit.getQuotas();
+        Double montoTotal = (credit.getAmountborrowed() * 1.10) / credit.getQuotas();
         credit.setMonthlyamount(montoTotal);
+        credit.setQuotaspaid(0);
         credit.setAmountpaid(0.00);
         credit.setNumbercredit(gene.Generated(10));
-        return creditRepository.save(credit);
+        creditRepository.save(credit);
+        return new AbstractMap.SimpleEntry<>(true, credit);
+      }
+      else {
+        return new AbstractMap.SimpleEntry<>(false, credit);
+      }
     }
     @Override
     public List<Credit> listAllCredtis() {

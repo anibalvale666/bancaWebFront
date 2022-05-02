@@ -24,9 +24,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer customerbyId(Long id) {
-
         return customerRepository.findById(id).orElse(null);
+    }
 
+    @Override
+    public Customer customerbyDoc(String doc) {
+      return customerRepository.findByDoc(doc);
     }
 
     @Override
@@ -35,8 +38,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<Customer> listCustomerbyType(Integer type) {
-        return customerRepository.findByType(type);
+    public List<Customer> listCustomerbyType(String typeCustomer) {
+        return customerRepository.findByType(typeCustomer);
     }
 
 }

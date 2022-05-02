@@ -1,10 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DetailAccountCredit } from 'src/app/interfaces/customer.interface';
 import { ActivatedRoute } from '@angular/router';
 import { DetailService } from 'src/app/customer/services/detail.service';
-import { account } from '../../../../interfaces/banca-api.interface';
-import { Transaction } from '../../../../interfaces/customer.interface';
-
+import { Account, Transaction } from '../../../../interfaces/banca.interface';
 
 
 @Component({
@@ -16,12 +13,12 @@ export class DetailAccountsComponent implements OnInit {
   //obtenemos el id de la cuenta seleccionada
   idAccount = this.activatedRoute.snapshot.params['id'];
   idOwner = this.activatedRoute.snapshot.params['idowner'];
-  
   // Variables del formulario modal
   // tipo de formulario seleccionado
   formSelected: string = 'accountForm'; // accountForm, createProductForm, creditCardForm, creditPaymentForm
   numberAccount!: string;
   operationType: string = 'withdrawal'; // este campo solo puede ser de dos tipos;  deposit or withdrawal
+  idProduct!: number;
   
   // para el pipe i18nSelect
   accountsMap = {
@@ -31,7 +28,7 @@ export class DetailAccountsComponent implements OnInit {
   }
 
   // Objeto que tremos del back con los detalles de la cuenta
-  accountDetail!: account;
+  accountDetail!: Account;
 
   // Lista de transacciones de la cuenta
   transactions: Transaction[]= [];
@@ -43,21 +40,21 @@ export class DetailAccountsComponent implements OnInit {
   ngOnInit(): void {
     this.detailService.getAccountDetail(this.idAccount).subscribe( detailaccountcredit => {
       this.accountDetail = detailaccountcredit;
-      console.log(detailaccountcredit);
-      console.log(typeof this.accountDetail.balance);
+
       
-      this.detailService.getAccountTransactions(this.accountDetail.id).subscribe( transactions => {
+      this.detailService.getAccountTransactions(this.accountDetail.id, 'account').subscribe( transactions => {
         this.transactions = transactions;
-        console.log(this.transactions);
+  
       });
     });
 
   }
 
-  setValue(value:string, operation: string= 'withdrawal'){
+  setValue(value:string, operation: string= 'withdrawal') {
     this.formSelected = value;
     this.operationType = operation; 
-    this.numberAccount = this.accountDetail.account_number;
+    this.numberAccount = this.accountDetail.numberaccount;
+    this.idProduct = this.accountDetail.id;
   }
 
 

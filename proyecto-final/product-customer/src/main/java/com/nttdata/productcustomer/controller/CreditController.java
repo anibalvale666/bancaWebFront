@@ -1,6 +1,7 @@
 package com.nttdata.productcustomer.controller;
 
 
+import com.nttdata.productcustomer.entity.Account;
 import com.nttdata.productcustomer.entity.CardCredit;
 import com.nttdata.productcustomer.entity.Credit;
 import com.nttdata.productcustomer.services.CreditService;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins="*")
@@ -39,8 +41,15 @@ public class CreditController {
     //Para crear una cuenta
     @PostMapping
     public  ResponseEntity<Credit> saveCredit(@RequestBody Credit credit){
-        Credit newCredit = creditService.saveCredit(credit);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newCredit);
+
+      Map.Entry<Boolean, Credit> newCredit = creditService.saveCredit(credit);
+      if(newCredit.getKey()) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(newCredit.getValue());
+      }
+      else {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+      }
+
     }
 
     @GetMapping("/{id}/update-amount-quota")

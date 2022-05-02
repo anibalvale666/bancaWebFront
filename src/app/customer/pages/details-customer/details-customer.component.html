@@ -3,11 +3,7 @@
   <h2 class="text-center">Detalle de Cliente</h2>
   <br />
   <div *ngIf="!user; else divContenido" class="text-center">
-    <img
-      class="img-loading"
-      src="../../../../assets/img/loading-gif.gif"
-      alt="loading-gif"
-    /> 
+    <img class="img-loading" src="../../../../assets/img/loading-gif.gif" alt="loading-gif" />
   </div>
   <!--  div contenido -->
   <ng-template #divContenido>
@@ -19,7 +15,7 @@
             <div class="col-sm-12 col-md-4">
               <label class="fw-bold" for="name">
                 {{
-                  user.type_customer === "business"
+                  user.type === "business"
                     ? "Razón Social"
                     : "Nombre y Apellido"
                 }}
@@ -27,7 +23,7 @@
               <br />
               <label for="">
                 {{
-                  user.type_customer === "business"
+                  user.type === "business"
                     ? user.first_name
                     : user.first_name +
                       " " +
@@ -39,13 +35,13 @@
               <label class="fw-bold" for="">Tipo de Documento:</label>
               <br />
               <label for="">{{
-                user.type_customer === "business" ? "RUC" : "DNI"
+                user.type === "business" ? "RUC" : "DNI"
               }}</label>
             </div>
             <div class="col-sm-12 col-md-4">
               <label class="fw-bold" for="">Nº de Doc:</label>
               <br />
-              <label for="">{{ user.number_doc }}</label>
+              <label for="">{{ user.doc }}</label>
             </div>
           </div>
           <div class="row">
@@ -63,7 +59,7 @@
               <label class="fw-bold" for="">Tipo de Cliente:</label>
               <br />
               <label for="">
-                {{ user.type_customer === "business" ? "Empresa" : "Persona" }}
+                {{ user.type === "business" ? "Empresa" : "Persona" }}
               </label>
             </div>
           </div>
@@ -73,7 +69,7 @@
     <!-- Fin card personal -->
     <br />
     <!-- card Cuentas -->
-    <section *ngIf="accounts.length > 0">
+    <section *ngIf="accounts && accounts.length > 0">
       <div class="card">
         <div class="card-title fw-bolder">
           <div class="row">
@@ -93,19 +89,15 @@
               </thead>
               <tbody>
                 <!-- '../../customerproducts/', -->
-                <tr
-                  *ngFor="let accountItem of accounts"
-                  [routerLink]="[
+                <tr *ngFor="let accountItem of accounts" [routerLink]="[
                   'customerproducts/',
                   accountItem.id, 'account'
-                  ]"
-                >
+                  ]">
                   <td>
                     <div style="width: 100%">
                       <span class="link">
-                        {{ accountItem.account_number | cardNumber }} </span
-                      ><br />
-                      <small> {{ accountItem.account_type | i18nSelect:accountsMap }} </small>
+                        {{ accountItem.numberaccount | cardNumber }} </span><br />
+                      <small> {{ accountItem.accounttype | i18nSelect:accountsMap }} </small>
                     </div>
                   </td>
                   <!-- <td class="td">S/ 100.00</td> -->
@@ -129,7 +121,7 @@
     <!-- fin card cuentas -->
     <br />
     <!-- card Credits -->
-    <section *ngIf="loans.length > 0">
+    <section *ngIf="loans && loans.length > 0">
       <div class="card">
         <div class="card-title fw-bolder">Créditos</div>
         <div class="card-body">
@@ -144,21 +136,19 @@
                 </tr>
               </thead>
               <tbody>
-                <tr
-                  *ngFor="let loanItem of loans"
-                  [routerLink]="[
+                <tr *ngFor="let loanItem of loans" [routerLink]="[
                   'customerproducts/',
                     loanItem.id, 'credit'
                   ]
                    
-                   "
-                >
+                   ">
                   <td>
                     <div>
                       <span class="link">
-                        {{ loanItem.loan_number | cardNumber }} </span
-                      ><br />
-                      <small> Préstamo {{ loanItem.type === 'personal'? 'personal' : 'Empresa' }} </small>
+                        {{ loanItem.numbercredit | cardNumber }}
+                      </span>
+                      <br />
+                      <small> Préstamo {{ loanItem.product.nameproduct }} </small>
                     </div>
                   </td>
                   <td class="">
@@ -167,12 +157,12 @@
                         <!-- {{ item2.currency | currencytable:'PEN' }} -->
                       </div>
                       <div class="col td">
-                        {{ loanItem.capital_amount | currencytable:loanItem.currency }}
+                        {{ loanItem.amountborrowed | currencytable:loanItem.currency }}
                       </div>
                     </div>
                   </td>
                   <td class="text-center">
-                    {{ loanItem.interest_rate }}%
+                    {{ loanItem.interest }}%
                   </td>
                   <td>
                     <div class="row">
@@ -180,7 +170,7 @@
                         <!-- {{ item2.currency | currencytable }} -->
                       </div>
                       <div class="col td">
-                        {{ loanItem.monthly_fee | currencytable:loanItem.currency }}
+                        {{ loanItem.monthlyamount | currencytable:loanItem.currency }}
                       </div>
                     </div>
                   </td>
@@ -191,10 +181,10 @@
         </div>
       </div>
     </section>
-    <br/>
+    <br />
     <!-- end card credtios  -->
     <!-- card Card Credits -->
-    <section *ngIf="creditCards.length > 0">
+    <section *ngIf="creditCards && creditCards.length > 0">
       <div class="card">
         <div class="card-title fw-bolder">Tarjetas de Créditos</div>
         <div class="card-body">
@@ -208,38 +198,34 @@
                 </tr>
               </thead>
               <tbody>
-                <tr
-                  *ngFor="let creditCardItem of creditCards"
-                  [routerLink]="[
+                <tr *ngFor="let creditCardItem of creditCards" [routerLink]="[
                     'customerproducts/',
                     creditCardItem.id, 'card-credit'
-                  ]"
-                >
+                  ]">
                   <td>
                     <div>
                       <span class="link">
-                        {{ creditCardItem.credit_card_number | cardNumber }} </span
-                      ><br />
+                        {{ creditCardItem.numbercard | cardNumber }} </span><br />
                       <small> Tarjeta de Crédito </small>
                     </div>
                   </td>
                   <td class="">
                     <div class="row">
                       <div class="col-sm-3">
-                        <!-- {{ item2.currency | currencytable }} -->
+
                       </div>
                       <div class="col td">
-                        {{ creditCardItem.credit_line| currencytable:creditCardItem.currency }}
+                        {{ creditCardItem.creditline| currencytable:creditCardItem.currency }}
                       </div>
                     </div>
                   </td>
                   <td>
                     <div class="row">
                       <div class="col-sm-3">
-                        <!-- {{ item2.currency | currencytables }} -->
+
                       </div>
                       <div class="col td">
-                        {{ creditCardItem.available_line | currencytable:creditCardItem.currency  }}
+                        {{ creditCardItem.availableline | currencytable:creditCardItem.currency  }}
                       </div>
                     </div>
                   </td>
@@ -249,25 +235,15 @@
           </div>
         </div>
       </div>
-      <button 
-        type="button" 
-        class="btn btn-primary mt-3" 
-        data-bs-toggle="modal" 
-        data-bs-target="#exampleModal"
-      >
-        Nuevo producto
-      </button>
-
-      <app-modal  
-        formOpen = "createProductForm" 
-          
-        dniRuc = "3232"
-          
-      ></app-modal>
-
-
     </section>
     <!-- end card Tarjetas  -->
+
+    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Nuevo producto
+    </button>
+    <app-modal formOpen="createProductForm" [id_user]="user.id" [doc]="user.doc"></app-modal>
+
+
   </ng-template>
   <!--  end div contenido -->
 </div>

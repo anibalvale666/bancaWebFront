@@ -22,15 +22,15 @@ public class CustomerController {
 
         //Para listar todos los cientes
         @GetMapping
-        public ResponseEntity<List<Customer>> listCustomers(@RequestParam(name = "type", required = false) Integer type){
+        public ResponseEntity<List<Customer>> listCustomers(@RequestParam(name = "type", required = false) String type_customer){
                 List<Customer> customers = new ArrayList<>();
-                if (null==type){
+                if (null==type_customer){
                         customers= customerService.listAllCustomer();
                         if (customers.isEmpty()){
                                 return ResponseEntity.noContent().build();
                         }
                 }else{
-                        customers=customerService.listCustomerbyType(type);
+                        customers=customerService.listCustomerbyType(type_customer);
                         if (customers.isEmpty()){
                                 return ResponseEntity.noContent().build();
                         }
@@ -46,6 +46,17 @@ public class CustomerController {
                         return ResponseEntity.notFound().build();
                 }
                 return ResponseEntity.ok(customer);
+        }
+
+
+        // Recibimos un cliente enviando su numerodeDoc
+        @GetMapping(value="/doc/{doc}")
+        public ResponseEntity<Customer> getCustomer(@PathVariable("doc") String doc){
+          Customer customer = customerService.customerbyDoc(doc);
+          if (null==customer){
+            return ResponseEntity.notFound().build();
+          }
+          return ResponseEntity.ok(customer);
         }
 
         //Para crear un cliente

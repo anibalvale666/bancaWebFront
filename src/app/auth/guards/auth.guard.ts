@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
+// Para bloquear el acceso a la panntalla de customers
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
   canActivate(
@@ -40,6 +41,5 @@ export class AuthGuard implements CanActivate {
         }
       })
     );
-
   }
 }

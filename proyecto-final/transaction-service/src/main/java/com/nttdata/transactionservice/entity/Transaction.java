@@ -25,7 +25,7 @@ public class Transaction {
     private Long idcardcredit;
     private Date date;
     private Integer quota;
-    private Integer operation;
+    private String operation;
     private Double amount;
 
 }

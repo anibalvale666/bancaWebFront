@@ -1,6 +1,7 @@
 package com.nttdata.productcustomer.controller;
 
 
+import com.nttdata.productcustomer.entity.Account;
 import com.nttdata.productcustomer.entity.CardCredit;
 import com.nttdata.productcustomer.services.CardCreditService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/card-credits")
 public class CardCreditController {
     @Autowired
@@ -35,15 +36,18 @@ public class CardCreditController {
         return  ResponseEntity.ok(cardCredits);
     }
 
-    @PostMapping
+  @CrossOrigin(origins = "*")
+    @PostMapping()
     public ResponseEntity<CardCredit> saveCardCredit(@RequestBody CardCredit cardCredit){
         CardCredit newCard = cardCreditService.saveCardCredit(cardCredit);
         return ResponseEntity.status(HttpStatus.CREATED).body(newCard);
     }
+
+
     @GetMapping("/{id}/availableline")
     public ResponseEntity<CardCredit> updateAvailibleLine(@PathVariable Long id,
                                                           @RequestParam(name = "quantity", required = true) Double quantity,
-                                                          @RequestParam(name = "operation",required = true) Integer ope ) {
+                                                          @RequestParam(name = "operation",required = true) String ope ) {
         CardCredit cardCredit = cardCreditService.updateAvailibleLine(id,quantity,ope);
         if (null == cardCredit){
             return ResponseEntity.notFound().build();
@@ -59,5 +63,16 @@ public class CardCreditController {
         return ResponseEntity.ok(cardCredit);
 
     }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CardCredit> updateAmount(@PathVariable("id") long id, @RequestBody CardCredit cardCredit) {
+      CardCredit _cc = cardCreditService.updateCreditCard(id, cardCredit);
+      if (_cc==null){
+        return ResponseEntity.notFound().build();
+      }
+      return ResponseEntity.ok(_cc);
+    }
+
 
 }

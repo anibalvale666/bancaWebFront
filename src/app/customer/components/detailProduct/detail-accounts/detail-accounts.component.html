@@ -12,13 +12,13 @@
 
   <div class="row">
     <div class="col-sm-12 col-md-4 text-center card card-body">
-      <h5 class="">Cuenta {{accountDetail.account_number | cardNumber}}</h5>
+      <h5 class="">Cuenta {{accountDetail.numberaccount | cardNumber}}</h5>
       <hr />
       <div class="row">
-        <h4> {{ accountDetail.account_type | i18nSelect:accountsMap}} </h4>
+        <h4> {{ accountDetail.accounttype | i18nSelect:accountsMap}} </h4>
 
         <label> {{ accountDetail.balance | currencytable:accountDetail.currency }} </label>
-        <!-- <span>Saldo Disponible</span> -->
+        <span>Saldo Disponible</span>
       </div>
       <br />
       <div class="row">
@@ -41,11 +41,11 @@
               <hr />
               <div class="row">
                 <span>Tipo de Cuenta</span>
-                <h6 class="fw-bold"> {{ accountDetail.account_type | i18nSelect:accountsMap }} </h6>
+                <h6 class="fw-bold"> {{ accountDetail.accounttype | i18nSelect:accountsMap }} </h6>
               </div>
               <div class="row">
                 <span> Número de Cuenta </span>
-                <h6 class="fw-bold"> {{accountDetail.account_number}}</h6>
+                <h6 class="fw-bold"> {{accountDetail.numberaccount}}</h6>
               </div>
               <div class="row">
                 <span>CCI</span>
@@ -53,14 +53,14 @@
               </div>
               <div class="row">
                 <span>Fecha de Apertura</span>
-                <h6 class="fw-bold"> {{accountDetail.opening_date | date:'dd MMMM yyyy'}}</h6>
+                <h6 class="fw-bold"> {{accountDetail.openingdate | date:'dd MMMM yyyy'}}</h6>
               </div>
-              <div class="row">
+              <!-- <div class="row">
                 <span>Otros Titulares</span>
                 <ul>
                   <li class="fw-bold">{{ accountDetail.owner}}</li>
                 </ul>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -88,6 +88,7 @@
           [numberAccount] = "numberAccount"
           [operationType]="operationType"
           [id_user]="idOwner"
+          [idProduct]="idProduct"
         ></app-modal>
 
       </div>
@@ -106,11 +107,11 @@
             <!--  <div *ngIf="detailTransaction.length===0" class="text-center" >
               <img class="img-loading" src="../../../../assets/img/loading-gif.gif" alt="loading-gif">
             </div> -->
-            <tr *ngFor="let transaction of transactions | sort:'date':true">
-              <td>{{transaction.date | date:'dd MMMM yyyy'}}</td>
-              <td> {{transaction.operation === 'deposit' ? 'Depósito' : 'Retiro' }} </td>
-              <td>{{ transaction.amount | number:'1.2-2' }} </td>
-            </tr>
+              <tr  *ngFor="let transaction of transactions | sort:'date':true">
+                <td>{{transaction.date | date:'dd MMMM yyyy'}}</td>
+                <td> {{transaction.operation === 'deposit' ? 'Depósito' : 'Retiro' }} </td>
+                <td>{{ transaction.amount | number:'1.2-2' }} </td>
+              </tr>
           </tbody>
         </table>
       </div>

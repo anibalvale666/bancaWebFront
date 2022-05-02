@@ -1,7 +1,7 @@
 // Aqui iran las interface de producto
 export interface Product {
-    id: number;
-    name_product:        string;
+    id:                  number;
+    nameproduct:         string;
     description_product: string;
     category:            string;
     logo:                string;

@@ -27,13 +27,15 @@ public class CardCredit {
     private String currency;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
+    private Date openingdate;
 
     private String numbercard;
-    private String cvv;
+    private String cvc;
     private Double creditline;
     private Double availableline;
-    private String expirationday;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date expirationday;
 
     @Transient
     private ProductClient product;

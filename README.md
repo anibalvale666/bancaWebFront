@@ -5,7 +5,7 @@
 # Banca Web del Perú📝
 
 Una aplicación que simula un sistema Bancario, los clientes pueden ingresar, crear cuentas, crear préstamos y adquirir tarjetas de crédito.
-Tambien pueden realizar operaciones sobre sus cuentas, y por último hay una vista de los productos que ofrece el sistema con sus respectivas características
+Tambien pueden realizar operaciones sobre sus cuentas, y por último hay una vista de los productos que ofrece el sistema con sus respectivas características.
 
 # Screenshot
 
@@ -14,9 +14,9 @@ Tambien pueden realizar operaciones sobre sus cuentas, y por último hay una vis
 # Herramientas y Tecnologias utilizadas
 * [Angular](https://angular.io/) - Angular Front End
 * [Bootstrap](https://getbootstrap.com/) Bootstrap 
-* [mysql](https://github.com/JedWatson/classnames#readme) - Base de datos
-* [xampp](https://github.com/JedWatson/classnames#readme) - para gestionar la base de datos
-* [Java Spring Boot](https://github.com/JedWatson/classnames#readme) - Java Spring Boot BackEnd con arquitectura microservicios.
+* [mysql](https://www.mysql.com/) - Base de datos
+* [xampp](https://www.apachefriends.org/es/index.html) - para gestionar la base de datos
+* [Java Spring Boot](https://spring.io/projects/spring-boot) - Java Spring Boot BackEnd con arquitectura microservicios.
 
 # Despliegue
 

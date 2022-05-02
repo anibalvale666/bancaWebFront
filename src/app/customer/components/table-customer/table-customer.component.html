@@ -1,1 +1,23 @@
-<p>table-customer works!</p>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr class="color-cabecera">
+        <th>{{ (isPerson==='personal') ? 'NOMBRE COMPLETO' : 'RAZÓN SOCIAL' }} </th>
+        <th>{{ (isPerson==='personal') ? 'DNI:' : 'RUC:' }}</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr *ngFor="let customer of customers ">
+
+
+        <td> {{ (isPerson==='personal') ? customer.first_name + ' ' + customer.last_name : customer.first_name}}</td>
+        <td> {{ customer.doc }}</td>
+        <td>
+          <a [routerLink]="[customer.id]" class="enlace">ver detalle</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

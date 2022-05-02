@@ -1,4 +1,36 @@
-<p>home works!</p>
+<br />
+<section>
+  <main class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-12 col-md-4">
+            <h4>Seleccione Cliente</h4>
+            <hr />
+            <ul class="menu-group-customer">
+              <li [class.active1]="type_customer==='personal'" (click)="listCustomer('personal')"
+                class="list-group-item">
+                Personas
+              </li>
+              <li [class.active1]="type_customer==='business'" (click)="listCustomer('business')"
+                class="list-group-item">
+                Empresas
+              </li>
+            </ul>
+          </div>
+          <div class="col-sm-12 col-md-8">
+            <div *ngIf="loading;else divContent" class="text-center">
+              <img class="img-loading" src="../../../../assets/img/loading-gif.gif" alt="loading-gif">
+            </div>
+            <ng-template #divContent>
 
-
-<router-outlet></router-outlet>
+              <h4 class="text-center">Lista de {{ (type_customer === "personal" ) ? 'Personas' : 'Empresas' }} </h4>
+              <hr>
+              <app-table-customer [isPerson]="type_customer" [customers]="clientCustomer"></app-table-customer>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</section>

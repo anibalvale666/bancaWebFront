@@ -1,0 +1,124 @@
+<div *ngIf="!creditCardDetail; else divContent" class="text-center" >
+  <img
+    class="img-loading mt-5"
+    src="../../../../assets/img/loading-gif.gif"
+    alt="loading-gif"
+    height="250px"
+  />
+</div>
+<!--  div contenido -->
+<ng-template #divContent>
+  <div class="row">
+    <div class="col-sm-12 col-md-4 text-center card card-body">
+      <h5 class="">Tarjeta {{creditCardDetail.numbercard | cardNumber }}</h5>
+      <hr />
+      <div class="row">
+        <h4>Tarjeta de Crédito</h4>
+        <label>{{creditCardDetail.creditline | currencytable:creditCardDetail.currency}} </label>
+        <span>Linea de Crédito</span>
+        <label>{{creditCardDetail.availableline | currencytable:creditCardDetail.currency }}</label>
+        <span>Linea disponible</span>
+        
+      </div>
+      <br />
+      <div class="row">
+        <p>
+          <button
+            class="btn btn-primary"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseExample"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            Ver más
+          </button>
+        </p>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
+            <div>
+              <h5>General</h5>
+              <hr />
+              <div class="row">
+                <span>Tarjeta</span>
+                <h6 class="fw-bold">Tarjeta de Crédito</h6>
+              </div>
+              <div class="row">
+                <span> Número de Tarjeta </span>
+                <h6 class="fw-bold">{{creditCardDetail.numbercard | cardNumber }}</h6>
+              </div>
+              <div class="row">
+                <span>CVV</span>
+                <h6 class="fw-bold">{{creditCardDetail.cvc }}</h6>
+              </div>
+              <div class="row">
+                <span>Fecha de Vencimiento</span>
+                <h6 class="fw-bold">{{creditCardDetail.expirationday | date:'MMMM yyyy'}}</h6>
+              </div>
+              <!-- <div class="row">
+                <span>Titulares</span>
+                <ul>
+                  <li class="fw-bold">Diego Andres Tuesta Perez</li>
+                </ul>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-8 card card-body">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button 
+          type="button" 
+          class="btn btn-primary btn-sm"
+          data-bs-toggle="modal" 
+          data-bs-target="#exampleModal"
+          (click) = "setValue( 'withdrawal')"
+        >
+          Cargar Crédito
+        </button>
+        <button 
+          type="button" 
+          class="btn btn-primary btn-sm"
+          data-bs-toggle="modal" 
+          data-bs-target="#exampleModal"
+          (click) = "setValue('deposit')"
+        >
+          Pagar Crédito
+        </button>
+        <!-- [dniRuc] = "dniRuc" -->
+        <app-modal  
+          formOpen = "creditCardForm" 
+          [operationType]="operationType"         
+          [creditCardNumber] = "creditCardNumber"
+          [id_user]="idOwner"
+          [idProduct]="idProduct"
+
+        ></app-modal>
+      </div>
+      <hr />
+      <h4>ÚLTIMOS MOVIMIENTOS</h4>
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th width="30%">Fecha</th>
+              <th width="40%">Operacion</th>
+              <th width="30%">Monto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!--  <div *ngIf="detailTransaction.length===0" class="text-center" >
+              <img class="img-loading" src="../../../../assets/img/loading-gif.gif" alt="loading-gif">
+            </div> -->
+            <tr *ngFor="let transaction of transactions | sort:'date':true">
+              <td>{{transaction.date | date:'dd MMMM yyyy'}}</td>
+              <td> {{transaction.operation === 'deposit' ? 'Pago' : 'Consumo' }} </td>
+              <td>{{ transaction.amount | number:'1.2-2' }} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</ng-template>

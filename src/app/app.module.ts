@@ -1,24 +1,38 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
 import { CustomerModule } from './customer/customer.module';
 import { ProductsModule } from './products/products.module';
+import { SharedModule } from './shared/shared.module';
+
+import { AppComponent } from './app.component';
+import { AuthModule } from './auth/auth.module';
+
+// Cambiar el locale de la app a español
+import localeEs from '@angular/common/locales/es-PE';
+import { registerLocaleData } from '@angular/common';
+
+// para cambiar el idioma
+registerLocaleData(localeEs);
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
+
     CustomerModule,
-    ProductsModule
+    ProductsModule,
+    SharedModule,
+    HttpClientModule,
+    AuthModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    // para cambiar al español
+    { provide: LOCALE_ID, useValue: 'es-PE' },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

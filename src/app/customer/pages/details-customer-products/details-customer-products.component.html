@@ -1,1 +1,17 @@
-<p>details-customer-products works!</p>
+<!-- Cuerpo -->
+<br />
+<section>
+  <div class="container-fluid">
+    <div class="card-title">
+      <h2 class="text-center">Detalle de {{label }}</h2>
+      <div class="card-body">
+
+        <app-detail-accounts *ngIf="isAccount">
+        </app-detail-accounts>
+        <app-detail-credit *ngIf="isCredit"></app-detail-credit>
+        <app-detail-card-credit *ngIf="isCardCredit"></app-detail-card-credit>
+
+      </div>
+    </div>
+  </div>
+</section>

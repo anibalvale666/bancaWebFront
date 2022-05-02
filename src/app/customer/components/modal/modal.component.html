@@ -1,0 +1,46 @@
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Escojemos el formulario mediante un ngSwitch -->
+        <div class="modal-body">
+            <div [ngSwitch]="formOpen">
+              <app-account-operations 
+                *ngSwitchCase="'accountForm'"
+                [numberAccount]="numberAccount"
+                [operationType]="operationType"
+                [idUser]="id_user"
+                [idProduct]="idProduct"
+              ></app-account-operations>
+              <app-create-product 
+                *ngSwitchCase="'createProductForm'"
+                [idUser]  = "id_user"
+                [doc] = "doc"
+              ></app-create-product>
+              <app-credit-card-consumption 
+                *ngSwitchCase="'creditCardForm'"
+                [creditCardNumber] = "creditCardNumber"
+                [idUser]="id_user"
+                [idProduct]="idProduct"
+                [dniRuc] = "doc"
+                [operationType]="operationType"
+              ></app-credit-card-consumption>
+              <app-credit-payments 
+                *ngSwitchCase="'creditPaymentForm'"
+                [idUser]="id_user"
+                [dniRuc] = "doc"
+                [idProduct]="idProduct"
+                [loanNumber] = "loanNumber"
+                [operationType]="operationType"
+              ></app-credit-payments>
+              <!-- <app-account-operations *ngSwitchDefault="'accountForm'"></app-account-operations> -->
+
+            </div>
+        </div>
+
+      </div>
+    </div>
+  </div>

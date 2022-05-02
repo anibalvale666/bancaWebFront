@@ -1,0 +1,119 @@
+
+
+ <div *ngIf="!loanDetail; else divContent" class="text-center" >
+  <img
+    class="img-loading mt-5"
+    src="../../../../assets/img/loading-gif.gif"
+    alt="loading-gif"
+    height="250px"
+  />
+</div>
+<!--  div contenido -->
+<ng-template #divContent>
+
+  <div class="row">
+    <div class="col-sm-12 col-md-4 text-center card card-body">
+      <h5 class="">Crédito {{loanDetail.numbercredit | cardNumber }}</h5>
+      <hr />
+      <div class="row">
+        <h4>Crédito {{ loanDetail.product.nameproduct  }}</h4>
+        <label> {{ loanDetail.amountborrowed | currencytable:loanDetail.currency }} </label>
+        <span>Monto Prestado</span>
+        <label> {{ loanDetail.quotas }} </label>
+        <span>Cuotas</span>
+        <label>{{ loanDetail.monthlyamount | currencytable:loanDetail.currency  }}</label>
+        <span>Monto Mensual</span>
+      </div>
+      <br />
+      <div class="row">
+        <p>
+          <button
+            class="btn btn-primary"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseExample"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            Ver más
+          </button>
+        </p>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
+            <div>
+              <h5>General</h5>
+              <hr />
+              <div class="row">
+                <span>Tipo de Credito</span>
+                <h6 class="fw-bold"> {{loanDetail.product.nameproduct }}</h6>
+              </div>
+              <div class="row">
+                <span> Número de Crédito </span>
+                <h6 class="fw-bold">{{loanDetail.numbercredit | cardNumber }}</h6>
+              </div>
+              <div class="row">
+                <span>Interes</span>
+                  <h6 class="fw-bold">{{ loanDetail.interest}}%</h6>
+              </div>
+              <div class="row">
+                <span>Fecha de Credito</span>
+                <h6 class="fw-bold"> {{loanDetail.openingdate | date:'dd MMMM yyyy'}} </h6>
+              </div>
+              <!-- <div class="row">
+                <span>Titulares</span>
+                <ul>
+                  <li class="fw-bold">Diego Andres Tuesta Perez</li>
+                </ul>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-8 card card-body">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button 
+          type="button" 
+          class="btn btn-primary btn-sm"
+          data-bs-toggle="modal" 
+          data-bs-target="#exampleModal"
+
+        >
+          Pagar Crédito
+        </button>
+
+        <!-- [dniRuc] = "dniRuc" -->
+        <app-modal  
+          formOpen = "creditPaymentForm" 
+          operationType="deposit"
+          [loanNumber] = "loanDetail.numbercredit"
+          [idProduct]="idProduct"
+          [id_user]="idUser"
+        ></app-modal>
+      </div>
+      <hr />
+      <h4>ÚLTIMOS PAGOS</h4>
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th width="30%">Fecha</th>
+              <th width="40%">Cuota</th>
+              <th width="30%">Monto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!--  <div *ngIf="detailTransaction.length===0" class="text-center" >
+              <img class="img-loading" src="../../../../assets/img/loading-gif.gif" alt="loading-gif">
+            </div> -->
+            <tr *ngFor="let transaction of transactions | sort:'quota':true; let i = index">
+              <td>{{transaction.date | date:'dd MMMM yyyy'}}</td>
+              <td> Cuota número {{ i + 1 }}</td>
+              <td>{{ transaction.amount | number:'1.2-2' }} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</ng-template>

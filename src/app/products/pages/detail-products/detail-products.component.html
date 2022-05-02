@@ -1,1 +1,36 @@
-<p>detail-products works!</p>
+<div class="container">
+
+  <div *ngIf="!product; else divContent" class="text-center">
+    <img class="img-loading mt-5" src="../../../../assets/img/loading-gif.gif" alt="loading-gif" height="250px" />
+  </div>
+  <!--  div contenido -->
+  <ng-template #divContent>
+
+    <div class='row mt-5 box'>
+      <div class="col-4">
+        <img [src]="product?.img" alt="product.id" class="img-thumbnail" />
+      </div>
+
+      <div class="col-8">
+        <h3>{{ product?.nameproduct }}</h3>
+        <ul class='list-group list-group-flush'>
+          <li *ngFor="let feature of features" class='list-group-item list-group-item-action color-bwp'> {{feature}}
+          </li>
+        </ul>
+        <div class="d-flex  justify-content-between">
+
+          <button class='btn btn-color-bwp2 mt-3' routerLink="/customer">
+            Iniciar con el Producto
+            <!-- onClick={handleReturn}> -->
+          </button>
+          <button class='btn btn-color-bwp2  mt-3' (click)="back()">
+            Regresar
+
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </ng-template>
+
+</div>

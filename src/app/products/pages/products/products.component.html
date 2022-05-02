@@ -1,3 +1,87 @@
-<p>products works!</p>
+<!-- BANNER INICIAL -->
+<div class="containesr">
+  <div class="row banner_producto  d-flex align-items-center">
+    <div class="col-6">
+      <div class="text-banner">
+        <h2>
+          ¡Abre tu cuenta y empieza a trabajar con nosotros!
+        </h2>
+        <p>
+          Premios en efectivo, sorteos, productos y mucho más.
+        </p>
+        <button class="btn btn-warning" routerLink="/customer">Abre tu cuenta</button>
+      </div>
+    </div>
+    <div class="col-6">
+      <img src="../../../../assets/img/ahorros.jpg" alt="">
+    </div>
+  </div>
+
+</div>
+
+
+<!-- GRUPO DE TARJETAS -->
+<div class="tarjetas-group ">
+
+  <div *ngIf="!productsAccount.length && !productsLoan.length; else divContent" class="text-center">
+    <img class="img-loading mt-5" src="../../../../assets/img/loading-gif.gif" alt="loading-gif" height="250px" />
+  </div>
+
+  <!-- TARJETAS SOBRE CUENTAS -->
+  <ng-template #divContent>
+    <div class="cards mt-5">
+      <h1>Una cuenta que se ajusta a tus necesidades</h1>
+
+      <div *ngFor="let product of productsAccount" class="card" [routerLink]="['detail/', product.id ]">
+        <i [class]="product.logo"></i>
+        <h2 class="sub">{{product.nameproduct}}</h2>
+        <p class="desc">
+          {{product.description_product}}
+        </p>
+      </div>
+
+    </div>
+
+
+    <!-- TARJETAS SOBRE PRESTAMOS Y CREDITO -->
+
+    <div class="cards mt-5">
+      <h1>Prestamos y tarjeta de crédito con las mejores tasas</h1>
+
+      <div *ngFor="let product of productsLoan" class="card" [routerLink]="['detail/', product.id]">
+        <i [class]="product.logo"></i>
+        <h2 class="sub">{{product.nameproduct}}</h2>
+        <p class="desc">
+          {{product.description_product}}
+        </p>
+      </div>
+
+    </div>
+  </ng-template>
+
+
+
+</div>
+
+
+<!-- BANNER DE CIERRE -->
+<div class="row banner_cierre">
+  <div class="col-6 d-flex justify-content-center align-items-center ">
+    <div class="div-box d-flex ">
+      <h5 class="d-flex align-items-start">Conoce más acerca de nosotros</h5>
+      <p class="d-flex align-items-end">Conoce más...</p>
+    </div>
+  </div>
+  <div class="col-6 d-flex justify-content-center align-items-center  ">
+    <div class="div-box d-flex">
+      <h4 class="d-flex align-items-start">Por donde empezar</h4>
+      <p class="d-flex align-items-end">Conoce más...</p>
+    </div>
+  </div>
+
+</div>
+
+
+
 
 <router-outlet></router-outlet>

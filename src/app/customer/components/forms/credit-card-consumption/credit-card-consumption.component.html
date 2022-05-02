@@ -1,1 +1,153 @@
-<p>credit-card-consumption works!</p>
+
+<div>
+    <h1 class="text-center">Pago / consumo de Tarjeta de Crédito</h1>
+
+    <div class="d-flex justify-content-center ">
+        
+        <div class="row ">
+        <hr class="my-4">
+        <div class="col">
+            <form   autocomplete="off" [formGroup]="creditCardForm" (ngSubmit)="save()" >
+                <!-- Campo de Numero de cuenta -->
+                <div class="mb-3 row">
+                    <label class="col-sm-3 col-form-label">Número de Tárjeta</label>
+                    <div class="col-sm-9">
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            formControlName="creditCardNumber"
+                            placeholder="Número de la tarjeta"
+                        >
+                        <span class="form-text text-danger"
+                            *ngIf="attIsValid('creditCardNumber')"
+                        >
+                            *el campo es obligatorio
+                        </span>
+                    </div>
+                </div>
+                <!-- Campo de DNI -->
+                <div class="mb-3 row">
+                    <label class="col-sm-3 col-form-label">Número de documento:</label>
+                    <div class="col-sm-9">
+                        <input 
+                            type="number" 
+                            class="form-control" 
+                            formControlName="dniRuc"
+                            placeholder="número de DNI o RUC"
+                        >
+                        <span class="form-text text-danger"
+                            *ngIf="attIsValid('dniRuc')"
+                        >
+                            *el campo es obligatorio
+                        </span>
+                    </div>
+                </div>
+                <!-- Campo de CVC -->
+                <div class="mb-3 row">
+                    <label class="col-sm-3 col-form-label">CVC:</label>
+                    <div class="col-sm-9">
+                        <input 
+                            type="number" 
+                            class="form-control" 
+                            formControlName="cvc"
+                            placeholder="ingrese el numero CVC"
+                            maxlength="3"
+                        >
+                        <span class="form-text text-danger"
+                            *ngIf="attIsValid('cvc')"
+                        >
+                            *el campo es obligatorio
+                        </span>
+                    </div>
+                </div>
+                <!-- Campo de fecha de expiración -->
+                <div class="mb-3 row">
+                    <label class="col-sm-3 col-form-label">Fecha de Expiración:</label>
+                    <div class="col-sm-9">
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            formControlName="expirationDate"
+                            placeholder="ingrese Mes y año. Ejemplo: 05/22"
+                        >
+                        <span class="form-text text-danger"
+                            *ngIf="attIsValid('expirationDate')"
+                        >
+                            *el campo es obligatorio
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Seleccion del tipo de operación -->
+                <div class="row mb-3" >
+                        <label class="col-sm-3 form-label">Tipo de Operación:</label>
+                        <div class="col-sm-9">
+                            <select 
+                                class="form-select"
+                                formControlName="operationType"
+                            >
+                               
+                                <option selected
+                                    value="deposit"
+                                >  
+                                    Pago de tarjeta  
+                                </option>
+                                <option
+                                    value="withdrawal"
+                                > 
+                                    Consumo de tarjeta
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                <!-- Campo de Monto -->
+                <div class="mb-3 row">
+                    <label class="col-sm-3 col-form-label">Monto</label>
+                    <div class="col-sm-9">
+                        <input 
+                            type="number" 
+                            class="form-control" 
+                            formControlName="amount"
+                            placeholder="Monto"
+                        >
+                        <span class="form-text text-danger"
+                        *ngIf="attIsValid('amount')"
+                        >
+                            El precio debe ser 0 o mayor
+                        </span>
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col">
+                        <!-- Boton Para cerrar el modal -->
+                        <button 
+                            type="button" 
+                            class="btn btn-secondary " 
+                            data-bs-dismiss="modal"
+                        >
+                            Cerrar
+                        </button>
+                        <button
+                            type="submit"
+                            class="btn btn-primary float-end"
+                            [disabled]="creditCardForm.invalid"
+                            data-bs-dismiss="modal"
+                            >
+                            Guardar
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    </div>
+
+
+</div>
